@@ -1,44 +1,36 @@
 <?php
 session_start();
 
-//echo "start ";
-//create connection with db
-include ('dbconnector.php');
+/* Changed by Kjetil to use existing
+ * database queries and functions.
+ */
 
-//echo "db included ";
+// Imports database queries.
+include 'queries.php';
 
+// Redirects user to homepage if already logged in.
+//if (isset($_SESSION['username'])) {
+//	header('location: home.php');
+//}
 
-//fetch data from the login form
-$username = mysqli_real_escape_string($connection,$_POST['username']);
-$password = $_POST['password'];
-$row = "";
-//echo "k got the post info ";
+// Checks if the user actually entered this page with the login button.
+if (isset($_POST['submit'])) {
 
+	// Get login information and try to log in.
+	$username = mysqli_real_escape_string($con,$_POST['username']);
+	$password = $_POST['password'];
 
-$sql= "SELECT * FROM userInfo WHERE username = '$username'";
-$result = mysqli_query($connection ,$sql);
-$count = mysqli_num_rows($result);
-
-if($count == 1) {
-	
-	$row = $result->fetch_array(MYSQLI_ASSOC);
-	
-	if (password_verify($password, $row["password"])) {
-    	$_SESSION["username"] = $username;
-		$_SESSION["password"] = $row["password"];
+	// If login is successful
+	if (login($username, $password)) {
+		$_SESSION['username'] = $_POST['username'];
+		
+	} else {
+		echo "Error. Incorrect username or password.";
 	}
-	else {
-    	echo "Error. Incorrect username or password.";
-	}
-	
-
 } else {
+	echo "Error. Incorrect username or password.";
+}
 
-	echo "Incorrect username or password.";
-
-	}
-
-mysqli_close($connection);
 ?>
 
 <script>

@@ -1,10 +1,5 @@
 <?php
-    if(session_status() !== PHP_SESSION_ACTIVE){
-    $active = FALSE;
-    } else{
-        $active = TRUE;
-        session_start();
-    }
+	session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +44,18 @@
 		    	<ul class="nav navbar-nav">
 
 		    		<?php
-				        if(!$active){
+				        if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+				        	$user = $_SESSION['username'];
+							echo "<li><a href=\"#profile\">$user</a></li>
+								<li><a href='logout.php'>Logout</a></li>";
+						}
 				    ?>
-				        <li><a href="#loginRegister" data-toggle="modal" data-target="#myModal">Login/Register</a></li>
+				        
 				    <?php
-				        } else {
-				            echo "Welcome " . $_SESSION['username'];
+				        else {
+				        ?>
+				            <li><a href="#loginRegister" data-toggle="modal" data-target="#myModal">Login/Register</a></li>
+				    <?php
 				        }
 				    ?>
 			        <li><a href="about.php">About</a></li>
@@ -398,7 +399,9 @@
 	                                <!-- Button -->
 	                                <div style="margin-top:10px" class="form-group">
 	                                    <div class="col-sm-12 controls">
-	                                    	<button type="submit" id="signin" name="signin" class="btn btn-success">Login</button>
+
+	                                    	<!-- Maybe I'll need to change to input type -->
+	                                    	<button type="submit" id="signin" name="submit" class="btn btn-success">Login</button>
 	                                    	<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
 	                                    </div>
 	                                </div>
