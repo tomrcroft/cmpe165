@@ -14,7 +14,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/pins.css" rel="stylesheet" type="text/css">
+    <link href="css/masonrystyle.css" rel="stylesheet" type="text/css">
 
     <!-- Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.php"><h1>Corq</h1></a>
+                <a class="navbar-brand" href="index.php"><h1><font color="black">Corq</font></h1></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -75,12 +75,33 @@
         </div> <!-- /.container -->
     </nav>
 
+    <section id="top" class="top">
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
 
 
+    <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
+    <div class="item"><img src="http://www.beyondhollywood.com/uploads/2014/05/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
+    <div class="item"><img src="http://collider.com/wp-content/uploads/batman-arkham-knight-1.jpg" /></div>
+    <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" />
+        <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+    </div>
+    <div class="item"><img src="http://3.bp.blogspot.com/-0onXBUDbyRw/Uha54E5GLfI/AAAAAAAAlfM/X68u6TNTBaI/s1600/batman.jpg" /></div>
+    <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" /></div>
+    <div class="item"><img src="http://collider.com/wp-content/uploads/batman-arkham-knight-1.jpg" /></div>
+    <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" /></div>
+    <div class="item"><img src="http://www.beyondhollywood.com/uploads/2014/05/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
+    <div class="item"><img src="http://3.bp.blogspot.com/-0onXBUDbyRw/Uha54E5GLfI/AAAAAAAAlfM/X68u6TNTBaI/s1600/batman.jpg" /></div>
+    </div>
 
+<!--
 <div class="container">
 <div class="row">
-    <div class="item">
+    <div class="obj">
         <div class="well">
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
@@ -93,7 +114,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
@@ -103,7 +124,7 @@
             </div>
             </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
@@ -115,7 +136,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well">
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
@@ -126,7 +147,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
@@ -139,7 +160,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
@@ -152,7 +173,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well">
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
@@ -162,7 +183,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
@@ -174,7 +195,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
@@ -185,7 +206,7 @@
         </div>
         </div>
     </div>
-    <div class="item">
+    <div class="obj">
         <div class="well"> 
             <div class="pin">
             <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
@@ -200,6 +221,8 @@
     </div>
 </div>
 </div>
+
+-->
 
 
 
@@ -344,13 +367,13 @@
                 <div class="col-md-12 col-lg-12">
                     <div class="wow shake" data-wow-delay="0.4s">
                     <div class="page-scroll marginbot-30">
-                        <a href="#intro" id="totop" class="btn btn-circle">
+                        <a href="#top" id="totop" class="btn btn-circle">
                             <i class="fa fa-angle-double-up animated"></i>
                         </a>
                     </div>
                     </div>
-                    <p>&copy;Copyright 2014 - Squad. All rights reserved.        
-                        <a href="contact.php"><font color="white">Contact</font></a>        <a href="terms.php"><font color="white">Terms/Conditions</font></a></p>
+                    <p>&copy;Copyright 2014 - Team Brouhaha, San Jose State University. Bootstrap theme by Squad. All rights reserved.<br>
+                        <a href="contact.php"><font color="white">Contact</font></a> &nbsp; <a href="terms.php"><font color="white">Terms/Conditions</font></a></p>
                 </div>
             </div>  
         </div>
@@ -364,6 +387,8 @@
     <script src="js/wow.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.js"></script>
 
 </body>
 
