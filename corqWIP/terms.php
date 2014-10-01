@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,13 +36,28 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.php"><h1>Corq</h1></a>
+                <a class="navbar-brand" href="index.php"><h1><font color="black">Corq</font></h1></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href='#loginRegister' data-toggle="modal" data-target="#myModal">Login/Register</a></li>
+
+                    <?php
+                        if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                            $user = $_SESSION['username'];
+                            echo "<li><a href=\"#profile\">$user</a></li>
+                                <li><a href='logout.php'>Logout</a></li>";
+                        }
+                    ?>
+                        
+                    <?php
+                        else {
+                        ?>
+                            <li><a href="#loginRegister" data-toggle="modal" data-target="#myModal">Login/Register</a></li>
+                    <?php
+                        }
+                    ?>
                     <li><a href="about.php">About</a></li>
                     <li><a href="help.php">Help</a></li>
                     <li><a href="contact.php">Contact</a></li>
@@ -67,7 +84,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="wow bounceInDown" data-wow-delay="0.4s">
                     <div class="section-heading">
-                    <h2>Corq: A How-To</h2>
+                    <h2>Terms and Conditions</h2>
                     <i class="fa fa-2x fa-angle-down"></i>
 
                     </div>
@@ -90,8 +107,8 @@
                         <img src="img/icons/service-icon-1.png" alt="" />
                     </div>
                     <div class="service-desc">
-                        <h5>Search</h5>
-                        <p>Look up interests.</p>
+                        <h5>Use</h5>
+                        <p>Use by individuals under 13 is prohibited. By using Corq, you agree to any changes made to the terms and conditions of use.</p>
                     </div>
                 </div>
                 </div>
@@ -103,8 +120,9 @@
                         <img src="img/icons/service-icon-2.png" alt="" />
                     </div>
                     <div class="service-desc">
-                        <h5>Boards</h5>
-                        <p>Create boards for collections of things.</p>
+                        <h5>Content</h5>
+                        <p>Any content that you upload is property of Corq and you waive any right to legal ownership for any images, text, or other content that you upload.
+                            You agree that Corq may use any content that you upload for any use that adds business value to Corq.</p>
                     </div>
                 </div>
                 </div>
@@ -116,8 +134,10 @@
                         <img src="img/icons/service-icon-3.png" alt="" />
                     </div>
                     <div class="service-desc">
-                        <h5>Pin</h5>
-                        <p>Pin things you like onto your boards.</p>
+                        <h5>Miscellaneous</h5>
+                        <p>Upon termination of your account Corq retains the rights to any content that you uploaded during your course of use.
+                            While we take many precautions to protect your security, by using Corq you agree that Corq is not liable for any breach of security.
+                            By using Corq, you agree that you may not sue Corq for any reason whatsoever.</p>
                     </div>
                 </div>
                 </div>
@@ -125,12 +145,9 @@
             <div class="col-sm-3 col-md-3">
                 <div class="wow fadeInRight" data-wow-delay="0.2s">
                 <div class="service-box">
-                    <div class="service-icon">
-                        <img src="img/icons/service-icon-4.png" alt="" />
-                    </div>
                     <div class="service-desc">
-                        <h5>Share</h5>
-                        <p>Comment on and like pins and boards.</p>
+                        <h5>Insert Image</h5>
+                        <p>Stock Image</p>
                     </div>
                 </div>
                 </div>
@@ -139,6 +156,7 @@
         </div>
     </section>
     <!-- /Section: services -->
+
 
 
     <!-- Login/Register Modal -->
@@ -180,7 +198,9 @@
                                     <!-- Button -->
                                     <div style="margin-top:10px" class="form-group">
                                         <div class="col-sm-12 controls">
-                                            <button type="submit" id="signin" name="signin" class="btn btn-success">Login</button>
+
+                                            <!-- Maybe I'll need to change to input type -->
+                                            <button type="submit" id="signin" name="submit" class="btn btn-success">Login</button>
                                             <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
                                         </div>
                                     </div>
@@ -217,27 +237,28 @@
                                     <span></span>
                                 </div>
                                 
-                                <!-- Email Field -->  
+                                <!-- Email Field  
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
                                 </div>
+                                 -->
                                 
                                 <!-- Username Field -->
                                 <div class="form-group">
                                     <label for="username" class="col-md-3 control-label">Username</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="username" placeholder="Username">
+                                        <input type="username" class="form-control" name="username" placeholder="Username">
                                     </div>
                                 </div>
 
                                 <!-- Name Field -->
                                 <div class="form-group">
-                                    <label for="firstlastname" class="col-md-3 control-label">First and Last Name</label>
+                                    <label for="realName" class="col-md-3 control-label">First and Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstlastname" placeholder="First and Last Name">
+                                        <input type="realName" class="form-control" name="realName" placeholder="First and Last Name">
                                     </div>
                                 </div>
 
@@ -284,7 +305,8 @@
                         </a>
                     </div>
                     </div>
-                    <p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
+                    <p>&copy;Copyright 2014 - Squad. All rights reserved.        
+                        <a href="contact.php"><font color="white">Contact</font></a>        <a href="terms.php"><font color="white">Terms/Conditions</font></a></p>
                 </div>
             </div>  
         </div>

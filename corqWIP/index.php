@@ -58,7 +58,7 @@
 				    <?php
 				        }
 				    ?>
-			        <li><a href="about.php">About</a></li>
+			        <li><a href="test.php">About</a></li>
 					<li><a href="help.php">Help</a></li>
 					<li><a href="contact.php">Contact</a></li>
 			        <li class="dropdown">
@@ -438,27 +438,28 @@
                                     <span></span>
                                 </div>
                                 
-                                <!-- Email Field -->  
+                                <!-- Email Field  
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
                                 </div>
+                                 -->
                                 
                                 <!-- Username Field -->
                                 <div class="form-group">
                                     <label for="username" class="col-md-3 control-label">Username</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="username" placeholder="Username">
+                                        <input type="username" class="form-control" name="username" placeholder="Username">
                                     </div>
                                 </div>
 
                                 <!-- Name Field -->
                                 <div class="form-group">
-                                    <label for="firstlastname" class="col-md-3 control-label">First and Last Name</label>
+                                    <label for="realName" class="col-md-3 control-label">First and Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstlastname" placeholder="First and Last Name">
+                                        <input type="realName" class="form-control" name="realName" placeholder="First and Last Name">
                                     </div>
                                 </div>
 
@@ -505,7 +506,8 @@
                         </a>
                     </div>
                     </div>
-                    <p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
+                    <p>&copy;Copyright 2014 - Squad. All rights reserved.        
+                        <a href="contact.php"><font color="white">Contact</font></a>        <a href="terms.php"><font color="white">Terms/Conditions</font></a></p>
                 </div>
             </div>  
         </div>
