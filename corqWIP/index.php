@@ -330,7 +330,7 @@
                         </div>
 
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" action="login.php" method="POST">
+                            <form id="signupform" class="form-horizontal" name="signin" action="registrationInsert.php" method="POST">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -373,7 +373,7 @@
 								<!-- Register Button -->    
                                 <div class="form-group">                      
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
+                                        <button id="btn-signup" name="signin" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
                                         <span style="margin-left:8px;">or</span>
                                     </div>
                                 </div>
