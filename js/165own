@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+        function my1()
+            {
+                $(“.boardimage").width(500).height(500);
+                
+                $(“.boardimage”).click(my2);
+            }
+        function my2()
+            {
+                $(".boardimage").width(100).height(100);
+                
+                $(".boardimage").click(my1);
+            }
+        $(document).ready(function()
+        {
+          
+            $(“.boardimage”).width(100).height(100);
+            $(“.boardimage”).click(my1);
+        
+            
+        
+        });
+ </script>

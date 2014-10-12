@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 /*
  * Includes all the functions from "DatabaseFunctions.php" and
@@ -88,7 +87,7 @@ function getName($uName)
  * @param String username the username specified in the appropriate field on the login page
  * @param String password the password specified in the appropriate field on the login page
  */
-function login($username, $password) {
+function validateLogin($username, $password) {
 	global $con;
 
 	$query = "SELECT * FROM userinfo

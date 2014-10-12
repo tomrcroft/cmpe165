@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,14 +44,20 @@
 		    	<ul class="nav navbar-nav">
 
 		    		<?php
-                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
-                            $user = $_SESSION['username'];
-                            echo "<li><a href=\"#profile\">$user</a></li>
-                                <li><a href='logout.php'>Logout</a></li>";
-                        } else {
-                            echo "<li><a href=\"#loginRegister\" data-toggle=\"modal\" data-target=\"#myModal\">Login/Register</a></li>";
-                        }
-                    ?>
+				        if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+				        	$user = $_SESSION['username'];
+							echo "<li><a href=\"#profile\">$user</a></li>
+								<li><a href='logout.php'>Logout</a></li>";
+						}
+				    ?>
+				        
+				    <?php
+				        else {
+				        ?>
+				            <li><a href="#loginRegister" data-toggle="modal" data-target="#myModal">Login/Register</a></li>
+				    <?php
+				        }
+				    ?>
 			        <li><a href="test.php">About</a></li>
 					<li><a href="help.php">Help</a></li>
 			        <li class="dropdown">
@@ -322,7 +330,7 @@
                         </div>
 
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" name="signin" action="register.php" method="POST">
+                            <form id="signupform" class="form-horizontal" name="signin" action="registrationInsert.php" method="POST">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -348,9 +356,9 @@
 
                                 <!-- Name Field -->
                                 <div class="form-group">
-                                    <label for="realname" class="col-md-3 control-label">First and Last Name</label>
+                                    <label for="realName" class="col-md-3 control-label">First and Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="realName" class="form-control" name="realname" placeholder="First and Last Name">
+                                        <input type="realName" class="form-control" name="realName" placeholder="First and Last Name">
                                     </div>
                                 </div>
 
@@ -359,14 +367,6 @@
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
                                         <input type="password" class="form-control" name="password" placeholder="Password">
-                                    </div>
-                                </div>
-
-                                <!-- Password Verify Field --> 
-                                <div class="form-group">
-                                    <label for="passverify" class="col-md-3 control-label">Password Verification</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passverify" placeholder="Password Verification">
                                     </div>
                                 </div>
 
