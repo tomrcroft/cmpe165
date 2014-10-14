@@ -145,11 +145,11 @@ function removePin($user, $pin_id)
 
 }
 
-function addBoard($user)
+function addBoard($user, $name)
 {
 	global $con;
 	
-	$result = mysqli_query($con,"insert into board (owner) values ('$user')");
+	$result = mysqli_query($con,"insert into board (owner, board_name) values ('$user', '$name')");
 }
 
 function removeBoard($board_id)
