@@ -10,7 +10,7 @@ require_once 'constants.php';
 $con = connect();
 
 function connect() {
-	return mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+	return mysqli_connect("sql5.freemysqlhosting.net", "sql554615", "fS7%mA5%", "sql554615");
 }
 
 /** 
@@ -107,6 +107,82 @@ function login($username, $password) {
 	}
 }
 
+function add_pin($owner, $board_id, $name, $desc, $path)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link) VALUES ('$owner', '$name', '$desc', '$path')");
+	if($result != '')
+		{die("error inserting pin into database");}
+		
+	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
+	if($result != '')
+		{die("error getting pin_id from database");}
+	$resultArray = mysqli_fetch_array($result);
+	$pinId = $resultArray[0];
+	
+	
+	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
+
+}
+
+function remove_pin($user, $pin_id)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"delete from pin where pin_id='$pin_id' and owner='$user'");
+	
+	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')");
+	
+	//get board_id of user
+	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
+	if($result != '')
+		{die("error getting board_id from database");}
+	$resultArray = mysqli_fetch_array($result);
+	$boardId = $resultArray[0];
+	
+	$result = mysqli_query($con,"delete from pinned_on where pin_id='$pin_id' and board_id='$boardId'");
+
+}
+
+function add_board($user)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"insert into board (owner) values ('$user')");
+}
+
+function removeBoard($board_id)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"delete from board where board_id='$board_id'");
+
+	
+	$result = mysqli_query($con,"delete from pinned_on where board_id='$board_id'");
+}
+
+function get_board_pins($board_id)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"select pin_id from pinned_on WHERE board_id='$board_id'");
+	if($result != '')
+		{die("error getting pin_id from database");}
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray;
+}
+
+function getBoardByUser($user)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
+	if($result != '')
+		{die("error getting board_id from database");}
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray;
+}
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
