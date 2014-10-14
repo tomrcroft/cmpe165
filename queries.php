@@ -10,7 +10,7 @@ require_once 'constants.php';
 $con = connect();
 
 function connect() {
-	return mysqli_connect("sql5.freemysqlhosting.net", "sql554615", "fS7%mA5%", "sql554615");
+	return mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 }
 
 /** 
@@ -107,7 +107,7 @@ function login($username, $password) {
 	}
 }
 
-function add_pin($owner, $board_id, $name, $desc, $path)
+function addPin($owner, $board_id, $name, $desc, $path)
 {
 	global $con;
 	
@@ -126,7 +126,7 @@ function add_pin($owner, $board_id, $name, $desc, $path)
 
 }
 
-function remove_pin($user, $pin_id)
+function removePin($user, $pin_id)
 {
 	global $con;
 	
@@ -145,7 +145,7 @@ function remove_pin($user, $pin_id)
 
 }
 
-function add_board($user)
+function addBoard($user)
 {
 	global $con;
 	
@@ -162,7 +162,7 @@ function removeBoard($board_id)
 	$result = mysqli_query($con,"delete from pinned_on where board_id='$board_id'");
 }
 
-function get_board_pins($board_id)
+function getBoardPins($board_id)
 {
 	global $con;
 	
