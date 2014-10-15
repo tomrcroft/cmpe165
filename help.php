@@ -161,7 +161,7 @@
 								<img src="img/icons/service-icon-2.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<a href="#boards"><h5>Boardes</h5></a>
+								<a href="#boards"><h5>Boards</h5></a>
 								<p>   </p>
 							</div>
 		                </div>
