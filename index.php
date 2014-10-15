@@ -117,8 +117,9 @@
 								<img src="img/icons/service-icon-1.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<h5>Print</h5>
-								<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+								<h5>Learn, Share, or Discover</h5>
+								<p>new interests that your peers find interesting. 
+									It could be rock climbing, cooking, or even sleeping, come join our family and start sharing.</p>
 							</div>
 		                </div>
 					</div>
