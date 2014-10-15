@@ -1,4 +1,33 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    include 'actions.php';
+
+    if (isset($_POST['submitLogin'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if (verifyLogin($username, $password))
+            $_SESSION['username'] = $username;
+        else
+            echo "Error. Incorrect username or password.";
+    }
+
+    if (isset($_POST['submitRegister'])) {
+        global $con;
+
+        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $password= mysqli_real_escape_string($con, $_POST['password']);
+        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
+
+        if ($password == $passwordverify) {
+            addUser($username, $realname, $password);
+        } else {
+            echo "Passwords did not match.";
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,18 +44,18 @@
 
     <!-- Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="css/animate.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
-	<link href="color/default.css" rel="stylesheet">
+    <link href="color/default.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-	<!-- Preloader -->
-	<div id="preloader">
-		<div id="load"></div>
-	</div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -34,14 +63,14 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.php"><h1>Corq</h1></a>
+                <a class="navbar-brand" href="index.php"><h1><font color="black">Corq</font></h1></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-		    	<ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
 
-		    		<?php
+                    <?php
                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
                             $user = $_SESSION['username'];
                             echo "<li><a href=\"#profile\">$user</a></li>
@@ -50,23 +79,24 @@
                             echo "<li><a href=\"#loginRegister\" data-toggle=\"modal\" data-target=\"#myModal\">Login/Register</a></li>";
                         }
                     ?>
-			        <li><a href="test.php">About</a></li>
-					<li><a href="help.php">Help</a></li>
-			        <li class="dropdown">
-				        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Boards<b class="caret"></b></a>
-				        <ul class="dropdown-menu">
-					        <li><a href="myBoards.php">My Boards</a></li>
-					        <li><a href="searchBoards.php">Search Boards</a></li>
-					        <li><a href="#">I'm feeling lucky</a></li>
-				        </ul>
-			        </li>
-		    	</ul>
+                    <li><a href="test.php">About</a></li>
+                    <li><a href="help.php">Help</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Boards<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="myBoards.php">My Boards</a></li>
+                            <li><a href="searchBoards.php">Search Boards</a></li>
+                            <li><a href="#">I'm feeling lucky</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div> <!-- /.navbar-collapse -->
         </div> <!-- /.container -->
     </nav>
 
     <section id="top" class="top">
     </section>
+
     
 	<!-- Section: intro -->
     <section id="intro" class="intro">
@@ -702,7 +732,7 @@
 	<!-- /Section: about -->
 
 
-	<!-- Login/Register Modal -->
+<!-- Login/Register Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	    	<div class="modal-content">
@@ -716,7 +746,7 @@
 
 	                    <div style="padding-top:30px" class="panel-body" >
 	                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-	                        	<form id="loginform" class="form-horizontal" role="form" action="login.php" method="POST">
+	                        	<form id="loginform" class="form-horizontal" role="form" action="index.php" method="POST">
 	                                    
 	                            	<div style="margin-bottom: 25px" class="input-group">
 	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -743,7 +773,7 @@
 	                                    <div class="col-sm-12 controls">
 
 	                                    	<!-- Maybe I'll need to change to input type -->
-	                                    	<button type="submit" id="signin" name="submit" class="btn btn-success">Login</button>
+	                                    	<button type="submit" id="signin" name="submitLogin" class="btn btn-success">Login</button>
 	                                    	<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
 	                                    </div>
 	                                </div>
@@ -773,7 +803,7 @@
                         </div>
 
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" name="signin" action="register.php" method="POST">
+                            <form id="signupform" class="form-horizontal" name="signin" action="index.php" method="POST">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -801,7 +831,7 @@
                                 <div class="form-group">
                                     <label for="realname" class="col-md-3 control-label">First and Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="realName" class="form-control" name="realname" placeholder="First and Last Name">
+                                        <input type="realname" class="form-control" name="realname" placeholder="First and Last Name">
                                     </div>
                                 </div>
 
@@ -824,7 +854,7 @@
 								<!-- Register Button -->    
                                 <div class="form-group">                      
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" name="signin" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
+                                        <button id="btn-signup" name="submitRegister" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
                                         <span style="margin-left:8px;">or</span>
                                     </div>
                                 </div>
@@ -846,7 +876,7 @@
 
 
     <footer>
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="wow shake" data-wow-delay="0.4s">

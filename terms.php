@@ -1,4 +1,33 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    include 'actions.php';
+
+    if (isset($_POST['submitLogin'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if (verifyLogin($username, $password))
+            $_SESSION['username'] = $username;
+        else
+            echo "Error. Incorrect username or password.";
+    }
+
+    if (isset($_POST['submitRegister'])) {
+        global $con;
+
+        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $password= mysqli_real_escape_string($con, $_POST['password']);
+        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
+
+        if ($password == $passwordverify) {
+            addUser($username, $realname, $password);
+        } else {
+            echo "Passwords did not match.";
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,9 +94,11 @@
         </div> <!-- /.container -->
     </nav>
 
-
     <section id="top" class="top">
     </section>
+
+
+
 
 <!-- Section: services -->
     <section id="service" class="home-section text-center bg-gray">
@@ -153,7 +184,7 @@
 
 
 
-    <!-- Login/Register Modal -->
+<!-- Login/Register Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -167,7 +198,7 @@
 
                         <div style="padding-top:30px" class="panel-body" >
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                                <form id="loginform" class="form-horizontal" role="form" action="login.php" method="POST">
+                                <form id="loginform" class="form-horizontal" role="form" action="index.php" method="POST">
                                         
                                     <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -194,7 +225,7 @@
                                         <div class="col-sm-12 controls">
 
                                             <!-- Maybe I'll need to change to input type -->
-                                            <button type="submit" id="signin" name="submit" class="btn btn-success">Login</button>
+                                            <button type="submit" id="signin" name="submitLogin" class="btn btn-success">Login</button>
                                             <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
                                         </div>
                                     </div>
@@ -224,7 +255,7 @@
                         </div>
 
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" action="login.php" method="POST">
+                            <form id="signupform" class="form-horizontal" name="signin" action="index.php" method="POST">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -250,9 +281,9 @@
 
                                 <!-- Name Field -->
                                 <div class="form-group">
-                                    <label for="realName" class="col-md-3 control-label">First and Last Name</label>
+                                    <label for="realname" class="col-md-3 control-label">First and Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="realName" class="form-control" name="realName" placeholder="First and Last Name">
+                                        <input type="realname" class="form-control" name="realname" placeholder="First and Last Name">
                                     </div>
                                 </div>
 
@@ -264,10 +295,18 @@
                                     </div>
                                 </div>
 
+                                <!-- Password Verify Field --> 
+                                <div class="form-group">
+                                    <label for="passverify" class="col-md-3 control-label">Password Verification</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="passverify" placeholder="Password Verification">
+                                    </div>
+                                </div>
+
                                 <!-- Register Button -->    
                                 <div class="form-group">                      
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
+                                        <button id="btn-signup" name="submitRegister" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
                                         <span style="margin-left:8px;">or</span>
                                     </div>
                                 </div>
