@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 /* 
  * Various user actions.
@@ -8,7 +7,7 @@ session_start();
 // Imports database queries.
 include 'queries.php';
 
-function post_pin() {
+function postPin() {
 
 	$user = $_SESSION('username');
 	$board = $_POST('current_board');
@@ -27,7 +26,7 @@ function post_pin() {
  * Remove a pin. User refers to the owner of the board on which the pin is pinned, so that
  * the query can remove the pin from all other boards if this is the owner of that pin.
  */
-function remove_pin($user, $pin_id)
+function deletePin() {
 	
 	$user = $_SESSION('username');
 	$pin_id = $_POST('pin_id');

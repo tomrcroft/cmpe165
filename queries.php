@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 /*
  * Includes all the functions from "DatabaseFunctions.php" and
@@ -37,7 +36,7 @@ function usernameAvailable($username) {
 
 	$result = mysqli_query($con,
 		"SELECT username 
-		 FROM userinfo
+		 FROM userInfo
 		 WHERE username = '$username'"
 	);
 
@@ -56,11 +55,11 @@ function usernameAvailable($username) {
   * @param String $password is the password of the user whos information will be put in.
   * @param String $name is the email of the user whos information will be put in.
   */
-function register($uName, $password, $name)
+function addUser($uName, $realname, $password)
 {
 		global $con;	
 
-	mysqli_query($con,"insert into userInfo (username, realName, password) values('$uName', '$name', '$password');");
+	mysqli_query($con,"insert into userInfo (username, realName, password) values('$uName', '$realname', '$password');");
 	return TRUE;    
 }
 
@@ -88,10 +87,10 @@ function getName($uName)
  * @param String username the username specified in the appropriate field on the login page
  * @param String password the password specified in the appropriate field on the login page
  */
-function login($username, $password) {
+function verifyLogin($username, $password) {
 	global $con;
 
-	$query = "SELECT * FROM userinfo
+	$query = "SELECT * FROM userInfo
 		WHERE username = ?
 		AND password = ?
 		LIMIT 1";
