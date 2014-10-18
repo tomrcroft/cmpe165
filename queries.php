@@ -182,6 +182,22 @@ function getBoardByUser($user)
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray;
 }
+
+function editBoardName($userName, $oldBoardName, $newBoardName)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"update board set board_name='$newBoardName' where owner='$userName' and board_name='$oldBoardName';");
+}
+
+function editPin($userName, $oldPinName, $newPinName, $desc)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"update pin set name='$newPinName', description='$desc' where owner='$userName' and name='$oldPinName';");
+	
+	return $result;
+}
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
