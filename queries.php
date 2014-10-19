@@ -172,14 +172,46 @@ function getBoardPins($board_id)
 	return $resultArray;
 }
 
+// Gets board IDs
 function getBoardByUser($user)
 {
 	global $con;
 	
 	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
-	if($result != '')
-		{die("error getting board_id from database");}
+	//if($result != '')
+	//	{die("error getting board_id from database");}
 	$resultArray = mysqli_fetch_array($result);
+	return $resultArray;
+}
+
+// Get board names.
+function getBoardNames($user)
+{
+	global $con;
+
+	$query = "	select board_name
+				from board
+				where owner = '$user';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray;
+}
+
+// Get board's first pin's image to show as a preview
+function getBoardPreviews($user)
+{
+	global $con;
+
+	$query = "	select img_link
+				from board join pinned_on on board.board_id = pinned_on.board_id 
+							join pin on pinned_on.pin_id = pin.pin_id
+				where board.owner = '$user'
+				order by board.board_id;";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_array($result);
+
 	return $resultArray;
 }
 

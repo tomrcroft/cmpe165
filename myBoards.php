@@ -175,7 +175,7 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
 
 	        <div class="row">
 	        
-
+                <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
 				<div class="col-xs-6 col-sm-3 col-md-3">
 					<div class="wow bounceInUp" data-wow-delay="0.2s">
 		                <div class="team boxed-grey">
@@ -188,21 +188,32 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
 	            </div>
 
 
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="0.2s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Board Example 1</h5>
-		                        <div class="avatar"><a href="test.php">
-		                        	<img src="http://3.bp.blogspot.com/-0onXBUDbyRw/Uha54E5GLfI/AAAAAAAAlfM/X68u6TNTBaI/s1600/batman.jpg" alt="" 
-		                        	class="img-responsive img-circle" /></a></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
+                <?php
+                    // Fetches boards based on user
+                    $boardIDs = getBoardByUser($user);
+                    $boardNames = getBoardNames($user);
+                    $boardPreviews = getBoardPreviews($user);
+
+                    for($i = 0; $i < count($boardIDs) - 1; $i++) {
+                        echo '
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <h5>'.$boardNames[$i].'</h5>
+                                            <div class="avatar"><a href="test.php">
+                                                <img src="'.$boardPreviews[$i].'" alt="" 
+                                                class="img-responsive img-circle" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+
+
+                ?>
 	            
-
-
 	        </div>		
 		</div>
 	</section>
