@@ -66,39 +66,26 @@
 
     <section id="top" class="top">
     </section>
-    <!-- Section: intro -->
-    <section id="intro" class="intro">
-
-        <div class="slogan">
-            <h2>Corq</span> </h2>
-            <h4>Find things you like and share it</h4>
-        </div>
-        <div class="page-scroll">
-            <a href="#service" class="btn btn-circle">
-                <i class="fa fa-angle-double-down animated"></i>
-            </a>
-        </div>
-    </section>
-    <!-- /Section: intro -->
 	
 	<!-- Section: Info Badges -->
 	<section id="badgebar" class="home-section text-center bg-gray">
-		<ul class="nav nav-pills">
-		  <li class="active">
-		    <a href="#">
-		      <span class="badge pull-right">42</span>
-		      Home
-		    </a>
-		    <a href="#">
-		      <span class="badge pull-right"></span>
-		      Likes
-		    </a>
-		    <a href="#">
-		      <span class="badge pull-right">42</span>
-		      Followers
-		    </a>
-		  </li>
-		</ul>
+		<ul class="nav nav-pills pull-right">
+			<li class="active">
+				<a href="#">
+		        	Pins<span class="badge pull-right">98</span>
+		    	</a>
+			</li>
+			<li class="active">
+		    	<a href="#">
+		      		Boards<span class="badge pull-right">2</span>
+		    	</a>
+			</li>
+			<li class="active">
+		    	<a href="#">
+		      		Followers<span class="badge pull-right">42</span>
+		    	</a>
+		    </li>
+		  </ul>
   	</section>
 	
 	<!-- /Section: Info Badges -->
