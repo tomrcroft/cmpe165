@@ -80,7 +80,7 @@
                             echo "<li><a href=\"#loginRegister\" data-toggle=\"modal\" data-target=\"#myModal\">Login/Register</a></li>";
                         }
                     ?>
-                    <li><a href="test.php">About</a></li>
+                    <li><a href="#uploadPin" data-toggle="modal" data-target="#uploadPin">Pin It</a></li>
                     <li><a href="help.php">Help</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Boards<b class="caret"></b></a>
@@ -135,20 +135,111 @@
 
             Once this works, remove item classes listed directly below
             -->
-            <div class="item"><img src="http://www.beyondhollywood.com/uploads/2014/05/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
-            <div class="item"><img src="http://collider.com/wp-content/uploads/batman-arkham-knight-1.jpg" /></div>
-            <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" />
+
+
+            <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
+                <div class="item">
+                    <img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
+                </div>
+            </a>
+
+
+
+            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" /></div>
+            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" />
                 <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
             </div>
-            <div class="item"><img src="http://3.bp.blogspot.com/-0onXBUDbyRw/Uha54E5GLfI/AAAAAAAAlfM/X68u6TNTBaI/s1600/batman.jpg" /></div>
-            <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" /></div>
-            <div class="item"><img src="http://collider.com/wp-content/uploads/batman-arkham-knight-1.jpg" /></div>
-            <div class="item"><img src="http://static.comicvine.com/uploads/scale_small/6/66303/3332249-batman_the_animated_series_logo.jpg" /></div>
-            <div class="item"><img src="http://www.beyondhollywood.com/uploads/2014/05/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
-            <div class="item"><img src="http://3.bp.blogspot.com/-0onXBUDbyRw/Uha54E5GLfI/AAAAAAAAlfM/X68u6TNTBaI/s1600/batman.jpg" /></div>
+            <div class="item"><img src="img/pins/3332249-batman_the_animated_series_logo.jpg" /></div>
+            <div class="item"><img src="img/pins/pidgeotto.gif" /></div>
+            <div class="item"><img src="img/pins/batman.jpg" /></div>
+            <div class="item"><img src="img/pins/tumblr_n96doc8WMO1rtpgrxo1_500.jpg" /></div>
+            <div class="item"><img src="img/pins/patrick.png" /></div>
         </div>
 
     </section>
+
+
+    <!-- Upload Pin Modal -->
+    <div class="modal fade" id="uploadPin" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="pinit" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <div class="panel-title">Pin It</div>
+                        </div>
+                        <div class="panel-body" >
+                            <form id="uploadPinform" class="form-horizontal" name="pinit" action="myBoards.php" method="POST">
+                                <div class="form-group">
+                                    <div class="col-md-9">
+                                        <!-- Upload Pin Field -->
+                                        <div class="form-group">
+                                            <label for="uploadPin" class="col-md-3 control-label">Image</label>
+                                            <div class="col-md-20">
+                                                <input type="uploadPin" class="form-control" name="uploadPin" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">
+                                            </div>
+                                            <div class="col-md-20">
+                                                <label for="boardname" class="col-md-3 control-label">Board</label>
+                                                <select id="boardname" name="boardname" class="form-control" required="required">
+                                                    <option value="na" selected="">Choose One:</option>
+                                                    <!-- TODO: need script to populate list with board names connected to user -->
+                                                    <option value="service">General Customer Service</option>
+                                                    <option value="suggestions">Suggestions</option>
+                                                    <option value="product">Product Support</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button id="btn-uploadPin" name="submitUploadPin" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Upload</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>        
+                    </div>
+                </div> 
+            </div>
+        </div>    
+    </div>
+
+
+    <!-- View Pin modal -->
+    <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="panel panel-info" >
+                    <div class="panel-body" >
+
+
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <!-- TODO: script to show clicked image here. Remove line below after this is solved -->
+                                <img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
+                            </div>
+                        </div>
+
+                        <form id="commentform" class="form-horizontal" name="commentform" action="" method="POST">
+                            <div class="form-group">
+                                <div class="col-md-9">
+                                    <!-- Upload Pin Field -->
+                                    <div class="form-group">
+                                        <label for="uploadPin" class="col-md-3 control-label">Leave a comment</label>
+                                        <div class="col-md-20">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Say something">
+                                        </div>
+                                        <!-- TODO: fetch and list comments -->
+                                    </div>
+                                    <button id="btn-commentSend" name="submitCommentSend" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Send</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <!-- Login/Register Modal -->
