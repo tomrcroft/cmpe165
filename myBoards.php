@@ -40,29 +40,11 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
     session_start(); 
     include 'actions.php';
 
-    if (isset($_POST['submitLogin'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    if (isset($_POST['submitCreateBoard'])) {
+        $owner = $_SESSION['username'];
+        $boardname = $_POST['boardname'];
 
-        if (verifyLogin($username, $password))
-            $_SESSION['username'] = $username;
-        else
-            echo "Error. Incorrect username or password.";
-    }
-
-    if (isset($_POST['submitRegister'])) {
-        global $con;
-
-        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
-        $username = mysqli_real_escape_string($con, $_POST['username']);
-        $password= mysqli_real_escape_string($con, $_POST['password']);
-        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
-
-        if ($password == $passwordverify) {
-            addUser($username, $realname, $password);
-        } else {
-            echo "Passwords did not match.";
-        }
+        addBoard($owner, $boardname);
     }
 
 ?>
@@ -220,7 +202,7 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
 
                         <div style="padding-top:30px" class="panel-body" >
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                                <form id="signupform" class="form-horizontal" name="signin" action="index.php" method="POST">
+                                <form id="signupform" class="form-horizontal" name="signin" action="myBoards.php" method="POST">
                                 
                                     <div id="signupalert" style="display:none" class="alert alert-danger">
                                         <p>Error:</p>
@@ -229,7 +211,7 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
                                     
                                     <!-- Board Name Field -->
                                     <div class="form-group">
-                                        <label for="boadname" class="col-md-3 control-label">Board Name</label>
+                                        <label for="boardname" class="col-md-3 control-label">Board Name</label>
                                         <div class="col-md-9">
                                             <input type="boardname" class="form-control" name="boardname" placeholder="Title your new board">
                                         </div>
