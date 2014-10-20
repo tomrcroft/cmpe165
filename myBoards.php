@@ -1,41 +1,3 @@
-<!--
-if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
-            
-            // Imports database queries. Edit to streamline queries.php instead
-            include 'queries.php';
-            $user=$_SESSION["username"];
-            $query = "SELECT * FROM userInfo WHERE username='$user' ";
-            if($result = mysqli_query ($connection, $query) )
-            {   
-                //Edit this fetched data to match what is needed for this page
-                $user = mysqli_fetch_assoc ($result);
-                
-                $firstname = $user["firstname"];
-                $lastname= $user["lastname"];
-                $username = $user["username"];
-                $password = $user["password"];
-                $email = $user["email"];
-                $about = $user["about"];
-                $picname = $user["picname"];
-                $languages = $user["languages"];
-                $ID =$user['id'];
-                
-            
-            
-            }
-            else {
-            
-            echo " problem with database connection ";
-            
-            }
-            
-            //close the connection
-            mysqli_close ($connection);
-         }
-         
-
--->
-
 <?php 
     session_start(); 
     include 'actions.php';
@@ -117,44 +79,46 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
 
 
     <section id="about" class="home-section text-center">
-		<div class="heading-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-							<div class="section-heading">
-								<h2>My Boards</h2>
-								<i class="fa fa-2x fa-angle-down"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
-
-
-
-	        <div class="row">
-	        
-                <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
-				<div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Create a New Board</h5>
-                                <div class="avatar"><a href="#loginRegister" data-toggle="modal" data-target="#myModal">
-                                    <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></a></div>
+        <div class="heading-about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="wow bounceInDown" data-wow-delay="0.4s">
+                            <div class="section-heading">
+                                <h2>My Boards</h2>
+                                <i class="fa fa-2x fa-angle-down"></i>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <hr class="marginbot-50">
+                </div>
+            </div>
+
+
+
+            <div class="row">
+            
+                <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
+                <a href="#loginRegister" data-toggle="modal" data-target="#myModal">
+                    <div class="col-xs-6 col-sm-3 col-md-3">
+                        <div class="wow bounceInUp" data-wow-delay="0.2s">
+                            <div class="team boxed-grey">
+                                <div class="inner">
+                                    <h5>Create a New Board</h5>
+                                    <div class="avatar">
+                                        <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
 
 
                 <?php
@@ -165,27 +129,29 @@ if (session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
 
                     for($i = 0; $i < count($boardIDs) - 1; $i++) {
                         echo '
-                            <div class="col-xs-6 col-sm-3 col-md-3">
-                                <div class="wow bounceInUp" data-wow-delay="0.2s">
-                                    <div class="team boxed-grey">
-                                        <div class="inner">
-                                            <h5>'.$boardNames[$i].'</h5>
-                                            <div class="avatar"><a href="test.php">
-                                                <img src="'.$boardPreviews[$i].'" alt="" 
-                                                class="img-responsive img-circle" /></a>
+                            <a href="pins.php">
+                                <div class="col-xs-6 col-sm-3 col-md-3">
+                                    <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                        <div class="team boxed-grey">
+                                            <div class="inner">
+                                                <h5>'.$boardNames[$i].'</h5>
+                                                <div class="avatar">
+                                                    <img src="'.$boardPreviews[$i].'" alt="" 
+                                                    class="img-responsive img-circle" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>';
+                            </a>';
                     }
 
 
                 ?>
-	            
-	        </div>		
-		</div>
-	</section>
+                
+            </div>      
+        </div>
+    </section>
 
 
 
