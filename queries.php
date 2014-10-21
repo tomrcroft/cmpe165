@@ -168,8 +168,14 @@ function getBoardPins($board_id)
 	$result = mysqli_query($con,"select pin_id from pinned_on WHERE board_id='$board_id'");
 	if($result != '')
 		{die("error getting pin_id from database");}
-	$resultArray = mysqli_fetch_array($result);
-	return $resultArray;
+	//$resultArray = mysqli_fetch_array($result);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 // Gets board IDs
@@ -180,8 +186,14 @@ function getBoardByUser($user)
 	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
 	//if($result != '')
 	//	{die("error getting board_id from database");}
-	$resultArray = mysqli_fetch_array($result);
-	return $resultArray;
+	//$resultArray = mysqli_fetch_array($result);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 // Get board names.
@@ -194,8 +206,14 @@ function getBoardNames($user)
 				where owner = '$user';";
 
 	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_array($result);
-	return $resultArray;
+	//$resultArray = mysqli_fetch_array($result);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 // Get board's first pin's image to show as a preview
