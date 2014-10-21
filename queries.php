@@ -228,9 +228,13 @@ function getBoardPreviews($user)
 				order by board.board_id;";
 
 	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_array($result);
-
-	return $resultArray;
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function editBoardName($userName, $oldBoardName, $newBoardName)
