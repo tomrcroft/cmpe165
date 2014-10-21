@@ -130,7 +130,11 @@
                     $boardNames = getBoardNames($user);
                     $boardPreviews = getBoardPreviews($user);
 
-                    for($i = 0; $i < count($boardIDs) - 1; $i++) {
+                    for($i = 0; $i < count($boardIDs); $i++) {
+                        if (!(isset($boardPreviews[$i]))) {
+                            $boardPreviews[$i] = "img/pins/preview.jpg";
+                        }
+
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
