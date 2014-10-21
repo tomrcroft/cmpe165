@@ -178,6 +178,22 @@ function getBoardPins($board_id)
 	return $outputArray;
 }
 
+function getPinLinks($board_id) {
+	global $con;
+	
+	$result = mysqli_query($con, "
+		select img_link from pin 
+		join pinned_on on pin.pin_id = pinned_on.pin_id 
+		where pinned_on.board_id = '$board_id'");
+
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+		array_push($outputArray, $resultArray[$x][0]);
+
+	return $outputArray;
+}
+
 // Gets board IDs
 function getBoardByUser($user)
 {

@@ -2,32 +2,17 @@
     session_start(); 
     include 'actions.php';
 
-    if (isset($_POST['submitLogin'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        if (verifyLogin($username, $password))
-            $_SESSION['username'] = $username;
-        else
-            echo "Error. Incorrect username or password.";
+    // If user is not logged in, redirect it
+    if (!(isset($_SESSION['username']))) {
+        header("location:index.php"); //to redirect back to "index.php" after logging out
+        exit();
     }
 
-    if (isset($_POST['submitRegister'])) {
-        global $con;
-
-        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
-        $username = mysqli_real_escape_string($con, $_POST['username']);
-        $password= mysqli_real_escape_string($con, $_POST['password']);
-        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
-
-        if ($password == $passwordverify) {
-            addUser($username, $realname, $password);
-        } else {
-            echo "Passwords did not match.";
-        }
+    if (isset($_POST['submitUploadPin'])) {
+        // Action to submit new pin.
     }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,46 +99,23 @@
             </div>
         </div>
     
-
-
-
+        <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
-            <!-- TODO: edit this script
             <?php
-                // Fetches pins based on boards
-                $boardIDs = getBoardByUser($user);
-                $boardNames = getBoardNames($user);
-                $boardPreviews = getBoardPreviews($user);
+                
+                // Where to get board ID from? 
+                $pins = getPinLinks(1);
 
-                for($i = 0; $i < count($boardIDs) - 1; $i++) {
+                for($i = 0; $i < count($pins); $i++) {
+
                     echo '
-                        <div class="item">
-                            <img src="http://www.beyondhollywood.com/uploads/2014/05/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" />
-                        </div>';
+                        <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
+                            <div class="item">
+                                <img src="'.$pins[$i].'" />
+                            </div>
+                        </a>';
                 }
             ?>
-
-            Once this works, remove item classes listed directly below
-            -->
-
-
-            <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
-                <div class="item">
-                    <img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
-                </div>
-            </a>
-
-
-
-            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" /></div>
-            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" />
-                <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-            </div>
-            <div class="item"><img src="img/pins/3332249-batman_the_animated_series_logo.jpg" /></div>
-            <div class="item"><img src="img/pins/pidgeotto.gif" /></div>
-            <div class="item"><img src="img/pins/batman.jpg" /></div>
-            <div class="item"><img src="img/pins/tumblr_n96doc8WMO1rtpgrxo1_500.jpg" /></div>
-            <div class="item"><img src="img/pins/patrick.png" /></div>
         </div>
 
     </section>
@@ -182,10 +144,16 @@
                                                 <label for="boardname" class="col-md-3 control-label">Board</label>
                                                 <select id="boardname" name="boardname" class="form-control" required="required">
                                                     <option value="na" selected="">Choose One:</option>
-                                                    <!-- TODO: need script to populate list with board names connected to user -->
-                                                    <option value="service">General Customer Service</option>
-                                                    <option value="suggestions">Suggestions</option>
-                                                    <option value="product">Product Support</option>
+
+                                                    <?php
+
+                                                        $list = getBoardByUser($_SESSION['username']);
+                                                        $names = getBoardNames($_SESSION['username']);
+
+                                                        for($i = 0; $i < count($names); $i++) {
+                                                            echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                                        }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -238,152 +206,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-    <!-- Login/Register Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">                    
-                    <div class="panel panel-info" >
-
-                        <div class="panel-heading">
-                            <div class="panel-title">Login</div>
-                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot your password?</a></div>
-                        </div>     
-
-                        <div style="padding-top:30px" class="panel-body" >
-                            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                                <form id="loginform" class="form-horizontal" role="form" action="index.php" method="POST">
-                                        
-                                    <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input required="" id="username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
-                                    </div>
-                                    
-                                    <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input required="" id="password" type="password" class="form-control" name="password" placeholder="password">
-                                    </div>
-                                        
-
-                                    
-                                    <div class="input-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Button -->
-                                    <div style="margin-top:10px" class="form-group">
-                                        <div class="col-sm-12 controls">
-
-                                            <!-- Maybe I'll need to change to input type -->
-                                            <button type="submit" id="signin" name="submitLogin" class="btn btn-success">Login</button>
-                                            <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Register Here footer -->
-                                    <div class="form-group">
-                                        <div class="col-md-12 control">
-                                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account? 
-                                                <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()"> Register Here</a>
-                                            </div>
-                                        </div>
-                                    </div>   
-
-                                </form>
-                            </div> <!-- Close Login Alert -->                   
-                        </div> <!-- Close Panel Body -->   
-                    </div> <!-- Close panel info -->
-                </div> <!-- Close Login Box -->
-
-                <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
-
-                        <div class="panel-heading">
-                            <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                                <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Or Login Here</a></div>
-                        </div>
-
-                        <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" name="signin" action="index.php" method="POST">
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                
-                                <!-- Email Field  
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
-                                    </div>
-                                </div>
-                                 -->
-                                
-                                <!-- Username Field -->
-                                <div class="form-group">
-                                    <label for="username" class="col-md-3 control-label">Username</label>
-                                    <div class="col-md-9">
-                                        <input type="username" class="form-control" name="username" placeholder="Username">
-                                    </div>
-                                </div>
-
-                                <!-- Name Field -->
-                                <div class="form-group">
-                                    <label for="realname" class="col-md-3 control-label">First and Last Name</label>
-                                    <div class="col-md-9">
-                                        <input type="realname" class="form-control" name="realname" placeholder="First and Last Name">
-                                    </div>
-                                </div>
-
-                                <!-- Password Field --> 
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="password" placeholder="Password">
-                                    </div>
-                                </div>
-
-                                <!-- Password Verify Field --> 
-                                <div class="form-group">
-                                    <label for="passverify" class="col-md-3 control-label">Password Verification</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passverify" placeholder="Password Verification">
-                                    </div>
-                                </div>
-
-                                <!-- Register Button -->    
-                                <div class="form-group">                      
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" name="submitRegister" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
-                                        <span style="margin-left:8px;">or</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- Facebook button -->
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                    </div>                                           
-                                </div>
-
-                            </form>
-                        </div> <!-- Close panel body -->
-                    </div> <!-- Close panel info -->
-                </div> <!-- Close Sign Up Box -->
-            </div> <!-- Close Modal Content -->
-        </div> <!-- Close Modal Dialog -->
-    </div> <!-- Close Modal Fade -->
-
 
     <footer>
         <div class="container">
