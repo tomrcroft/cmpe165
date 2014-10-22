@@ -156,8 +156,6 @@ function removeBoard($board_id)
 	global $con;
 	
 	$result = mysqli_query($con,"delete from board where board_id='$board_id'");
-
-	
 	$result = mysqli_query($con,"delete from pinned_on where board_id='$board_id'");
 }
 
@@ -251,6 +249,19 @@ function getBoardPreviews($user)
 		array_push($outputArray, $resultArray[$x][0]);
 	}
 	return $outputArray;
+}
+
+function getBoardName($board_id) {
+	global $con;
+
+	$query = "
+		select board_name
+		from board
+		where board_id = '$board_id'";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];   
 }
 
 function editBoardName($userName, $oldBoardName, $newBoardName)
