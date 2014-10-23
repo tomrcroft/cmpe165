@@ -7,20 +7,23 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-/* Incomplete method call, still missing two 
-    parameters in addPin method call
+
+    // This will upload the pin
  
     if (isset($_POST['submitUploadPin'])) {
         // this will upload pin,
+        $title=$_POST['pinTitle'];
+        $desc=$_POST['pinDescription'];
         $path=$_POST['uploadPin'];
         $board=$_POST['boardname'];
         $username=$_SESSION['username'];
-        if(addPin($username,$board,$path)){}
+ 
+        if(addPin($username,$board,$title,$desc,$path)){}
         
         else
             echo "Error: Cannot Pin it!";
     }
-*/
+
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
     } else {

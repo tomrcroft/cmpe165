@@ -17,6 +17,14 @@
                                         <div class="col-md-20">
                                             <input type="uploadPin" class="form-control" name="uploadPin" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">
                                         </div>
+                                        <label for="uploadPin" class="col-md-3 control-label">Title</label>
+                                        <div class="col-md-20">
+                                        <input type="input" class="form-control" name="pinTitle" placeholder="Title of Image">
+                                        </div>
+                                        <label for="uploadPin" class="col-md-3 control-label">Description</label>
+                                        <div class="col-md-20">
+                                        <textarea rows="2" class="form-control" name="pinDescription" placeholder="Description of Image"></textarea>
+                                        </div>
                                         <div class="col-md-20">
                                             <label for="boardname" class="col-md-3 control-label">Board</label>
                                             <select id="boardname" name="boardname" class="form-control" required="required">
