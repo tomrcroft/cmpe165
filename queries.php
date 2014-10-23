@@ -271,11 +271,20 @@ function editBoardName($userName, $oldBoardName, $newBoardName)
 	$result = mysqli_query($con,"update board set board_name='$newBoardName' where owner='$userName' and board_name='$oldBoardName';");
 }
 
-function editPin($userName, $oldPinName, $newPinName, $desc)
+function editPinName($userName, $oldPinName, $newPinName, $desc)
 {
 	global $con;
 	
 	$result = mysqli_query($con,"update pin set name='$newPinName', description='$desc' where owner='$userName' and name='$oldPinName';");
+	
+	return $result;
+}
+
+editPinLink($userName, $pinName, $newPinImageLink)
+{
+	global $con;
+	
+	$result = mysqli_query($con,"update pin set img_link='$newPinImageLink' where name='$pinName' and owner='$userName';");
 	
 	return $result;
 }
