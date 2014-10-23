@@ -280,7 +280,7 @@ function editPinName($userName, $oldPinName, $newPinName, $desc)
 	return $result;
 }
 
-editPinLink($userName, $pinName, $newPinImageLink)
+function editPinLink($userName, $pinName, $newPinImageLink)
 {
 	global $con;
 	
