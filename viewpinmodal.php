@@ -8,7 +8,7 @@
 
                         <div class="form-group">
                             <div class="col-md-9">
-                                <!-- TODO: script to show clicked image here. Remove line below after this is solved -->
+                                <!-- $imgLink is set in pins.php to the correct image link -->
                                 <img src=<?php echo $imgLink ?> />
                             </div>
                         </div>
