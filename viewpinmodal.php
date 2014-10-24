@@ -9,7 +9,7 @@
                         <div class="form-group">
                             <div class="col-md-9">
                                 <!-- TODO: script to show clicked image here. Remove line below after this is solved -->
-                                <img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
+                                <img src=<?php echo $imgLink ?> />
                             </div>
                         </div>
 

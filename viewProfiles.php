@@ -74,23 +74,25 @@
         </div>
 		
 		<!-- Info Badges -->
-		<br>
-		<br>
-		<?php
-			$boardIDs = getBoardByUser($viewUser);
-			$numberOfBoards = count($boardIDs);
-		?>
-		<ul class="nav nav-pills pull-right">
-			<li class="active">
-				<a href="#">
-		        	Pins<span class="badge pull-right">98</span>
-		    	</a>
-			</li>
-			<li class="active">
-		    	<a href="#">
-		      		Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
-		    	</a>
-			</li>
+		<div class="heading-about">
+			<div class="container">
+		    	<div class="row">
+		        	<div class="col-lg-8 col-lg-offset-2">
+						<?php
+							$boardIDs = getBoardByUser($viewUser);
+							$numberOfBoards = count($boardIDs);
+						?>
+						<ul class="nav nav-pills pull-right">
+							<li class="active">
+								<a href="#">
+									Pins<span class="badge pull-right">98</span>
+								</a>
+							</li>
+							<li class="active">
+								<a href="#">
+									Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
+								</a>
+							</li>
 			<!--
 			<li class="active">
 		    	<a href="#">
@@ -98,7 +100,11 @@
 		    	</a>
 		    </li>
 			-->
-		  </ul>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		  <!-- /Info Badges -->
 		  
         <div class="container">

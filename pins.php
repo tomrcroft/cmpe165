@@ -92,7 +92,7 @@
                 $pins = getPinLinks($board_id);
 
                 for($i = 0; $i < count($pins); $i++) {
-
+					$imgLink = $pins[$i];
                     echo '
                         <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
                             <div class="item">
