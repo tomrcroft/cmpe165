@@ -25,6 +25,22 @@ function checkConnection() {
 	} else return true;
 }
 
+function editUser($currentUName, $uName, $realname, $password) {
+    global $con;
+    mysqli_query($con, "update userInfo SET username='$uName', realName='$realname', password='$password' WHERE username='$currentUName';");
+    return TRUE;
+}
+
+function checkUserName($uName) {
+    global $con;
+    $result = mysqli_query($con, "SELECT * FROM userInfo WHERE username='$uName'");
+    if (mysqli_num_rows($result) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /** 
  * Checks a username's availability.
  * 
@@ -287,6 +303,39 @@ function editPinLink($userName, $pinName, $newPinImageLink)
 	$result = mysqli_query($con,"update pin set img_link='$newPinImageLink' where name='$pinName' and owner='$userName';");
 	
 	return $result;
+}
+
+function getNumberOfPins($user)
+{
+	global $con;
+
+	$query = "
+		select *
+		from pin
+		where owner = '$user';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	return sizeof($resultArray);
+}
+
+function getDescriptionOfPins($user)
+{
+	global $con;
+
+	$query = "
+		select description
+		from pin
+		where owner = '$user';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
