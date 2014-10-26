@@ -7,18 +7,7 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-
-    if (isset($_POST['submitCreateBoard'])) {
-        $owner = $_SESSION['username'];
-        $boardname = $_POST['boardname'];
-
-        addBoard($owner, $boardname);
-    }
-
-    if (isset($_POST['submitDeleteBoard'])) {
-        $board_id = $_POST['board_id'];
-        removeboard($board_id);
-    }
+	
 	$viewUser = "gary";
 ?>
 <!DOCTYPE html>
@@ -129,7 +118,7 @@
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
-                                    <a href="pins.php?board='.$boardIDs[$i].'">
+                                    <a href="pins.php?board='.$boardIDs[$i].'&owner=no">
                                         <div class="team boxed-grey">
                                             <div class="inner">
                                                 <h5>'.$boardNames[$i].'</h5>

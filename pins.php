@@ -23,12 +23,36 @@
         else
             echo "Error: Cannot Pin it!";
     }
+	
+    if (isset($_POST['submitAddPin'])) {
+        // this will upload pin,
+        $title=$_GET['pinTitle'];
+        $desc=$_GET['pinDescription'];
+        $path=$_GET['addImgLink'];
+        $board=$_POST['boardname'];
+        $username=$_SESSION['username'];
+ 
+        if(addPin($username,$board,$title,$desc,$path)){}
+        
+        else
+            echo "Error: Cannot Pin it!";
+    }
 
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
     } else {
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
+    }
+	
+    if (isset($_POST['addPin'])) {
+        $owner = $_SESSION['username'];
+        $board_id = $_POST['board_id'];
+		$name = $_GET['name'];
+		$desc = $_GET['description'];
+		$img = $_GET['imgLink'];
+		
+		addPin($owner, $board_id, $name, $desc, $path)
     }
 ?>
 
@@ -97,7 +121,33 @@
                         <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
-                            </div>
+                            </div>';
+							/*
+					if (isset($_GET['owner'])) {
+						echo'
+                            <div class="col-md-offset-8 col-md-4">
+								<form action="pins.php?&description='..'&imgLink='.$pins[i].'" method="post">
+                                <input id="btn-add-other-user-pin" name="addOtherUserPin" type="submit" type="button" class="btn btn-info"/>
+                                    <i class="icon-hand-right"></i>+</button>
+                                    <div class="col-md-20">
+                                        <label for="boardname" class="col-md-3 control-label">Board</label>
+                                        <select id="boardname" name="boardname" class="form-control" required="required">
+                                            <option value="na" selected="">Choose One:</option>';
+
+                                            <?php
+                                                $list = getBoardByUser($_SESSION['username']);
+                                                $names = getBoardNames($_SESSION['username']);
+
+                                                for($i = 0; $i < count($names); $i++) {
+                                                    echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                                }
+                                        echo '    
+                                        </select>
+                                    </div>
+								</form>
+                            </div>';
+					}*/
+					echo '
                         </a>';
                 }
             ?>

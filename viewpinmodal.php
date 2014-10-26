@@ -1,4 +1,7 @@
 <!-- View Pin modal -->
+<?php 
+	$localImgLink = $imgLink; 
+?>
     <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -9,7 +12,7 @@
                         <div class="form-group">
                             <div class="col-md-9">
                                 <!-- $imgLink is set in pins.php to the correct image link -->
-                                <img src=<?php echo $imgLink ?> />
+                                <img src=<?php echo $localImgLink ?> />
                             </div>
                         </div>
 
