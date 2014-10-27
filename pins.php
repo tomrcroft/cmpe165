@@ -24,20 +24,7 @@
             echo "Error: Cannot Pin it!";
     }
 	
-    if (isset($_POST['submitAddPin'])) {
-        // this will upload pin,
-        $title=$_GET['pinTitle'];
-        $desc=$_GET['pinDescription'];
-        $path=$_GET['addImgLink'];
-        $board=$_POST['boardname'];
-        $username=$_SESSION['username'];
- 
-        if(addPin($username,$board,$title,$desc,$path)){}
-        
-        else
-            echo "Error: Cannot Pin it!";
-    }
-
+   
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
     } else {
@@ -52,7 +39,7 @@
 		$desc = $_GET['description'];
 		$img = $_GET['imgLink'];
 		
-		addPin($owner, $board_id, $name, $desc, $path)
+        addPin($owner, $board_id, $name, $desc, $path);
     }
 ?>
 
