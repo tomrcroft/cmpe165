@@ -42,6 +42,19 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="color/default.css" rel="stylesheet">
+    <script>
+      function removeboard(eventboard)
+        {
+            if(confirm("Do you want to delete the board?"))
+            { var parentcontainer= eventboard;
+                for( var i =0; i< 3; i++)
+                { parentcontainer=parentcontainer.parentNode;}
+                parentcontainer.remove();
+            }
+            
+        }
+
+    </script>
 
 </head>
 
@@ -123,15 +136,20 @@
                                                     <img src="'.$boardPreviews[$i].'" alt="" 
                                                     class="img-responsive img-circle" />
                                                 </div>
-                                                <div class="col-md-offset-8 col-md-4">
-                                                    <button id="btn-deleteBoard" name="submitDeleteBoard" type="submit" type="button" class="btn btn-info">
-                                                        <i class="icon-hand-right"></i>X</button>
-                                                </div>
+                        
                                             </div>
                                         </div>
                                     </a>
+                                <!-- Php code needed to delete this board from database-->
+                                <div class="col-md-offset-8 col-md-4">
+                        
+                                        <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
+                                        class="btn btn-info" onclick="removeboard(this)">
+                                        <i class="icon-hand-right"></i>X</button>
+                        
                                 </div>
-                            </div>';
+                            </div>
+                        </div>';
                     }
 
 
