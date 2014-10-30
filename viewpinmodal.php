@@ -8,6 +8,11 @@
                 <div class="panel panel-info" >
                     <div class="panel-body" >
 
+                        <div class="panel-heading">
+                            <button type="submit" class="btn btn-primary btn-medium">Pin it</button>
+                            <button type="submit" class="btn btn-primary btn-medium">Like</button>
+                            <button type="submit" class="btn btn-primary btn-medium">Edit</button>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-9">

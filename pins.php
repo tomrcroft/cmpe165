@@ -21,7 +21,7 @@
         if(addPin($username,$board,$title,$desc,$path)){}
         
         else
-            echo "Error: Cannot Pin it!";
+            echo "Error: Can't pin that!";
     }
 	
    

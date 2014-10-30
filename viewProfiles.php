@@ -54,7 +54,38 @@
                         <div class="wow bounceInDown" data-wow-delay="0.4s">
                             <div class="section-heading">
                                 <h2><?php echo $viewUser."'s"; ?> Boards</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
+                                <!-- Info Badges -->
+                                <div class="heading-about">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-lg-offset-2">
+                                                <?php
+                                                    $boardIDs = getBoardByUser($viewUser);
+                                                    $numberOfBoards = count($boardIDs);
+                                                ?>
+                                                <ul class="nav nav-pills center">
+                                                    <li class="active" style="padding-left:3em">
+                                                        Pins<span class="badge pull-right">98</span>
+                                                    </li>
+                                                    <li class="active" style="padding-left:3em">
+                                                        Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
+                                                    </li>
+                                                    <li class="active" style="padding-left:3em">
+                                                        <button type="submit" class="btn btn-primary btn-medium">Follow</button>
+                                                    </li>
+                                    <!--
+                                    <li class="active">
+                                        <a href="#">
+                                            Followers<span class="badge pull-right">42</span>
+                                        </a>
+                                    </li>
+                                    -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Info Badges -->
                             </div>
                         </div>
                     </div>
@@ -62,39 +93,7 @@
             </div>
         </div>
 		
-		<!-- Info Badges -->
-		<div class="heading-about">
-			<div class="container">
-		    	<div class="row">
-		        	<div class="col-lg-8 col-lg-offset-2">
-						<?php
-							$boardIDs = getBoardByUser($viewUser);
-							$numberOfBoards = count($boardIDs);
-						?>
-						<ul class="nav nav-pills pull-right">
-							<li class="active">
-								<a href="#">
-									Pins<span class="badge pull-right">98</span>
-								</a>
-							</li>
-							<li class="active">
-								<a href="#">
-									Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
-								</a>
-							</li>
-			<!--
-			<li class="active">
-		    	<a href="#">
-		      		Followers<span class="badge pull-right">42</span>
-		    	</a>
-		    </li>
-			-->
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		  <!-- /Info Badges -->
+		
 		  
         <div class="container">
             <div class="row">
