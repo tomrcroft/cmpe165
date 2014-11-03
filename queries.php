@@ -128,11 +128,11 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	
 	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link) VALUES ('$owner', '$name', '$desc', '$path')");
 	if($result != '')
-		{die("error inserting pin into database");}
+		{die("queries.php: error inserting pin into database");}
 		
 	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
 	if($result != '')
-		{die("error getting pin_id from database");}
+		{die("queries.php: error getting pin_id from database");}
 	$resultArray = mysqli_fetch_array($result);
 	$pinId = $resultArray[0];
 	
@@ -247,24 +247,19 @@ function getBoardNames($user)
 }
 
 // Get board's first pin's image to show as a preview
-function getBoardPreviews($user)
+function getBoardPreview($boardId)
 {
 	global $con;
 
 	$query = "	select img_link
 				from board join pinned_on on board.board_id = pinned_on.board_id 
-							join pin on pinned_on.pin_id = pin.pin_id
-				where board.owner = '$user'
-				order by board.board_id;";
+					join pin on pinned_on.pin_id = pin.pin_id
+				where board.board_id = '$boardId'
+				limit 1;";
 
 	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];
 }
 
 function getBoardName($board_id) {

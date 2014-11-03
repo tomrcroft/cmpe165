@@ -118,11 +118,12 @@
                     // Fetches boards based on user
                     $boardIDs = getBoardByUser($user);
                     $boardNames = getBoardNames($user);
-                    $boardPreviews = getBoardPreviews($user);
 
                     for($i = 0; $i < count($boardIDs); $i++) {
-                        if (!(isset($boardPreviews[$i]))) {
-                            $boardPreviews[$i] = "img/pins/preview.jpg";
+
+                        $boardPreview = getBoardPreview($boardIDs[$i]);
+                        if (!(isset($boardPreview))) {
+                            $boardPreview = "img/pins/preview.jpg";
                         }
 
                         echo '
@@ -133,7 +134,7 @@
                                             <div class="inner">
                                                 <h5>'.$boardNames[$i].'</h5>
                                                 <div class="avatar">
-                                                    <img src="'.$boardPreviews[$i].'" alt="" 
+                                                    <img src="'.$boardPreview.'" alt="" 
                                                     class="img-responsive img-circle" />
                                                 </div>
                         
