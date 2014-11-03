@@ -8,26 +8,26 @@
                         <div class="panel-title">Pin It</div>
                     </div>
                     <div class="panel-body" >
-                        <form id="uploadPinform" class="form-horizontal" name="pinit" action="myBoards.php" method="POST">
+                        <form id="uploadPinform" class="form-horizontal" name="pinit" action="pins.php" method="POST">
                             <div class="form-group">
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
                                         <label for="uploadPin" class="col-md-3 control-label">Image</label>
                                         <div class="col-md-20">
-                                            <input type="uploadPin" class="form-control" name="uploadPin" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">
+                                            <input type="uploadPin" class="form-control" name="pinUrl" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">
                                         </div>
-                                        <label for="uploadPin" class="col-md-3 control-label">Title</label>
+                                            <label for="uploadPin" class="col-md-3 control-label">Title</label>
                                         <div class="col-md-20">
-                                        <input type="input" class="form-control" name="pinTitle" placeholder="Title of Image">
+                                            <input type="input" class="form-control" name="pinTitle" placeholder="Title of Image">
                                         </div>
                                         <label for="uploadPin" class="col-md-3 control-label">Description</label>
                                         <div class="col-md-20">
-                                        <textarea rows="2" class="form-control" name="pinDescription" placeholder="Description of Image"></textarea>
+                                            <textarea rows="2" class="form-control" name="pinDescription" placeholder="Description of Image"></textarea>
                                         </div>
                                         <div class="col-md-20">
                                             <label for="boardname" class="col-md-3 control-label">Board</label>
-                                            <select id="boardname" name="boardname" class="form-control" required="required">
+                                            <select id="boardname" name="boardId" class="form-control" required="required">
                                                 <option value="na" selected="">Choose One:</option>
 
                                                 <?php

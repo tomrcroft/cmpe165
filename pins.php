@@ -12,16 +12,14 @@
  
     if (isset($_POST['submitUploadPin'])) {
         // this will upload pin,
-        $title=$_POST['pinTitle'];
-        $desc=$_POST['pinDescription'];
-        $path=$_POST['uploadPin'];
-        $board=$_POST['boardname'];
-        $username=$_SESSION['username'];
+        $owner = $_SESSION['username'];
+        $boardId = $_POST['boardId'];
+
+        $title = $_POST['pinTitle'];
+        $desc = $_POST['pinDescription'];
+        $url = $_POST['pinUrl'];
  
-        if(addPin($username,$board,$title,$desc,$path)){}
-        
-        else
-            echo "Error: Can't pin that!";
+        addPin($owner, $boardId, $title, $desc, $url);
     }
 	
    
@@ -30,16 +28,6 @@
     } else {
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
-    }
-	
-    if (isset($_POST['addPin'])) {
-        $owner = $_SESSION['username'];
-        $board_id = $_POST['board_id'];
-		$name = $_GET['name'];
-		$desc = $_GET['description'];
-		$img = $_GET['imgLink'];
-		
-        addPin($owner, $board_id, $name, $desc, $path);
     }
 ?>
 
