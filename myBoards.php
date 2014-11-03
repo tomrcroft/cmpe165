@@ -15,12 +15,13 @@
         addBoard($owner, $boardname);
     }
 
-    if (isset($_POST['submitDeleteBoard'])) {
-        $board_id = $_POST['board_id'];
-        removeboard($board_id);
+    if (isset($_GET['boardname'])) {
+        $board_id = $_GET['boardname'];
+        removeBoard($board_id);
+		header("location:myBoards.php");
     }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,10 +47,8 @@
       function removeboard(eventboard)
         {
             if(confirm("Do you want to delete the board?"))
-            { var parentcontainer= eventboard;
-                for( var i =0; i< 3; i++)
-                { parentcontainer=parentcontainer.parentNode;}
-                parentcontainer.remove();
+            {   
+				window.location = "myBoards.php?boardname="+eventboard;
             }
             
         }
@@ -145,7 +144,7 @@
                                 <div class="col-md-offset-8 col-md-4">
                         
                                         <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                        class="btn btn-info" onclick="removeboard(this)">
+                                        class="btn btn-info" onclick="removeboard('.$boardIDs[$i].')">
                                         <i class="icon-hand-right"></i>X</button>
                         
                                 </div>
