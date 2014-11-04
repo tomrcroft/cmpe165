@@ -8,6 +8,8 @@ body { font-family: sans-serif; }
 
 #pin-container {
   max-width: 300px;
+  margin-left: 30px;
+  margin-right: 25px;
 }
 
 #pin-container .item {

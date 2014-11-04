@@ -68,7 +68,7 @@
 	
 		<div class="slogan">
 			<h2>Corq</span> </h2>
-			<h4>Find things you like and share it</h4>
+			<h4>feed me</h4>
 		</div>
 		<div class="page-scroll">
 			<a href="#service" class="btn btn-circle">

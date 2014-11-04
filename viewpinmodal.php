@@ -1,18 +1,33 @@
 <!-- View Pin modal -->
 <?php 
 // $imgLink is set in pins.php to the correct image link
-	$localImgLink = $imgLink; 
+	$localImgLink = $imgLink;
 ?>
-    <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <!-- TODO: fetch image title -->
+                        <?php echo 'fetch image title here' ?>
+                    </div>
                     <div class="panel-body" >
 
-                        <div class="panel-heading">
-                            <button type="submit" class="btn btn-primary btn-medium">Pin it</button>
-                            <button type="submit" class="btn btn-primary btn-medium">Like</button>
-                            <button type="submit" class="btn btn-primary btn-medium">Edit</button>
+                        <div class="panel-heading" style="margin-top : -15px">
+                            <button type="submit" class="btn btn-primary btn-sm">Pin it</button>
+                            <button type="submit" class="btn btn-secondary btn-sm">Like</button>
+
+
+                            <?php
+                                if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                                    $user = $_SESSION['username'];
+                                    echo '
+                                    <a href="#editPin" data-toggle="modal" data-target="#editPin">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+                                    </a>';
+                                }
+                            ?>
+                            
                         </div>
 
                         <div class="form-group">
@@ -26,11 +41,15 @@
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
-                                        <label for="uploadPin" class="col-md-3 control-label">Leave a comment</label>
                                         <div class="col-md-20">
-                                            <input type="comment" class="form-control" name="comment" placeholder="Say something">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px">
                                         </div>
-                                        <!-- TODO: fetch and list comments -->
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-20">
+                                            <label for="uploadPin" class="col-md-3 control-label">Comments</label>
+                                            <!-- TODO: fetch and list comments -->
+                                        </div>
                                     </div>
                                     <button id="btn-commentSend" name="submitCommentSend" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Send</button>
                                 </div>
@@ -75,3 +94,6 @@
             </div>
         </div>
     </div>
+
+        <!-- Get view edit pin modal. -->
+    <?php include 'editpinmodal.php' ?>
