@@ -127,12 +127,8 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	global $con;
 	
 	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link) VALUES ('$owner', '$name', '$desc', '$path')");
-	if($result != '')
-		{die("queries.php: error inserting pin into database");}
 		
 	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
-	if($result != '')
-		{die("queries.php: error getting pin_id from database");}
 	$resultArray = mysqli_fetch_array($result);
 	$pinId = $resultArray[0];
 	
