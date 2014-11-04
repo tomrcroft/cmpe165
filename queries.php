@@ -347,6 +347,33 @@ function getBoardsByCategory($category)
 	}
 	return $outputArray;
 }
+
+function follow($uname, $userToFollow)
+{
+	global $con;
+	
+		$result = mysqli_query($con,"INSERT INTO follow VALUES ('$uname', '$userToFollow')");
+
+}
+
+function getFollowing($uname)
+{
+	global $con;
+
+	$query = "
+		select followUser
+		from follow
+		where username = '$uname';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
