@@ -374,6 +374,48 @@ function getFollowing($uname)
 	}
 	return $outputArray;
 }
+
+function getSecurityQuestion($username) {
+    global $con;
+    $result = mysqli_query($con, "SELECT securityQuestion FROM userInfo WHERE username='$username'");
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
+}
+
+function validateSecurityAnswer($securityanswer, $uName) {
+    global $con;
+    $result = mysqli_query($con, "SELECT securityAnswer FROM userInfo WHERE username='$uName'");
+    if (mysqli_num_rows($result) == $securityanswer) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getLatitude($pinid) {
+    global $con;
+    $result = mysqli_query($con, "SELECT latitude FROM pin WHERE pin_id='$pinid'");
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
+}
+
+function getLongitude($pinid) {
+    global $con;
+    $result = mysqli_query($con, "SELECT longitude FROM pin WHERE pin_id='$pinid'");
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
+}
+
+function validateUser($username)
+{
+	global $con;
+    $result = mysqli_query($con, "SELECT * FROM userInfo WHERE username='$username'");
+    if (mysqli_num_rows($result) == 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
