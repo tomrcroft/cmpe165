@@ -14,7 +14,9 @@
                     <div class="panel-body" >
 
                         <div class="panel-heading" style="margin-top : -15px">
-                            <button type="submit" class="btn btn-primary btn-sm">Pin it</button>
+                            <a href="#pinIt" data-toggle="modal" data-target="#pinIt">
+                                <button type="submit" class="btn btn-primary btn-sm">Pin it</button>
+                            </a>
                             <button type="submit" class="btn btn-secondary btn-sm">Like</button>
 
 
@@ -42,7 +44,7 @@
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
                                         <div class="col-md-20">
-                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px; margin-left:10px">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -95,5 +97,7 @@
         </div>
     </div>
 
-        <!-- Get view edit pin modal. -->
+    <!-- Get view edit pin modal. -->
     <?php include 'editpinmodal.php' ?>
+    <!-- Get view edit pin modal. -->
+    <?php include 'pinitmodal.php' ?>
