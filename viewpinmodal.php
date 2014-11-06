@@ -33,9 +33,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-9">
-                                <img src=<?php echo $localImgLink ?> />
-                            </div>
+                            <img style="height:auto; max-width:560px;" src=<?php echo $localImgLink ?> />
                         </div>
 
                         <form id="commentform" class="form-horizontal" name="commentform" action="" method="POST">
