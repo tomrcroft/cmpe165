@@ -1,11 +1,7 @@
 <!-- View Pin modal -->
-<?php 
-// $imgLink is set in pins.php to the correct image link
-	$localImgLink = $imgLink;
-?>
     <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-body">
+            <div class="modal-content">
                 <div class="panel panel-info" >
                     <div class="panel-heading">
                         <!-- TODO: fetch image title -->
@@ -32,9 +28,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-9">
-                                <img src="" class=showPic />
-                            </div>
+                            <img style="height:auto; max-width:560px;" src="" class=showPic />
                         </div>
 
                         <form id="commentform" class="form-horizontal" name="commentform" action="" method="POST">
@@ -43,7 +37,7 @@
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
                                         <div class="col-md-20">
-                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" id="comment" style="margin-top:10px">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -68,7 +62,6 @@
                                     	<?php /*
                                         $list = getBoardByUser($_SESSION['username']);
                                         $names = getBoardNames($_SESSION['username']);
-
                                         for($i = 0; $i < count($names); $i++) {
                                             echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
                                         }
