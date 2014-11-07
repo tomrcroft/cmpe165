@@ -27,8 +27,9 @@ function checkConnection() {
 
 function editUser($currentUName, $uName, $realname, $password) {
     global $con;
-    mysqli_query($con, "update userInfo SET username='$uName', realName='$realname', password='$password' WHERE username='$currentUName';");
-    return TRUE;
+	$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
+    $result = mysqli_query($con, "update userInfo SET username='$uName', realName='$realname', password='$hPassword' WHERE username='$currentUName';");
+	return $result;
 }
 
 function checkUserName($uName) {
@@ -74,8 +75,10 @@ function usernameAvailable($username) {
 function addUser($uName, $realname, $password)
 {
 		global $con;	
+		
+		$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
 
-	mysqli_query($con,"insert into userInfo (username, realName, password) values('$uName', '$realname', '$password');");
+	mysqli_query($con,"insert into userInfo (username, realName, password) values('$uName', '$realname', '$hPassword');");
 	return TRUE;    
 }
 
@@ -86,6 +89,21 @@ function getPassword($uName)
 	$result = mysqli_query($con,"select password from userInfo WHERE username='$uName'");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];    
+}
+
+function verifyPassword($uName, $potentialPassword)
+{
+		global $con;
+	
+	$result = mysqli_query($con,"select password from userInfo WHERE username='$uName'");
+	$resultArray = mysqli_fetch_array($result);
+	//return $resultArray[0];
+		if (password_verify($potentialPassword, $resultArray[0])) {
+			return true;
+			}
+		else {
+			return false;
+			}
 }
 
 function getName($uName)
