@@ -5,11 +5,12 @@
 ?>
     <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-body">
                 <div class="panel panel-info" >
                     <div class="panel-heading">
                         <!-- TODO: fetch image title -->
                         <?php echo 'fetch image title here' ?>
+						<button class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="panel-body" >
 
@@ -32,7 +33,7 @@
 
                         <div class="form-group">
                             <div class="col-md-9">
-                                <img src=<?php echo $localImgLink ?> />
+                                <img src="" class=showPic />
                             </div>
                         </div>
 
@@ -42,7 +43,7 @@
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
                                         <div class="col-md-20">
-                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" id="comment" style="margin-top:10px">
                                         </div>
                                     </div>
                                     <div class="form-group">

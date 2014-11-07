@@ -49,8 +49,7 @@
             if(confirm("Do you want to delete the board?"))
             {   
 				window.location = "myBoards.php?boardname="+eventboard;
-            }
-            
+            }           
         }
 
     </script>

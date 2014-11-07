@@ -52,10 +52,23 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="color/default.css" rel="stylesheet">
-
+	
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+	<script src="js/jquery.min.js"></script>
+	
+	<!-- This is called when a pin is clicked and passes the correct image link to viewpinmodal-->
+	<script type="text/javascript">
+		$(document).on("click", ".open-viewPin", function () {
+			 var src =$(this).data('id');
+		     $(".showPic").attr("src", src);
+		});
+	</script>
 </head>
-
+	
+	
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+	
+	
     <!-- Preloader -->
     <div id="preloader">
         <div id="load"></div>
@@ -85,15 +98,16 @@
     
         <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
+			
             <?php
                 
                 // Where to get board ID from? 
                 $pins = getPinLinks($board_id);
 
                 for($i = 0; $i < count($pins); $i++) {
-					$imgLink = $pins[$i];
+					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-toggle="modal" data-target="#viewPin">
+                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-id="'.$pins[$i].'">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
                             </div>';
@@ -138,6 +152,78 @@
     <?php include 'viewpinmodal.php' ?>
     
 
+    <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="panel panel-info" >
+                    <div class="panel-body" >
+
+                        <div class="panel-heading">
+                            <button type="submit" class="btn btn-primary btn-medium">Pin it</button>
+                            <button type="submit" class="btn btn-primary btn-medium">Like</button>
+                            <button type="submit" class="btn btn-primary btn-medium">Edit</button>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <img src="" class="showPic"/>
+                            </div>
+                        </div>
+
+                        <form id="commentform" class="form-horizontal" name="commentform" action="" method="POST">
+                            <div class="form-group">
+                                <div class="col-md-9">
+                                    <!-- Upload Pin Field -->
+                                    <div class="form-group">
+                                        <label for="uploadPin" class="col-md-3 control-label">Leave a comment</label>
+                                        <div class="col-md-20">
+                                            <input type="comment" class="form-control" name="comment" placeholder="Say something">
+                                        </div>
+                                        <!-- TODO: fetch and list comments -->
+                                    </div>
+                                    <button id="btn-commentSend" name="submitCommentSend" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Send</button>
+                                </div>
+                            </div>
+                        </form>
+						
+						<!-- TODO: add to your board functionality when viewing other people's pins
+						<form action="addToBoard.php" method="post">
+                        <input id="btn-add-other-user-pin" name="addOtherUserPin" type="submit" class="btn btn-info"> </input>
+                            <div class="col-md-20">
+                                <label for="boardname" class="col-md-3 control-label">Board</label>
+                                <select id="boardname" name="boardname" class="form-control" required="required">
+                                    <option value="na" selected="">Choose One:</option>';
+									
+                                    	<?php /*
+                                        $list = getBoardByUser($_SESSION['username']);
+                                        $names = getBoardNames($_SESSION['username']);
+
+                                        for($i = 0; $i < count($names); $i++) {
+                                            echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                        }
+                                		?>
+								 </select>
+								 
+								 <?php /*
+								 	if (!$owner) {
+								 	   echo '<select id="pin" name="pin" class="form-control" required="required">'.
+                                    	   	'<option value="na" selected="">Pin Info:</option>';
+											$pin = getPin($localImgLink);
+											for ($i = 0; i < count($pin); $i++) {
+                                            	echo '<option value="'.$pin[$i].'">'.$pin[$i].'</option>';
+                                        	}
+                                	echo '</select>';
+									}
+								*/?>
+                            </div>
+						</form>-->
+
+
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="container">
             <div class="row">
@@ -157,7 +243,6 @@
     </footer>
 
     <!-- Core JavaScript Files -->
-    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script> 
     <script src="js/jquery.scrollTo.js"></script>
