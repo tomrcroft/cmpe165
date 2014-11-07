@@ -33,7 +33,7 @@
                             <img style="height:auto; max-width:560px;" src="" class=showPic />
                         </div>
 
-                        <form id="commentform" class="form-horizontal" name="commentform" action="" method="POST">
+                        <form id="commentform" class="form-horizontal" name="commentform" method="POST">
                             <div class="form-group">
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
@@ -45,6 +45,7 @@
                                     <div class="form-group">
                                         <div class="col-md-20">
                                             <label for="uploadPin" class="col-md-3 control-label">Comments</label>
+                                            <!-- TODO: Make a mock comment that I can copy (kjetil) -->
                                             <!-- TODO: fetch and list comments -->
                                         </div>
                                     </div>

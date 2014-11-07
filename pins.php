@@ -18,7 +18,15 @@
  
         addPin($owner, $boardId, $title, $desc, $url);
     }
-	
+
+    if (isset($_POST['submitCommentSend'])) {
+        // Add a comment to a pin.
+        $pinId = $_POST['pinId'];
+        $author = $_SESSION['username'];
+        $comment = $_POST['comment'];
+ 
+        submitComment($pinId, $author, $comment);
+    }
    
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
