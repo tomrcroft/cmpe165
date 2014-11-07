@@ -72,14 +72,14 @@ function usernameAvailable($username) {
   * @param String $password is the password of the user whos information will be put in.
   * @param String $name is the email of the user whos information will be put in.
   */
-function addUser($uName, $realname, $password)
+function addUser($uName, $realname, $password, $security_question, $security_answer)
 {
 		global $con;	
 		
 		$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
 
-	mysqli_query($con,"insert into userInfo (username, realName, password) values('$uName', '$realname', '$hPassword');");
-	return TRUE;    
+	$result = mysqli_query($con,"insert into userInfo (username, realName, password, security_question, security_answer) values('$uName', '$realname', '$hPassword', '$security_question', '$security_answer');");
+	return $result;    
 }
 
 function getPassword($uName)
@@ -140,11 +140,30 @@ function verifyLogin($username, $password) {
 	}
 }
 
+function addRestaurant($owner, $board_id, $name, $desc, $path, $retaurantAddress)
+{
+	global $con;
+	
+	$isRestuarant = 1;
+	
+	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator, restaurant_address) VALUES ('$owner', '$name', '$desc', '$path', $isRestuarant, '$retaurantAddress');");
+		
+	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
+	$resultArray = mysqli_fetch_array($result);
+	$pinId = $resultArray[0];
+	
+	
+	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
+
+}
+
 function addPin($owner, $board_id, $name, $desc, $path)
 {
 	global $con;
 	
-	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link) VALUES ('$owner', '$name', '$desc', '$path')");
+	$isRestuarant = 0;
+	
+	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator) VALUES ('$owner', '$name', '$desc', '$path', '$isRestuarant');");
 		
 	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
 	$resultArray = mysqli_fetch_array($result);
@@ -452,6 +471,54 @@ function validateUser($username)
     } else {
         return true;
     }
+}
+
+function addTag($board_id, $tag)
+{
+	global $con;
+	$result = mysqli_query($con, "INSERT INTO tags
+									VALUES('$board_id', '$tag');");
+	return $result;
+}
+
+function removeTag($board_id, $tag)
+{
+	global $con;
+	$result = mysqli_query($con, "delete from tags
+									WHERE board_id=$board_id AND tag='$tag';");
+	return $result;
+}
+
+function addComment($pin_id, $author, $comment_content)
+{
+	global $con;
+	$result = mysqli_query($con, "INSERT INTO comments
+									VALUES('$pin_id', '$author', '$comment_content');");
+	return $result;
+}
+
+function removeComment($pin_id, $author, $comment_content)
+{
+	global $con;
+	$result = mysqli_query($con, "delete from comments
+									WHERE pin_id=$pin_id AND author='$author' AND comment_content='$comment_content';");
+	return $result;
+}
+
+function addLike($user_id, $pin_id)
+{
+	global $con;
+	$result = mysqli_query($con, "INSERT INTO likes
+									VALUES($user_id, $pin_id);");
+	return $result;
+}
+
+function removeLike($user_id, $pin_id)
+{
+	global $con;
+	$result = mysqli_query($con, "delete from likes
+									WHERE user_id=$user_id AND pin_id=$pin_id;");
+	return $result;
 }
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
