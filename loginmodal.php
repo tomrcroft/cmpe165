@@ -7,10 +7,10 @@
 
 	                    <div class="panel-heading">
 	                        <div class="panel-title">Login</div>
-	                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot your password?</a></div>
+	                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#"  onclick=
+                            "$('#resetModal').modal('show'); $('#myModal').modal('hide'); ">Forgot your password?</a></div>
 	                    </div>     
-
-	                    <div style="padding-top:30px" class="panel-body" >
+                        	                    <div style="padding-top:30px" class="panel-body" >
 	                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 	                        	<form id="loginform" class="form-horizontal" role="form" action="index.php" method="POST">
 	                                    
@@ -33,7 +33,6 @@
 	                                        </label>
 	                                    </div>
 	                                </div>
-
 	                                <!-- Button -->
 	                                <div style="margin-top:10px" class="form-group">
 	                                    <div class="col-sm-12 controls">
@@ -44,6 +43,7 @@
 	                                    </div>
 	                                </div>
 
+                                    
 	                                <!-- Register Here footer -->
 	                                <div class="form-group">
 	                                    <div class="col-md-12 control">

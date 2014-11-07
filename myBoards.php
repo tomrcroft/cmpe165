@@ -1,20 +1,16 @@
 <?php 
     session_start(); 
     include 'actions.php';
-
     // If user is not logged in, redirect it
     if (!(isset($_SESSION['username']))) {
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-
     if (isset($_POST['submitCreateBoard'])) {
         $owner = $_SESSION['username'];
         $boardname = $_POST['boardname'];
-
         addBoard($owner, $boardname);
     }
-
     if (isset($_GET['boardname'])) {
         $board_id = $_GET['boardname'];
         removeBoard($board_id);
@@ -48,10 +44,10 @@
         {
             if(confirm("Do you want to delete the board?"))
             {   
-				window.location = "myBoards.php?boardname="+eventboard;
-            }           
+                window.location = "myBoards.php?boardname="+eventboard;
+            }
+            
         }
-
     </script>
 
 </head>
@@ -116,14 +112,11 @@
                     // Fetches boards based on user
                     $boardIDs = getBoardByUser($user);
                     $boardNames = getBoardNames($user);
-
                     for($i = 0; $i < count($boardIDs); $i++) {
-
                         $boardPreview = getBoardPreview($boardIDs[$i]);
                         if (!(isset($boardPreview))) {
                             $boardPreview = "img/pins/preview.jpg";
                         }
-
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
@@ -150,8 +143,6 @@
                             </div>
                         </div>';
                     }
-
-
                 ?>
                 
             </div>      
@@ -195,7 +186,6 @@
                                             <input type="description" class="form-control" name="description" placeholder="Tell everyone what's on your board">
                                         </div>
                                     </div>
-
                                     <!-- Category
                                     <div class="form-group">
                                         <label for="category" class="col-md-3 control-label">Category</label>
@@ -203,7 +193,6 @@
                                             <input type="category" class="form-control" name="category" placeholder="Where should we file your board">
                                         </div>
                                     </div>
-
                                     <!-- Private board switch
                                     <div class="form-group">
                                         <label for="passverify" class="col-md-3 control-label">Password Verification</label>

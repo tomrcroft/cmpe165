@@ -9,7 +9,8 @@
                     <div class="panel-body" >
 
                         <div class="panel-heading" style="margin-top : -15px">
-                            <button type="submit" class="btn btn-primary btn-sm">Pin it</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                            Pin it</button>
                             <button type="submit" class="btn btn-secondary btn-sm">Like</button>
 
 
@@ -22,6 +23,9 @@
                                     </a>';
                                 }
                             ?>
+                                <a id="viewmapBtn" class="btn btn-primary btn-sm" href="viewmap.php">
+                                    <span class="glyphicon glyphicon-globe"></span>Map</a>
+                                    
                             
                         </div>
 
@@ -86,6 +90,7 @@
             </div>
         </div>
     </div>
-
+   
         <!-- Get view edit pin modal. -->
     <?php include 'editpinmodal.php' ?>
+    

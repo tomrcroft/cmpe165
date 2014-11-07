@@ -161,6 +161,7 @@
                             <button type="submit" class="btn btn-primary btn-medium">Pin it</button>
                             <button type="submit" class="btn btn-primary btn-medium">Like</button>
                             <button type="submit" class="btn btn-primary btn-medium">Edit</button>
+                             <button type="button" class="btn btn-primary btn-md">View Map</button>
                         </div>
 
                         <div class="form-group">
@@ -249,7 +250,8 @@
     <script src="js/custom.js"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/masonry.pkgd.js"></script>
-
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEwhWN-eoYsw3SDy5L8vnQEGYx4KdGKTk&sensor=false">
+    </script>
 </body>
 
 </html>

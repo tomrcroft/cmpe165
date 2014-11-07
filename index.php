@@ -26,7 +26,11 @@
 		    echo "Passwords did not match.";
 		}
 	}
-
+        
+    
+   
+    
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +52,7 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
-
+   
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -59,7 +63,7 @@
 
     <!-- Get nav bar -->
     <?php include 'navbar.php' ?>
-
+    <?php include 'reset.php'  ?>
     <section id="top" class="top">
     </section>
     
