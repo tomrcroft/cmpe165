@@ -23,7 +23,7 @@
                                     </a>';
                                 }
                             ?>
-                                <a id="viewmapBtn" class="btn btn-primary btn-sm" href="viewmap.php">
+                                <a id="viewmapBtn" class="btn btn-primary btn-sm" href="mapview.php">
                                     <span class="glyphicon glyphicon-globe"></span>Map</a>
                                     
                             
