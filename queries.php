@@ -329,6 +329,25 @@ function getDescriptionOfPins($user)
 	return $outputArray;
 }
 
+function getNamesOfPins($user)
+{
+	global $con;
+
+	$query = "
+		select name
+		from pin
+		where owner = '$user';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
+
 function getBoardsByCategory($category) 
 {
 	global $con;

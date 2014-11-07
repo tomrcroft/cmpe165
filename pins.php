@@ -1,20 +1,17 @@
 <?php 
     session_start(); 
     include 'actions.php';
-
     // If user is not logged in, redirect it
     if (!(isset($_SESSION['username']))) {
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-
     // This will upload the pin
  
     if (isset($_POST['submitUploadPin'])) {
         // this will upload pin,
         $owner = $_SESSION['username'];
         $boardId = $_POST['boardId'];
-
         $title = $_POST['pinTitle'];
         $desc = $_POST['pinDescription'];
         $url = $_POST['pinUrl'];
@@ -53,14 +50,18 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="color/default.css" rel="stylesheet">
 	
-	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+	<!-- This NEEDS to be here, JQuery needs to be defined before it can be used -->
 	<script src="js/jquery.min.js"></script>
 	
-	<!-- This is called when a pin is clicked and passes the correct image link to viewpinmodal-->
+	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
 		$(document).on("click", ".open-viewPin", function () {
 			 var src =$(this).data('id');
+			 var title = $(this).data('title');
+			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
+			 // passes the pin title and a close button to viewpinmodal
+			 $(".title").html(title + '<button class="close" data-dismiss="modal">×</button>');
 		});
 	</script>
 </head>
@@ -103,11 +104,11 @@
                 
                 // Where to get board ID from? 
                 $pins = getPinLinks($board_id);
-
+				$pinNames = getNamesOfPins($_SESSION['username']);
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-id="'.$pins[$i].'">
+                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-id="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
                             </div>';
@@ -122,11 +123,9 @@
                                         <label for="boardname" class="col-md-3 control-label">Board</label>
                                         <select id="boardname" name="boardname" class="form-control" required="required">
                                             <option value="na" selected="">Choose One:</option>';
-
                                             <?php
                                                 $list = getBoardByUser($_SESSION['username']);
                                                 $names = getBoardNames($_SESSION['username']);
-
                                                 for($i = 0; $i < count($names); $i++) {
                                                     echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
                                                 }
@@ -197,7 +196,6 @@
                                     	<?php /*
                                         $list = getBoardByUser($_SESSION['username']);
                                         $names = getBoardNames($_SESSION['username']);
-
                                         for($i = 0; $i < count($names); $i++) {
                                             echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
                                         }

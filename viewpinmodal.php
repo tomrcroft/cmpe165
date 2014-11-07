@@ -3,10 +3,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <!-- TODO: fetch image title -->
-                        <?php echo 'fetch image title here' ?>
-						<button class="close" data-dismiss="modal">×</button>
+                    <div class="panel-heading title">
+                        <!-- KEEP THIS, it is set in pins.php -->
                     </div>
                     <div class="panel-body" >
 
