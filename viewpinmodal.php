@@ -18,9 +18,10 @@
                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]) {
                             $user = $_SESSION['username'];
                             echo '
-                                    <a href="#editPin" data-toggle="modal" data-target="#editPin">
+                                    <a href="#editPin" data-toggle="modal" data-target="#editPin" onclick="dothis()">
                                         <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
                                     </a>';
+                                    
                         }
                         ?>
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
@@ -163,3 +164,9 @@
 
 <!-- Get view edit pin modal. -->
 <?php include 'editpinmodal.php' ?>
+<script>
+function dothis(){
+    $('#viewPin').hide();
+}
+
+</script>
