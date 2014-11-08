@@ -436,6 +436,7 @@ function getPinId($board_id)
     $result="Select pin_id from pinned_on WHERE board_id='$board_id'; ";
     return $result;
 }
+
 function follow($uname, $userToFollow)
 {
 	global $con;
