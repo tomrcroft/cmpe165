@@ -52,11 +52,11 @@
 	
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
-	var pinId;
 		$(document).on("click", ".open-viewPin", function () {
 			 var src =$(this).data('link');
 			 var title = $(this).data('title');
-			 pinId = $(this).data('pinId');
+			 var pinId = $(this).data('pinId');
+			 $(."pinID").val(pinID);
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
