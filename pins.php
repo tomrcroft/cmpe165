@@ -55,8 +55,8 @@
 		$(document).on("click", ".open-viewPin", function () {
 			 var src =$(this).data('link');
 			 var title = $(this).data('title');
-			 var pinId = $(this).data('pinId');
-			 $(."pinID").val(pinID);
+			 var pinID = $(this).data('pinID');
+			 $(".pinID").val(pinID);
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
@@ -108,7 +108,7 @@
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-pinId="'.$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
+                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-pinID="'.$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
                             </div>';
