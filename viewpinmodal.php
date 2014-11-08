@@ -138,6 +138,10 @@
                                 <input type="text" class="form-control" name="zip" placeholder="zip">
                             </div>
                         </div>
+                        
+                        <div>
+                            <input type="hidden" name="pinid" class="pinId">
+                        </div>
 
 
                         <!-- submit Button -->    

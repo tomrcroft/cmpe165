@@ -15,6 +15,7 @@ if (isset($_POST['submitAddAddress'])) {
     $city = $_POST['city'];
     $state = $_POST['state'];
     $zip = $_POST['zip'];
+    $pinid=$_POST['pinid'];
     $combine = $address . ' ' . $city . ' ' . $state . ', ' . $zip;
     
     $data_arr = geocode($combine);
@@ -23,8 +24,7 @@ if ($data_arr) {
 
     $latitude = $data_arr[0];
     $longitude = $data_arr[1];
-    addAddress($pinId, $username, $combine);
-    addlatandlong($pinId, $username, $latitude, $longitue);
+    addAddress($pinid, $username, $combine);
 }
 
 function geocode($address) {
