@@ -25,12 +25,7 @@
 		} else {
 		    echo "Passwords did not match.";
 		}
-	}
-        
-    
-   
-    
-        
+	}       
 ?>
 <!DOCTYPE html>
 <html lang="en">

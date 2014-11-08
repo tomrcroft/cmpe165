@@ -7,17 +7,6 @@
         exit();
     }
     // This will upload the pin
- 
-    if (isset($_POST['submitUploadPin'])) {
-        // this will upload pin,
-        $owner = $_SESSION['username'];
-        $boardId = $_POST['boardId'];
-        $title = $_POST['pinTitle'];
-        $desc = $_POST['pinDescription'];
-        $url = $_POST['pinUrl'];
- 
-        addPin($owner, $boardId, $title, $desc, $url);
-    }
 
     if (isset($_POST['submitCommentSend'])) {
         // Add a comment to a pin.
