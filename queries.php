@@ -430,6 +430,12 @@ function getBoardsByCategory($category)
 	return $outputArray;
 }
 
+function getPinId($board_id)
+{
+    global $con;
+    $result="Select pin_id from pinned_on WHERE board_id='$board_id'; ";
+    return $result;
+}
 function follow($uname, $userToFollow)
 {
 	global $con;
