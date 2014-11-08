@@ -19,9 +19,12 @@
 		$username = mysqli_real_escape_string($con, $_POST['username']);
 		$password= mysqli_real_escape_string($con, $_POST['password']);
 		$passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
-
+                $question= mysqli_real_escape_string($con,$_POST['question']);
+                $answer= mysqli_real_escape_string($con, $_POST['answer']);
+                
 		if ($password == $passwordverify) {
-		    addUser($username, $realname, $password);
+		    addUser($username, $realname, $password, $question, $answer);
+                    
 		} else {
 		    echo "Passwords did not match.";
 		}
