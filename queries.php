@@ -146,7 +146,7 @@ function addRestaurant($pinId, $owner, $restaurantAddress)
 	
 	$isRestuarant = 1;
 	
-	$result = mysqli_query($con,"INSERT INTO pin (restaurant_indicator, restaurant_address) VALUES ($isRestuarant, '$restaurantAddress') WHERE pin_id='$pinId' and owner='$owner';");
+	$result = mysqli_query($con,"INSERT INTO pin (restaurant_indicator, restaurant_address) VALUES ('$isRestuarant', '$restaurantAddress') WHERE pin_id='$pinId' and owner='$owner';");
 		
 //	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
 //	$resultArray = mysqli_fetch_array($result);
@@ -433,7 +433,7 @@ function getBoardsByCategory($category)
 function getPinId($board_id)
 {
     global $con;
-    $result="Select pin_id from pinned_on WHERE board_id='$board_id'; ";
+    $result= mysqli_query($con,"Select pin_id from pinned_on WHERE board_id='$board_id';");
     return $result;
 }
 

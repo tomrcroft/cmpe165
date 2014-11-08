@@ -16,8 +16,11 @@ if (isset($_POST['submitAddAddress'])) {
     $zip = $_POST['zip'];
     $pinid=$_POST['pinid'];
     $combine = $address . ' ' . $city . ' ' . $state . ', ' . $zip;
-   
-    addRestaurant($pinid, $username, $combine);
+   print $combine;
+   print $pinid;
+   print $username;
+   addRestaurant($pinid, $username, $combine);
 }
+
 
 ?>
