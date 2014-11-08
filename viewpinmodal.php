@@ -23,11 +23,17 @@
                                     </a>';
                         }
                         ?>
-                        <a id="addmaplink" class="btn btn-primary btn-sm" href="#" onclick="$('.pinbox').hide();
+                        <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
-                        <a id="viewmapBtn" class="btn btn-primary btn-sm" href="mapview.php">
+                        <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
-
+							
+							<script type="text/javascript">
+							//TODO Change to check if pin is a restaurant
+							if (false) {
+								
+							}
+							</script>
 
                     </div>
 

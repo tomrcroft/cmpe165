@@ -140,13 +140,13 @@ function verifyLogin($username, $password) {
 	}
 }
 
-function addRestaurant($owner, $board_id, $name, $desc, $path, $retaurantAddress)
+function addRestaurant($owner, $board_id, $name, $desc, $path, $restaurantAddress)
 {
 	global $con;
 	
 	$isRestuarant = 1;
 	
-	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator, restaurant_address) VALUES ('$owner', '$name', '$desc', '$path', $isRestuarant, '$retaurantAddress');");
+	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator, restaurant_address) VALUES ('$owner', '$name', '$desc', '$path', $isRestuarant, '$restaurantAddress');");
 		
 	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
 	$resultArray = mysqli_fetch_array($result);
@@ -155,6 +155,10 @@ function addRestaurant($owner, $board_id, $name, $desc, $path, $retaurantAddress
 	
 	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
 
+}
+
+function isRestuarant($board_id) {
+	
 }
 
 function addPin($owner, $board_id, $name, $desc, $path)
