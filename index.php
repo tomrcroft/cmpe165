@@ -64,6 +64,8 @@
     <!-- Get nav bar -->
     <?php include 'navbar.php' ?>
     <?php include 'reset.php'  ?>
+   
+    
     <section id="top" class="top">
     </section>
     

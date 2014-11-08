@@ -78,7 +78,6 @@
                       }
                       ?>
                       </select>
-
                       <?php /*
                       if (!$owner) {
                       echo '<select id="pin" name="pin" class="form-control" required="required">'.
@@ -160,4 +159,3 @@
 
 <!-- Get view edit pin modal. -->
 <?php include 'editpinmodal.php' ?>
-    
