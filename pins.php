@@ -118,7 +118,7 @@
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
+                        <a href="#viewPin" data-target="#viewPin" data-toggle= "modal" class="open-viewPin" data-pinId="" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
                             </div>';
