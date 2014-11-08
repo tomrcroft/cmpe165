@@ -5,10 +5,11 @@
             <div id="pinUpload" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Pin It</div>
+                        Pin It
+						<button class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="panel-body" >
-                        <form id="uploadPinform" class="form-horizontal" name="pinUpload" action="pins.php" method="POST">
+                        <form id="uploadPinform" class="form-horizontal" name="pinUpload" action="index.php" method="POST">
                             <div class="form-group">
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
