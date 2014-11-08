@@ -6,7 +6,7 @@
                 <div class="panel-heading title">
                     <!-- KEEP THIS, it is set in pins.php -->
                 </div>
-                <div class="panel-body" id="pinbox">
+                <div class="panel-body pinbox">
 
                     <div class="panel-heading" style="margin-top : -15px">
                         <button type="submit" class="btn btn-primary btn-sm">
@@ -23,7 +23,7 @@
                                     </a>';
                         }
                         ?>
-                        <a id="addmaplink" class="btn btn-primary btn-sm" href="#" onclick="$('#pinbox').hide();
+                        <a id="addmaplink" class="btn btn-primary btn-sm" href="#" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
                         <a id="viewmapBtn" class="btn btn-primary btn-sm" href="mapview.php">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
@@ -94,7 +94,7 @@
 
                     <div style="float:right; font-size: 85%; position: relative; top:-10px">
                         <a id="addmaplink" href="#" onclick="$('#mapbox').hide();
-                                $('#pinbox').show()">Go Back to Pin</a></div>
+                                $('.pinbox').show()">Go Back to Pin</a></div>
                     <form id="addressform" class="form-horizontal" name="addressform" action="addAddress.php" method="POST">
 
                         <div id="addressalert" style="display:none" class="alert alert-danger">
