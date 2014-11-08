@@ -60,7 +60,7 @@
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
-			 $(".title").html(title + '<button class="close" data-dismiss="modal">×</button>');
+			 $(".title").html(title + '<button class="close" data-dismiss="modal"onclick="location.reload()">×</button>');
 		});
 	</script>
 </head>
