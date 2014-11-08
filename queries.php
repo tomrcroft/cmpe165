@@ -147,14 +147,14 @@ function addRestaurant($owner, $board_id, $name, $desc, $path, $retaurantAddress
 	$isRestuarant = 1;
 	
 	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator, restaurant_address) VALUES ('$owner', '$name', '$desc', '$path', $isRestuarant, '$retaurantAddress');");
-		
-	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
+		//return $result;
+	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name' AND owner='$owner';");
 	$resultArray = mysqli_fetch_array($result);
 	$pinId = $resultArray[0];
 	
 	
-	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
-
+	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id');"); 
+return $result;
 }
 
 function addPin($owner, $board_id, $name, $desc, $path)
@@ -171,7 +171,7 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	
 	
 	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
-
+return $result;
 }
 
 function removePin($user, $pin_id)
@@ -179,13 +179,9 @@ function removePin($user, $pin_id)
 	global $con;
 	
 	$result = mysqli_query($con,"delete from pin where pin_id='$pin_id' and owner='$user'");
-	
-	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')");
-	
+		
 	//get board_id of user
 	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
-	if($result != '')
-		{die("error getting board_id from database");}
 	$resultArray = mysqli_fetch_array($result);
 	$boardId = $resultArray[0];
 	
@@ -448,18 +444,17 @@ function validateSecurityAnswer($securityanswer, $uName) {
     }
 }
 
-function getLatitude($pinid) {
-    global $con;
-    $result = mysqli_query($con, "SELECT latitude FROM pin WHERE pin_id='$pinid'");
+function getAddress($pinID)
+{
+	global $con;
+    $result = mysqli_query($con, "SELECT restaurant_indicator, restaurant_address
+								FROM pin 
+								WHERE pin_id='$pinID'");
     $resultArray = mysqli_fetch_array($result);
-	return $resultArray[0]; 
-}
-
-function getLongitude($pinid) {
-    global $con;
-    $result = mysqli_query($con, "SELECT longitude FROM pin WHERE pin_id='$pinid'");
-    $resultArray = mysqli_fetch_array($result);
-	return $resultArray[0]; 
+	if($resultArray[0] == true)
+		return $resultArray[1];
+	else
+		die("pin selected was not a restaurant!");
 }
 
 function validateUser($username)
