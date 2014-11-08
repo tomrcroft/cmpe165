@@ -25,6 +25,7 @@
         $url = $_POST['pinUrl'];
  
         addPin($owner, $boardId, $title, $desc, $url);
+		
     }
 ?>
 
@@ -63,6 +64,9 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+	<?php
+		addPin('gary', 1, "DNA", "it's some DNA", "http://www.godandscience.org/images/dna-helix.gif");
+	?>
     <!-- Preloader -->
     <div id="preloader">
         <div id="load"></div>

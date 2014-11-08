@@ -169,7 +169,7 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	
 	$result = mysqli_query($con,"INSERT INTO pin (owner, name, description, img_link, restaurant_indicator) VALUES ('$owner', '$name', '$desc', '$path', '$isRestuarant');");
 		
-	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
+	$result = mysqli_query($con,"select MAX(pin_id) from pin");
 	$resultArray = mysqli_fetch_array($result);
 	$pinId = $resultArray[0];
 	
