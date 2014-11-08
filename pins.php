@@ -114,7 +114,7 @@
                 
                 // Where to get board ID from? 
                 $pins = getPinLinks($board_id);
-				$pinNames = getNamesOfPins($_SESSION['username']);
+				$pinNames = getNamesOfPinsOnBoard($board_id);
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
