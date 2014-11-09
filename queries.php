@@ -158,8 +158,19 @@ function addRestaurant($pinId, $owner, $restaurantAddress)
 }
 
 function isRestuarant($board_id) {
-	
-}
+    global $con;
+    $result=  mysqli_query($con, "
+		select restaurant_indicator from pin 
+		join pinned_on on pin.pin_id = pinned_on.pin_id 
+		where pinned_on.board_id = '$board_id' ");
+    $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}   
 
 function addPin($owner, $board_id, $name, $desc, $path)
 {
@@ -453,6 +464,13 @@ function follow($uname, $userToFollow)
 
 }
 
+function getRestaurantAddress($pinId)
+{
+    global $con;
+    $result=  mysqli_query($con, "Select restaurant_address from pin Where pin_id='$pinId';");
+    return $result;
+    
+}
 function getFollowing($uname)
 {
 	global $con;
