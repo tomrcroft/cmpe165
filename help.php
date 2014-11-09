@@ -60,7 +60,8 @@
 
 	    <!-- Get nav bar -->
 	    <?php include 'navbar.php' ?>
-
+            <?php include 'pinitmodal.php' ?>
+            <?php include 'pinmodal.php' ?>
 	    <section id="top" class="top">
 	    </section>
     
