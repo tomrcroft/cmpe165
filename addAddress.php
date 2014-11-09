@@ -15,7 +15,7 @@ if (isset($_POST['submitAddAddress'])) {
     $state = $_POST['state'];
     $zip = $_POST['zip'];
     $pinid=$_POST['pinid'];
-    $combine = $address . ' ' . $city . ' ' . $state . ', ' . $zip;
+    $combine = $address . ' ' . $city . ' ' . $state . ' ' . $zip;
    addRestaurant($pinid, $username, $combine);
    header("location:myBoards.php");
 }
