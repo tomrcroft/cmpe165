@@ -52,47 +52,18 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="load"></div>
-    </div>
+		
+		<!-- Preloader -->
+	    <div id="preloader">
+	        <div id="load"></div>
+	    </div>
 
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.php"><h1><font color="black">Corq</font></h1></a>
-            </div>
+	    <!-- Get nav bar -->
+	    <?php include 'navbar.php' ?>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-
-                    <?php
-                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
-                            $user = $_SESSION['username'];
-                            echo "<li><a href=\"#profile\">$user</a></li>
-                                <li><a href='logout.php'>Logout</a></li>";
-                        } else {
-                            echo "<li><a href=\"#loginRegister\" data-toggle=\"modal\" data-target=\"#myModal\">Login/Register</a></li>";
-                        }
-                    ?>
-                    <li><a href="test.php">About</a></li>
-                    <li><a href="help.php">Help</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Boards<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="myBoards.php">My Boards</a></li>
-                            <li><a href="searchBoards.php">Search Boards</a></li>
-                            <li><a href="#">I'm feeling lucky</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div> <!-- /.navbar-collapse -->
-        </div> <!-- /.container -->
-    </nav>
+	    <section id="top" class="top">
+	    </section>
+    
 
     <section id="top" class="top">
     </section>
@@ -901,6 +872,8 @@
     <script src="js/wow.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.js"></script>
 
 </body>
 
