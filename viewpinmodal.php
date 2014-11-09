@@ -141,7 +141,7 @@
                         </div>
                         
                         <div>
-                            <input type="hidden" name="pinid" class="pinID" val="">
+                            <input name="pinid" class="pinID" val="">
                         </div>
 
 

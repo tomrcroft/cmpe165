@@ -433,8 +433,16 @@ function getBoardsByCategory($category)
 function getPinId($board_id)
 {
     global $con;
-    $result= mysqli_query($con,"Select pin_id from pinned_on WHERE board_id='$board_id';");
-    return $result;
+	
+	$query = "Select pin_id from pinned_on WHERE board_id='$board_id';";
+    $result= mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function follow($uname, $userToFollow)
