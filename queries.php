@@ -461,14 +461,15 @@ function follow($uname, $userToFollow)
 	global $con;
 	
 		$result = mysqli_query($con,"INSERT INTO follow VALUES ('$uname', '$userToFollow')");
-
+		
 }
 
 function getRestaurantAddress($pinId)
 {
     global $con;
     $result=  mysqli_query($con, "Select restaurant_address from pin Where pin_id='$pinId';");
-    return $result;
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
     
 }
 function getFollowing($uname)

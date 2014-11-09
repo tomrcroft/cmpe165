@@ -55,11 +55,19 @@
 		$(document).on("click", ".open-viewPin", function () {
 			 var src = $(this).data('link');
 			 var title = $(this).data('title');
-			 var pinID = $(this).attr('data-getPinID');
-			 var address = "1 washington sq,San Jose,CA 95192";
-			 //var address = $(this).attr('data-isRestaurant');
-			 $(".pinID").val(pinID);
-			 $(".viewmapBtn").attr("href", "mapview.php?address=" + address);
+			 var isRestaurant = $(this).attr('data-isRestaurant');
+			 if (isRestaurant == 1) {
+				var pinID = $(this).attr('data-getPinID');
+			 	$(".pinID").val(pinID);
+				var address = $(this).attr('data-address');
+				//var address = '1 washington sq,San Jose,CA 95192';
+				var addressLink = "mapview.php?address=" + address;
+				$(".viewmapBtn").attr("href", addressLink);
+			 } else {
+			 	$(".addmaplink").hide();
+				$(".viewmapBtn").hide();
+			 }
+			 
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
@@ -108,11 +116,17 @@
                 $pins = getPinLinks($board_id);
 				$pinNames = getNamesOfPinsOnBoard($board_id);
 				$pinIDs = getPinId($board_id);
-				//$isRestaurantArray = ;
+				$isRestaurantArray = isRestuarant($board_id); 
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-isRestaurant="" data-getPinID="'.(string)$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin"';
+					
+					if ($isRestaurantArray[$i] == 1) {
+						echo ' data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
+					}
+					
+					echo 'data-isRestaurant="'.$isRestaurantArray[$i].'" data-getPinID="'.(string)$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
                             <div class="item">
                                 <img src="'.$pins[$i].'" />
                             </div>';
