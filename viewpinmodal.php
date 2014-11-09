@@ -26,7 +26,7 @@
                         ?>
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
-                        <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php">
+                        <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
 							
 							<script type="text/javascript">

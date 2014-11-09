@@ -1,32 +1,11 @@
 <?php 
     session_start(); 
     include 'actions.php';
-
-    if (isset($_POST['submitLogin'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        if (verifyLogin($username, $password))
-            $_SESSION['username'] = $username;
-        else
-            echo "Error. Incorrect username or password.";
+	
+    if (!(isset($_SESSION['username']))) {
+        header("location:index.php"); //to redirect back to "index.php" after logging out
+        exit();
     }
-
-    if (isset($_POST['submitRegister'])) {
-        global $con;
-
-        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
-        $username = mysqli_real_escape_string($con, $_POST['username']);
-        $password= mysqli_real_escape_string($con, $_POST['password']);
-        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
-
-        if ($password == $passwordverify) {
-            addUser($username, $realname, $password);
-        } else {
-            echo "Passwords did not match.";
-        }
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +37,7 @@
 	        <div id="load"></div>
 	    </div>
 
-	    <!-- Get nav bar -->
+	    <!-- Get modals and nav bar -->
 	    <?php include 'navbar.php' ?>
             <?php include 'pinitmodal.php' ?>
             <?php include 'pinmodal.php' ?>
@@ -571,7 +550,7 @@
 
 
 
-		<!-- Section: about -->
+	<!-- Section: about -->
     <a name="about"><section id="about" class="home-section text-center"></a>
 		<div class="heading-about">
 			<div class="container">
@@ -601,7 +580,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Ardalan</h5>
-		                        <p class="subtitle">Pixel Crafter</p>
+		                        <p class="subtitle">Developer</p>
 		                        <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -613,7 +592,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Malcolm</h5>
-		                        <p class="subtitle">Ruby on Rails</p>
+		                        <p class="subtitle">Scrum Master</p>
 		                        <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -625,7 +604,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>John</h5>
-		                        <p class="subtitle">jQuery Ninja</p>
+		                        <p class="subtitle">Product Owner</p>
 		                        <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -637,7 +616,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Art</h5>
-		                        <p class="subtitle">Typographer</p>
+		                        <p class="subtitle">Head Architect</p>
 		                        <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -648,7 +627,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Tom</h5>
-		                        <p class="subtitle">Typographer</p>
+		                        <p class="subtitle">DB specialist</p>
 		                        <div class="avatar"><img src="img/team/5.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -659,7 +638,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Kjetil</h5>
-		                        <p class="subtitle">Typographer</p>
+		                        <p class="subtitle">Developer</p>
 		                        <div class="avatar"><img src="img/team/6.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -670,7 +649,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Kristian</h5>
-		                        <p class="subtitle">Typographer</p>
+		                        <p class="subtitle">QA</p>
 		                        <div class="avatar"><img src="img/team/7.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -680,8 +659,8 @@
 					<div class="wow bounceInUp" data-wow-delay="1s">
 		                <div class="team boxed-grey">
 		                    <div class="inner">
-								<h5>kelly</h5>
-		                        <p class="subtitle">Typographer</p>
+								<h5>Kelly</h5>
+		                        <p class="subtitle">QA</p>
 		                        <div class="avatar"><img src="img/team/8.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -692,7 +671,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Soelin</h5>
-		                        <p class="subtitle">Typographer</p>
+		                        <p class="subtitle">Developer</p>
 		                        <div class="avatar"><img src="img/team/9.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>

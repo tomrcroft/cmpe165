@@ -173,14 +173,14 @@
 
 
 	<!-- Section: about -->
-    <section id="about" class="home-section text-center">
+    <a name="about"><section id="about" class="home-section text-center"></a>
 		<div class="heading-about">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2">
 						<div class="wow bounceInDown" data-wow-delay="0.4s">
 							<div class="section-heading">
-								<h2>About us</h2>
+								<h2>Who we are?</h2>
 								<i class="fa fa-2x fa-angle-down"></i>
 							</div>
 						</div>
@@ -201,8 +201,8 @@
 					<div class="wow bounceInUp" data-wow-delay="0.2s">
 		                <div class="team boxed-grey">
 		                    <div class="inner">
-								<h5>Anna Hanaceck</h5>
-		                        <p class="subtitle">Pixel Crafter</p>
+								<h5>Ardalan</h5>
+		                        <p class="subtitle">Developer</p>
 		                        <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -213,8 +213,8 @@
 					<div class="wow bounceInUp" data-wow-delay="0.5s">
 		                <div class="team boxed-grey">
 		                    <div class="inner">
-								<h5>Maura Daniels</h5>
-		                        <p class="subtitle">Ruby on Rails</p>
+								<h5>Malcolm</h5>
+		                        <p class="subtitle">Scrum Master</p>
 		                        <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -225,8 +225,8 @@
 					<div class="wow bounceInUp" data-wow-delay="0.8s">
 		                <div class="team boxed-grey">
 		                    <div class="inner">
-								<h5>Jack Briane</h5>
-		                        <p class="subtitle">jQuery Ninja</p>
+								<h5>John</h5>
+		                        <p class="subtitle">Product Owner</p>
 		                        <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -237,9 +237,64 @@
 					<div class="wow bounceInUp" data-wow-delay="1s">
 		                <div class="team boxed-grey">
 		                    <div class="inner">
-								<h5>Tom Petterson</h5>
-		                        <p class="subtitle">Typographer</p>
+								<h5>Art</h5>
+		                        <p class="subtitle">Head Architect</p>
 		                        <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+	            <div class="col-xs-6 col-sm-3 col-md-3">
+					<div class="wow bounceInUp" data-wow-delay="1s">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Tom</h5>
+		                        <p class="subtitle">DB specialist</p>
+		                        <div class="avatar"><img src="img/team/5.jpg" alt="" class="img-responsive img-circle" /></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+	            <div class="col-xs-6 col-sm-3 col-md-3">
+					<div class="wow bounceInUp" data-wow-delay="1s">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Kjetil</h5>
+		                        <p class="subtitle">Developer</p>
+		                        <div class="avatar"><img src="img/team/6.jpg" alt="" class="img-responsive img-circle" /></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+	            <div class="col-xs-6 col-sm-3 col-md-3">
+					<div class="wow bounceInUp" data-wow-delay="1s">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Kristian</h5>
+		                        <p class="subtitle">QA</p>
+		                        <div class="avatar"><img src="img/team/7.jpg" alt="" class="img-responsive img-circle" /></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+	            <div class="col-xs-6 col-sm-3 col-md-3">
+					<div class="wow bounceInUp" data-wow-delay="1s">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Kelly</h5>
+		                        <p class="subtitle">QA</p>
+		                        <div class="avatar"><img src="img/team/8.jpg" alt="" class="img-responsive img-circle" /></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+	            <div class="col-xs-6 col-sm-3 col-md-3">
+					<div class="wow bounceInUp" data-wow-delay="1s">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Soelin</h5>
+		                        <p class="subtitle">Developer</p>
+		                        <div class="avatar"><img src="img/team/9.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
 					</div>
