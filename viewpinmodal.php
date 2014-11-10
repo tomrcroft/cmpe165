@@ -1,4 +1,19 @@
 <!-- View Pin modal -->
+
+<script>
+    function likeButtonClick() {
+        document.getElementById("likeButton").value = "[Like button disabled]";
+        // TODO: Disable like button
+        // TODO: Run query to like from JS function
+    }
+
+    function pinButtonClick() {
+        document.getElementById("pinButton").value = "[Pin button disabled]";
+        // TODO: Disable pin button
+        // TODO: Run pin queries.
+    }
+</script>
+
 <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,11 +24,9 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading" style="margin-top : -15px">
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            Pin it</button>
-                        <button type="submit" class="btn btn-secondary btn-sm">Like</button>
-
-
+                        <button type="button" id="pinButton" class="btn btn-primary btn-sm" onClick="pinButtonClick();">Pin it</button>
+                        <button type="button" id="likeButton" class="btn btn-secondary btn-sm" onClick="likeButtonClick();">Like</button>
+                        
                         <?php
                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]) {
                             $user = $_SESSION['username'];
