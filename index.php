@@ -6,7 +6,7 @@
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
-		if (verifyLogin($username, $password))
+		if (verifyPassword($username, $password))
 			$_SESSION['username'] = $username;
 		else
 			echo "Error. Incorrect username or password.";
