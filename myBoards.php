@@ -82,8 +82,48 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="wow bounceInDown" data-wow-delay="0.4s">
                             <div class="section-heading">
-                                <h2>My Boards</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
+                                <!-- TODO: insert board owner's name -->
+                                <h2>/Board owner's name here/</h2>
+                                <!-- Info Badges -->
+                                <div class="heading-about">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-lg-offset-2">
+                                                <?php
+                                                    $boardIDs = getBoardByUser($_SESSION['username']); //TODO: insert board owner's name
+                                                    $numberOfBoards = count($boardIDs);
+                                                ?>
+                                                <ul class="nav nav-pills center">
+                                                    <li class="active" style="padding-left:3em">
+                                                        <!-- TODO: count all pins on all boards -->
+                                                        Pins<span class="badge pull-right">/?/</span>
+                                                    </li>
+                                                    <li class="active" style="padding-left:3em">
+                                                        Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
+                                                    </li>
+                                                    <?php
+                                                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                                                            echo '<li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button href="#editProfile" class="btn btn-primary btn-sm">Account Settings</button>
+                                                            </li>';
+                                                        } else { //TODO: change to "else if" condition to check if user is following this person already, then uncomment "else" statement below
+                                                            echo '<li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button type="submit" class="btn btn-primary btn-sm">Follow</button>
+                                                            </li>';
+                                                        } /**else {
+                                                            echo '<li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button type="submit" class="btn btn-primary btn-sm">Unfollow</button>
+                                                            </li>';
+                                                        }
+                                                        */
+                                                    ?>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Info Badges -->
                             </div>
                         </div>
                     </div>
@@ -100,21 +140,26 @@
 
             <div class="row">
             
-                <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                        <a href="#createBoard" data-toggle="modal" data-target="#createBoard">
-                            <div class="team boxed-grey">
-                                <div class="inner">
-                                    <h5>Create a New Board</h5>
-                                    <div class="avatar">
-                                        <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></div>
-                                </div>
+            <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
+                <?php
+                    if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                        echo '<div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                <a href="#createBoard" data-toggle="modal" data-target="#createBoard">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <div style="margin-top:-15px">
+                                                <h5>Create a New Board</h5>
+                                            </div>
+                                            <div class="avatar">
+                                                <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                
+                        </div>';
+                    }
+                ?>
 
 
                 <?php
@@ -129,26 +174,20 @@
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
-                                    <a href="pins.php?board='.$boardIDs[$i].'">
+                                    <a href="boards.php?board='.$boardIDs[$i].'">
                                         <div class="team boxed-grey">
                                             <div class="inner">
-                                                <h5>'.$boardNames[$i].'</h5>
-                                                <div class="avatar">
-                                                    <img src="'.$boardPreview.'" alt="" 
-                                                    class="img-responsive img-circle" />
+                                                <div style="margin-top:-15px">
+                                                    <h5>'.$boardNames[$i].'</h5>
                                                 </div>
-                        
+                                                <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
                                             </div>
                                         </div>
                                     </a>
                                 <!-- Php code needed to delete this board from database-->
-                                <div class="col-md-offset-8 col-md-4">
-                        
-                                        <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                        class="btn btn-info" onclick="removeboard('.$boardIDs[$i].')">
-                                        <i class="icon-hand-right"></i>X</button>
-                        
-                                </div>
+                                <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
+                                    class="btn btn btn-sm btn-secondary edit-board" onclick="removeboard('.$boardIDs[$i].')">
+                                <i class="icon-hand-left"></i>delete</button>
                             </div>
                         </div>';
                     }
@@ -160,77 +199,12 @@
 
 
 
-    <!-- Create New Board Modal -->
-    <div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">                    
-                    <div class="panel panel-info" >
-
-                        <div class="panel-heading">
-                            <div class="panel-title">Create a New Board</div>
-                        </div>     
-
-                        <div style="padding-top:30px" class="panel-body" >
-                            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                                <form id="signupform" class="form-horizontal" name="signin" action="myBoards.php" method="POST">
-                                
-                                    <div id="signupalert" style="display:none" class="alert alert-danger">
-                                        <p>Error:</p>
-                                        <span></span>
-                                    </div>
-                                    
-                                    <!-- Board Name Field -->
-                                    <div class="form-group">
-                                        <label for="boardname" class="col-md-3 control-label">Board Name</label>
-                                        <div class="col-md-9">
-                                            <input type="boardname" class="form-control" name="boardname" placeholder="Title your new board">
-                                        </div>
-                                    </div>
-
-                                    <!-- Description
-                                    <div class="form-group">
-                                        <label for="description" class="col-md-3 control-label">Description</label>
-                                        <div class="col-md-9">
-                                            <input type="description" class="form-control" name="description" placeholder="Tell everyone what's on your board">
-                                        </div>
-                                    </div>
-                                    <!-- Category
-                                    <div class="form-group">
-                                        <label for="category" class="col-md-3 control-label">Category</label>
-                                        <div class="col-md-9">
-                                            <input type="category" class="form-control" name="category" placeholder="Where should we file your board">
-                                        </div>
-                                    </div>
-                                    <!-- Private board switch
-                                    <div class="form-group">
-                                        <label for="passverify" class="col-md-3 control-label">Password Verification</label>
-                                        <div class="col-md-9">
-                                            <input type="password" class="form-control" name="passverify" placeholder="Password Verification">
-                                        </div>
-                                    </div>
-                                    -->
-                                    <!-- Create Board Button -->    
-                                    <div class="form-group">                      
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button id="btn-createBoard" name="submitCreateBoard" type="submit" type="button" class="btn btn-info">
-                                                <i class="icon-hand-right"></i>Create</button>
-                                            <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>Cancel</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> <!-- Close Login Alert -->                   
-                        </div> <!-- Close Panel Body -->   
-                    </div> <!-- Close panel info -->
-                </div> <!-- Close Login Box -->
-            </div> <!-- Close Modal Content -->
-        </div> <!-- Close Modal Dialog -->
-    </div> <!-- Close Modal Fade -->
-
     <!-- Get login/register modal. -->
     <?php include 'loginmodal.php' ?>
     <!-- Get upload pin modal. -->
     <?php include 'pinmodal.php' ?>
+        <!-- Get create board modal. -->
+    <?php include 'createboardmodal.php' ?>
 
     <footer>
         <div class="container">

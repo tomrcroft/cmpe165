@@ -357,7 +357,7 @@ hr {
 
 .boxed-grey {
 	background: #f9f9f9;
-	padding: 20px;
+	padding: 30px;
 }
 
 .team h5 {
@@ -369,7 +369,7 @@ hr {
 }
 
 .avatar {
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 }
 
 .team-social {
@@ -789,4 +789,17 @@ Parallax
 		font-size: 20px;
 	}
 	
+}
+
+div.circle-image{
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    display:block;
+    background-position-y:25% 
+}
+
+button.edit-board{
+  margin-left:193px;
+  margin-top:-55px;
 }

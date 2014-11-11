@@ -43,6 +43,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/masonrystyle.css" rel="stylesheet" type="text/css">
 
     <!-- Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -50,6 +51,7 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
+	<script src="js/jquery.min.js"></script>
    
 </head>
 
@@ -75,7 +77,7 @@
 			<h4>feed me</h4>
 		</div>
 		<div class="page-scroll">
-			<a href="#service" class="btn btn-circle">
+			<a href="#feed" class="btn btn-circle">
 				<i class="fa fa-angle-double-down animated"></i>
 			</a>
 		</div>
@@ -83,226 +85,40 @@
 	<!-- /Section: intro -->
 
 
-	<!-- Section: services -->
-    <section id="service" class="home-section text-center bg-gray">
-		
-		<div class="heading-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-							<div class="section-heading">
-								<h2>Our Services</h2>
-								<i class="fa fa-2x fa-angle-down"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+ 	<section id="feed" class="home-section text-center">
+        <div class="heading-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="wow bounceInDown" data-wow-delay="0.4s">
+                            <div class="section-heading">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Show all pins based on board ID -->
+        <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
+			
+            <!-- TODO: PHP code here: fill feed with newest posts from all followers in reverse time/date order. Below are just dummies -->
+            <a href="#viewPin" data-toggle="modal" data-target="#viewPin"><div class="item"><img src="img/pins/pidgeotto.gif" /></div></a>
+            <div class="item"><img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" /></div>
+            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
+            <div class="item"><img src="img/pins/tumblr_n96doc8WMO1rtpgrxo1_500.jpg" /></div>
+            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" /></div>
+            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" /></div>
+            <div class="item"><img src="img/pins/patrick.png" /></div>
+            <div class="item"><img src="img/pins/pidgeotto.gif" /></div>
+            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" /></div>
+            <div class="item"><img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" /></div>
+            <div class="item"><img src="img/pins/patrick.png" /></div>
+            <!-- end dummy code -->
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
 
-	        <div class="row">
-	            <div class="col-sm-3 col-md-3">
-					<div class="wow fadeInLeft" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-1.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Learn, Share, or Discover</h5>
-								<p>new interests that your peers find interesting. 
-									It could be rock climbing, cooking, or even sleeping, come join our family and start sharing.</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-2.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Web Design</h5>
-								<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Photography</h5>
-								<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Cloud System</h5>
-								<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	        </div>		
-		</div>
+        </div>
 	</section>
-	<!-- /Section: services -->
-
-
-
-	<!-- Section: about -->
-    <a name="about"><section id="about" class="home-section text-center"></a>
-		<div class="heading-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-							<div class="section-heading">
-								<h2>Who we are?</h2>
-								<i class="fa fa-2x fa-angle-down"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
-
-	        <div class="row">
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="0.2s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Ardalan</h5>
-		                        <p class="subtitle">Developer</p>
-		                        <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="0.5s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Malcolm</h5>
-		                        <p class="subtitle">Scrum Master</p>
-		                        <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="0.8s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>John</h5>
-		                        <p class="subtitle">Product Owner</p>
-		                        <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Art</h5>
-		                        <p class="subtitle">Head Architect</p>
-		                        <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Tom</h5>
-		                        <p class="subtitle">DB specialist</p>
-		                        <div class="avatar"><img src="img/team/5.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Kjetil</h5>
-		                        <p class="subtitle">Developer</p>
-		                        <div class="avatar"><img src="img/team/6.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Kristian</h5>
-		                        <p class="subtitle">QA</p>
-		                        <div class="avatar"><img src="img/team/7.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Kelly</h5>
-		                        <p class="subtitle">QA</p>
-		                        <div class="avatar"><img src="img/team/8.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-xs-6 col-sm-3 col-md-3">
-					<div class="wow bounceInUp" data-wow-delay="1s">
-		                <div class="team boxed-grey">
-		                    <div class="inner">
-								<h5>Soelin</h5>
-		                        <p class="subtitle">Developer</p>
-		                        <div class="avatar"><img src="img/team/9.jpg" alt="" class="img-responsive img-circle" /></div>
-		                    </div>
-		                </div>
-					</div>
-	            </div>
-	        </div>		
-		</div>
-	</section>
-	<!-- /Section: about -->
 	
 
 
@@ -332,13 +148,15 @@
     </footer>
 
     <!-- Core JavaScript Files -->
-    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script> 
     <script src="js/jquery.scrollTo.js"></script>
     <script src="js/wow.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEwhWN-eoYsw3SDy5L8vnQEGYx4KdGKTk&sensor=false">
 
 </body>
 
