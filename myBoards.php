@@ -73,7 +73,14 @@
     <section id="top" class="top">
     </section>
 
-
+	<?php
+		$boardOwner = $_GET['username'];
+		if ($_GET['username'] == $_SESSION['username']) {
+			$isOwner = true;
+		} else {
+			$isOwner = false;
+		}
+	?>
 
     <section id="about" class="home-section text-center">
         <div class="heading-about">
@@ -83,8 +90,9 @@
                         <div class="wow bounceInDown" data-wow-delay="0.4s">
                             <div class="section-heading">
                                 <!-- TODO: insert board owner's name -->
-                                <h2>/Board owner's name here/</h2>
+                                <h2><?php echo $boardOwner; ?></h2>
                                 <!-- Info Badges -->
+								
                                 <div class="heading-about">
                                     <div class="container">
                                         <div class="row">
@@ -142,7 +150,7 @@
             
             <!-- Show a "create board"-button if $user = $_SESSION['username'] -->
                 <?php
-                    if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                    if ($isOwner == true){
                         echo '<div class="col-xs-6 col-sm-3 col-md-3">
                             <div class="wow bounceInUp" data-wow-delay="0.2s">
                                 <a href="#createBoard" data-toggle="modal" data-target="#createBoard">
@@ -183,11 +191,15 @@
                                                 <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
                                             </div>
                                         </div>
-                                    </a>
-                                <!-- Php code needed to delete this board from database-->
-                                <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                    class="btn btn btn-sm btn-secondary edit-board" onclick="removeboard('.$boardIDs[$i].')">
-                                <i class="icon-hand-left"></i>delete</button>
+                                    </a>';
+									if ($isOwner == true) {
+										echo '
+                                			<!-- Delete this board from database-->
+                                			<button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
+                                    			class="btn btn btn-sm btn-secondary edit-board" onclick="removeboard('.$boardIDs[$i].')">
+                                			<i class="icon-hand-left"></i>delete</button>';
+									}
+								echo '
                             </div>
                         </div>';
                     }
