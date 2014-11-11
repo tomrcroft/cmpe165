@@ -14,7 +14,7 @@
     if (isset($_GET['boardname'])) {
         $board_id = $_GET['boardname'];
         removeBoard($board_id);
-		header("location:myBoards.php");
+		header("location:myBoards.php?username=gary");
     }
     if (isset($_POST['submitUploadPin'])) {
         $owner = $_SESSION['username'];
