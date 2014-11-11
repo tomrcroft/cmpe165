@@ -672,7 +672,7 @@
 		                    <div class="inner">
 								<h5>Soelin</h5>
 		                        <p class="subtitle">Developer</p>
-		                        <div class="avatar"><img src="img/team/9.jpg" alt="" class="img-responsive img-circle" /></div>
+		                        <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-rounded" /></div>
 		                    </div>
 		                </div>
 					</div>
