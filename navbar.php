@@ -17,7 +17,7 @@
                             echo '<li class="dropdown">
 							        <a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$user.'<b class="caret"></b></a>
 							        <ul class="dropdown-menu">
-								        <li><a href="myBoards.php">My Boards</a></li>
+								        <li><a href="myBoards.php?username='.$_SESSION['username'].'">My Boards</a></li>
 										<li><a href="help.php">Help</a></li>
 										<li><a href="logout.php">Logout</a></li>
 							        </ul>
