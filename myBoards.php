@@ -103,30 +103,30 @@
                                                 <?php
                                                     $boardIDs = getBoardByUser($boardOwner); //TODO: insert board owner's name
                                                     $numberOfBoards = count($boardIDs);
+													$numberOfPins =  getNumberOfPins($boardOwner);
                                                 ?>
                                                 <ul class="nav nav-pills center">
                                                     <li class="active" style="padding-left:3em">
                                                         <!-- TODO: count all pins on all boards -->
-                                                        Pins<span class="badge pull-right">/?/</span>
+                                                        Pins<span class="badge pull-right"><?php echo $numberOfPins; ?></span>
                                                     </li>
                                                     <li class="active" style="padding-left:3em">
                                                         Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
                                                     </li>
                                                     <?php
-                                                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
+                                                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && $isOwner){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button href="#editProfile" class="btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
-                                                        } else { //TODO: change to "else if" condition to check if user is following this person already, then uncomment "else" statement below
+                                                        } elseif (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && !$isOwner){ //TODO: change to "else if" condition to check if user is following this person already, then uncomment "else" statement below
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button type="submit" class="btn btn-primary btn-sm">Follow</button>
                                                             </li>';
-                                                        } /**else {
+                                                        } else {
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button type="submit" class="btn btn-primary btn-sm">Unfollow</button>
                                                             </li>';
                                                         }
-                                                        */
                                                     ?>
                                                     
                                                 </ul>
