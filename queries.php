@@ -580,6 +580,33 @@ function removeLike($user_id, $pin_id)
 									WHERE user_id=$user_id AND pin_id=$pin_id;");
 	return $result;
 }
+
+function getPinName($pin_id) {
+    global $con;
+
+    $query = "
+        select name
+        from pin
+        where pin_id = '$pin_id'";
+
+    $result = mysqli_query($con, $query);
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];   
+}
+
+function getPinImage($pin_id) {
+    global $con;
+
+    $query = "
+        select img_link
+        from pin
+        where pin_id = '$pin_id'";
+
+    $result = mysqli_query($con, $query);
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];
+}
+
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
