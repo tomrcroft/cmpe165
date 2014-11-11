@@ -11,6 +11,9 @@
         $boardname = $_POST['boardname'];
         addBoard($owner, $boardname);
     }
+	if (!isset($_GET['username'])) {
+		header("location:index.php");
+	}
     if (isset($_GET['boardname'])) {
         $board_id = $_GET['boardname'];
         removeBoard($board_id);
@@ -98,7 +101,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-lg-offset-2">
                                                 <?php
-                                                    $boardIDs = getBoardByUser($_SESSION['username']); //TODO: insert board owner's name
+                                                    $boardIDs = getBoardByUser($boardOwner); //TODO: insert board owner's name
                                                     $numberOfBoards = count($boardIDs);
                                                 ?>
                                                 <ul class="nav nav-pills center">
@@ -172,8 +175,8 @@
 
                 <?php
                     // Fetches boards based on user
-                    $boardIDs = getBoardByUser($user);
-                    $boardNames = getBoardNames($user);
+                    $boardIDs = getBoardByUser($boardOwner);
+                    $boardNames = getBoardNames($boardOwner);
                     for($i = 0; $i < count($boardIDs); $i++) {
                         $boardPreview = getBoardPreview($boardIDs[$i]);
                         if (!(isset($boardPreview))) {
