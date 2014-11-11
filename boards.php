@@ -128,7 +128,12 @@
 					
 					echo 'data-isRestaurant="'.$isRestaurantArray[$i].'" data-getPinID="'.(string)$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
                             <div class="item">
-                                <img src="'.$pins[$i].'" />
+                                <div class="body">
+                                    <img src="'.$pins[$i].'" />
+                                </div>
+                                <div class="footer" style="margin-bottom:10px">
+                                    TODO: fetch description of pin
+                                </div>
                             </div>';
 							/*
 					if (isset($_GET['owner'])) {
