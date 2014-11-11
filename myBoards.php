@@ -103,11 +103,12 @@
                                                 <?php
                                                     $boardIDs = getBoardByUser($boardOwner); //TODO: insert board owner's name
                                                     $numberOfBoards = count($boardIDs);
+													$numberOfPins =  getNumberOfPins($boardOwner);
                                                 ?>
                                                 <ul class="nav nav-pills center">
                                                     <li class="active" style="padding-left:3em">
                                                         <!-- TODO: count all pins on all boards -->
-                                                        Pins<span class="badge pull-right">/?/</span>
+                                                        Pins<span class="badge pull-right"><?php echo $numberOfPins; ?></span>
                                                     </li>
                                                     <li class="active" style="padding-left:3em">
                                                         Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
