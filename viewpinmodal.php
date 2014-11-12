@@ -41,6 +41,8 @@
                                 $('#mapbox').show()">Add Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
+                        <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
+                                $('#repinBox').show()">Repin</a>
                     </div>
 
                     <div class="form-group">
@@ -160,6 +162,41 @@
 
                     </form>
                 </div> <!-- Close panel body -->
+				
+				
+				<!-- Repin sub-modal -->
+                <div id="repinBox" class="panel-body" style="display:none;">
+					<form id="repinForm" class="form-horizontal" name="repinForm" action="repin.php" method="POST">
+                    <div class="col-md-20">
+                        <label for="boardname" class="col-md-3 control-label">Board</label>
+                        <select id="boardname" name="boardID" class="form-control" required="required">
+                            <option value="na" selected="">Choose One:</option>
+
+                            <?php
+
+                                $list = getBoardByUser($_SESSION['username']);
+                                $names = getBoardNames($_SESSION['username']);
+
+                                for($i = 0; $i < count($names); $i++) {
+                                    echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+					
+                    <div>
+                        <input type="hidden" name="repinid" class="repinID" val="">
+                    </div>
+					
+                    <div class="form-group">                      
+                        <div class="col-md-offset-3 col-md-9">
+							<button id="btn-signup" name="submitRepin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Repin</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+				
+				<!-- /Repin sub-modal -->
 
 
             </div>

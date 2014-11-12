@@ -30,7 +30,7 @@
                                     <div class="col-md-offset-3 col-md-9">
                                         <button id="btn-createBoard" name="submitCreateBoard" type="submit" type="button" class="btn btn-info">
                                             <i class="icon-hand-right"></i>Create</button>
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>Cancel</button>
+                                        <button id="btn-fbsignup" type="button" data-dismiss="modal" onclick="$('#createBoard').hide();" class="btn btn-primary"><i class="icon-facebook"></i>Cancel</button>
                                     </div>
                                 </div>
                             </form>

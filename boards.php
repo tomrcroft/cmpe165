@@ -6,7 +6,6 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-    // This will upload the pin
 
     if (isset($_POST['submitCommentSend'])) {
         // Add a comment to a pin.
@@ -19,6 +18,7 @@
    
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
+		$boardOwner = getBoardOwner($board_id);
     } else {
         header("location:boards.php"); //to redirect back to "index.php" after logging out
         exit();
@@ -56,11 +56,19 @@
 			 var src = $(this).data('link');
 			 var title = $(this).data('title');
 			 var isRestaurant = $(this).attr('data-isRestaurant');
+			 var pinID = $(this).attr('data-getPinID');
+			 $(".repinID").val(pinID);
+			 
+			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
+				 $(".repinButton").hide();
+			 } else {
+			 	$(".repinButton").show();
+			 }
 			 if (isRestaurant == 1) {
-				var pinID = $(this).attr('data-getPinID');
-			 	$(".pinID").val(pinID);
+ 			 	$(".addmaplink").show();
+ 				$(".viewmapBtn").show();
+			 	$(".pinID").val(pinID);			
 				var address = $(this).attr('data-address');
-				//var address = '1 washington sq,San Jose,CA 95192';
 				var addressLink = "mapview.php?address=" + address;
 				$(".viewmapBtn").attr("href", addressLink);
 			 } else {
@@ -71,7 +79,7 @@
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
-			 $(".title").html(title + '<button class="close" data-dismiss="modal"onclick="location.reload()">x</button>');
+			 $(".title").html(title + '<button class="close" data-dismiss="modal" onclick="$("#viewPin").hide();">x</button>');
 		});
 	</script>
 </head>
@@ -118,13 +126,14 @@
 				$pinIDs = getPinId($board_id);
 				$isRestaurantArray = isRestuarant($board_id);
 				$descriptions = getDescriptionsOfPinsOnBoard($board_id);
+				
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin"';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" ';
 					
 					if ($isRestaurantArray[$i] == 1) {
-						echo ' data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
+						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
 					}
 					
 					echo 'data-isRestaurant="'.$isRestaurantArray[$i].'" data-getPinID="'.(string)$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
