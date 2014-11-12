@@ -53,26 +53,43 @@
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
 		var title;
+
 		
 		$(document).on("click", ".open-viewPin", function () {
 			 var src = $(this).data('link');
 			 title = $(this).data('title');
 			 var isRestaurant = $(this).attr('data-isRestaurant');
 			 var pinID = $(this).attr('data-getPinID');
+			 var comments = $(this).data('comments').split("~");
+			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 $(".repinID").val(pinID);
+			 $("commentPinID").val(pinID);
+			 var commentHtml="<br />";
+			 
+			 for (i = 0; i < comments.length; i++) {
+				 if (commentAuthors[i] == '') {
+					 commentHtml = '<br /><br />Be the first!';
+					 break;
+				 }
+			 	commentHtml += commentAuthors[i] + ' says "' + comments[i] + '"<br /> <br />';
+			 }
+			     //We add vPool HTML content to #myDIV
+			     $('.commentField').html(commentHtml);
 			 
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
 				 $(".repinButton").hide();
-				 $(".editButton").show();
+				 $(".open-editPin").show();
 				 $(".likeButton").hide();
 				 
 			 } else {
 			 	$(".repinButton").show();
-				$(".editButton").hide();
+				$(".open-editPin").hide();
 				$(".likeButton").show();
 			 }
 			 if (isRestaurant == 1) {
- 			 	$(".addmaplink").show();
+				if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
+					$(".addmaplink").show();
+				} 			 	
  				$(".viewmapBtn").show();
 			 	$(".pinID").val(pinID);			
 				var address = $(this).attr('data-address');
@@ -132,12 +149,29 @@
 				$pinNames = getNamesOfPinsOnBoard($board_id);
 				$pinIDs = getPinId($board_id);
 				$isRestaurantArray = isRestuarant($board_id);
-				$descriptions = getDescriptionsOfPinsOnBoard($board_id);
+				$descriptions = getDescriptionsOfPinsOnBoard($board_id);				
 				
                 for($i = 0; $i < count($pins); $i++) {
-					//$_SESSION['imgLink'] = $pins[$i];
+					$comments = getComments($pinIDs[$i]);
+					$authors = getCommentAuthors($pinIDs[$i]);
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" ';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-comments="';
+					
+					for ($j = 0; $j < count($comments); $j++) {
+						if ($j != 0) {
+							echo '~';
+						}
+						echo $comments[$j];
+					}
+					echo '" ';
+					echo 'data-commentAuthors="';
+					for ($j = 0; $j < count($authors); $j++) {
+						if ($j != 0) {
+							echo '~';
+						}
+						echo $authors[$j];
+					}
+					echo '" ';
 					
 					if ($isRestaurantArray[$i] == 1) {
 						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';

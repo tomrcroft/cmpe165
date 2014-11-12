@@ -10,12 +10,6 @@
         // TODO: Disable like button
         // TODO: Run query to like from JS function
     }
-
-    function pinButtonClick() {
-        document.getElementById("pinButton").value = "[Pin button disabled]";
-        // TODO: Disable pin button
-        // TODO: Run pin queries.
-    }
 </script>
 
 <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -31,7 +25,7 @@
                         <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
 
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
-                                        <button type="submit" class="btn btn-secondary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
+                                        <button type="submit" class="btn btn-primary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
                         </a>
 
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
@@ -46,7 +40,7 @@
                         <img style="height:auto; max-width:560px;" src="" class=showPic />
                     </div>
 
-                    <form id="commentform" class="form-horizontal" name="commentform" method="POST">
+                    <form id="commentform" class="form-horizontal" action="addComment.php" name="commentform" method="POST">
                         <div class="form-group">
                             <div class="col-md-9">
                                 <!-- Upload Pin Field -->
@@ -55,14 +49,24 @@
                                         <input type="comment" class="form-control" name="comment" placeholder="Leave a comment" style="margin-top:10px">
                                     </div>
                                 </div>
+								
+			                    <div>
+			                        <input type="hidden" name="commentPinID" class="repinID" val="">
+			                    </div>
+								
+			                    <div>
+			                        <input type="hidden" class="numberOfComments" data-loadedComments="">
+			                    </div>
+								
+								<button id="btn-commentSend" name="submitCommentSend" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Send</button>
                                 <div class="form-group">
                                     <div class="col-md-20">
-                                        <label for="uploadPin" class="col-md-3 control-label">Comments</label>
-                                        <!-- TODO: Make a mock comment that I can copy (kjetil) -->
-                                        <!-- TODO: fetch and list comments -->
+                                        <label for="uploadPin" style="margin-left : 15px" class="control-label">Comments:</label>
+                                        <!-- TODO: Make it look better -->                                       
+										<div class="commentField" style="margin-left : 15px">
+										</div>
                                     </div>
-                                </div>
-                                <button id="btn-commentSend" name="submitCommentSend" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Send</button>
+                                </div>                              
                             </div>
                         </div>
                     </form>

@@ -45,6 +45,30 @@
 		$desc = $_POST['pinDescription'];
 		editPinName($userName, $oldPinName, $newPinName, $desc);
 	}
+	if (isset($_POST['submitEditPassword'])) {
+		$userName = $_SESSION['username'];
+		$fullName = $_POST['realname'];
+		$oldPassword = $_POST['oldpassword'];
+		$newPassword = $_POST['newpassword'];
+		$confirmedPassword = $_POST['passverify'];
+		if (verifyPassword($userName, $oldPassword)) {
+			if ($newPassword == $confirmedPassword) {
+				editUser($userName, $fullName, $newPassword);
+				echo '<script type="text/javascript">';
+				echo 'alert("Account Updated")';
+				echo '</script>';
+			} else {
+				echo '<script type="text/javascript">';
+				echo 'alert("Passwords do not match, please try again")';
+				echo '</script>';
+			}
+		} else {
+			echo '<script type="text/javascript">';
+			echo 'alert("Old Password is invalid!")';
+			echo '</script>';
+		}
+
+	}
 ?>
 
 <!DOCTYPE html>
@@ -133,25 +157,21 @@
                                                         Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
                                                     </li>
                                                     <?php
-                                                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && $isOwner){
+                                                        if ($isOwner){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
-                                                        } elseif (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && !$isOwner && !$followed){
+                                                        } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <form method="POST">
                                                                     <button type="submit" name="submitFollow" class="btn btn-primary btn-sm">Follow</button>
                                                                 </form>
                                                             </li>';
-                                                        } elseif (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && !$isOwner && $followed) {
+                                                        } elseif ($followed == true) {
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <form method="POST">
                                                                     <button type="submit" name="submitUnfollow" class="btn btn-primary btn-sm">Unfollow</button>
                                                                 </form>
-                                                            </li>';
-                                                        } else {
-                                                            echo '<li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                    <button type="submit" name="logintofollow" class="btn btn-primary btn-sm">Log In to Follow</button>
                                                             </li>';
                                                         }
                                                     ?>

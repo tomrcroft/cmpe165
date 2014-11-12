@@ -25,10 +25,11 @@ function checkConnection() {
 	} else return true;
 }
 
-function editUser($currentUName, $uName, $realname, $password) {
+//removed change username because it is much more involved than this single update
+function editUser($uName, $realname, $password) {
     global $con;
 	$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
-    $result = mysqli_query($con, "update userInfo SET username='$uName', realName='$realname', password='$hPassword' WHERE username='$currentUName';");
+    $result = mysqli_query($con, "update userInfo SET realName='$realname', password='$hPassword' WHERE username='$uName';");
 	return $result;
 }
 
@@ -516,11 +517,12 @@ function follow($uname, $userToFollow)
 
 function isFollowing($uname, $following) {
 	global $con;
-	$result = mysqli_query($con, "SELECT * FROM follow WHERE username='$uname' AND followUser='following'");
+	$result = mysqli_query($con, "SELECT * FROM follow WHERE username='$uname' AND followUser='$following'");
 
 	if (mysqli_num_rows($result) == 0)
+		return false;
+	else 
 		return true;
-	else return false;
 }
 
 function unFollow($uname, $userToFollow) {
@@ -627,6 +629,42 @@ function removeComment($pin_id, $author, $comment_content)
 	$result = mysqli_query($con, "delete from comments
 									WHERE pin_id=$pin_id AND author='$author' AND comment_content='$comment_content';");
 	return $result;
+}
+
+function getComments($pin_id) {
+	global $con;
+
+	$query = "
+		SELECT comment_content
+		FROM comments
+		WHERE pin_id = '$pin_id';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
+
+function getCommentAuthors($pin_id) {
+	global $con;
+
+	$query = "
+		SELECT author
+		FROM comments
+		WHERE pin_id = '$pin_id';";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function addLike($user_id, $pin_id)
