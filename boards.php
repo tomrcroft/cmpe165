@@ -65,7 +65,7 @@
 			 $(".repinID").val(pinID);
 			 $("commentPinID").val(pinID);
 			 var commentHtml="<br />";
-			 
+			 $(".repinButton").show();
 			 for (i = 0; i < comments.length; i++) {
 				 if (commentAuthors[i] == '') {
 					 commentHtml = '<br /><br />Be the first!';
@@ -79,12 +79,12 @@
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
 				 $(".addmaplink").show();
 				 $(".pinID").val(pinID);	
-				 $(".repinButton").hide();
+				 
 				 $(".open-editPin").show();
 				 $(".likeButton").hide();
 				 
 			 } else {
-			 	$(".repinButton").show();
+			 	
 				$(".open-editPin").hide();
 				$(".addmaplink").hide();
 				$(".likeButton").show();

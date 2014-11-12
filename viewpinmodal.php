@@ -167,6 +167,10 @@
 				
 				<!-- Repin sub-modal -->
                 <div id="repinBox" class="panel-body" style="display:none;">
+					
+					<div style="float:right; font-size: 85%; position: relative; top:-10px">
+                    <a id="addmaplink" href="#" onclick="$('#repinBox').hide();
+                            $('.pinbox').show()">Go Back to Pin</a></div>
 					<form id="repinForm" class="form-horizontal" name="repinForm" action="repin.php" method="POST">
                     <div class="col-md-20">
                         <label for="boardname" class="col-md-3 control-label">Board</label>
