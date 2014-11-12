@@ -33,7 +33,7 @@
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
-                                $('#repinBox').show()">Repin</a>
+                                $('#repinBox').show()">PIN IT</a>
                     </div>
 
                     <div class="form-group">
