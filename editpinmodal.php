@@ -5,7 +5,7 @@
             <div id="editPin" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <button class="btn btn-link pull-right" onclick=" $('#editPin').hide();$('#viewPin').show()">X</button>
+                        <button class="btn btn-link pull-right" data-dismiss="modal" onclick="$('#editPin').hide();$('#viewPin').show()">X</button>
                         <div class="panel-title">Pin Settings</div>
                      
                     </div>
