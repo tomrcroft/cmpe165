@@ -295,7 +295,7 @@
 								<img src="img/icons/service-icon-2.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<a href="#boardes"><h5>How many types of boards are there?</h5> </a>
+								<h5>How many types of boards are there?</h5>
 								<p>There are two types of boards. One is private and another one is public. The names say everything about them. Private boaard is your own private place for pinning whatever you want. A public board is visible to everyone.</p>
 							</div>
 		                </div>
