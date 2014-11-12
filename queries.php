@@ -566,8 +566,9 @@ function getSecurityQuestion($username) {
 
 function validateSecurityAnswer($securityanswer, $uName) {
     global $con;
-    $result = mysqli_query($con, "SELECT securityAnswer FROM userInfo WHERE username='$uName'");
-    if (mysqli_num_rows($result) == $securityanswer) {
+    $result = mysqli_query($con, "SELECT security_answer FROM userInfo WHERE username='$uName'");
+    $row=mysqli_fetch_array($result,MYSQLI_NUM); 
+    if ($row[0]== $securityanswer) {
         return true;
     } else {
         return false;
