@@ -13,6 +13,34 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
+
+    // Submit comment POST function
+    if (isset($_POST['submitCommentSend'])) {
+
+        $author = $_SESSION['username'];
+        $comment = $_POST['comment'];
+ 
+        submitComment($pinId, $author, $comment);
+    }
+
+    // Submit like POST function
+    if (isset($_POST['submitLike'])) {
+        addLike($_POST['username'], $pin_id);
+    }
+
+    // Disable like button if user has liked this pin already.
+    /*$liked = checkLike($_POST['username'], $pin_id);
+    if ($liked == 1) {
+        echo '<script>$(\'#likeButton\').disabled = true;</script>';
+    }*/
+
+    // Hide buttons exclusive to the pin's owner.
+    $pinOwner = getPinOwner($pin_id);
+    if ($pinOwner == $_SESSION['username']) {
+        echo 'here was here';
+        echo '<script>$(\'#pinButton\').hide();</script>';
+        echo '<script>$(\'#addAddressButton\').hide();</script>';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +72,7 @@
     
     
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    
+
     
     <!-- Preloader -->
     <div id="preloader">
@@ -89,12 +117,12 @@
                             $user = $_SESSION['username'];
                             echo '
                                     <a href="#editPin" data-toggle="modal" data-target="#editPin" onclick="dothis()">
-                                        <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+                                        <button type="submit" id="editPinButton" class="btn btn-secondary btn-sm">Edit</button>
                                     </a>';
                                     
                         }
                         ?>
-                        <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
+                        <a class="btn btn-primary btn-sm addmaplink" href="#" id="addAddressButton" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
@@ -276,6 +304,16 @@
     <script src="js/masonry.pkgd.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEwhWN-eoYsw3SDy5L8vnQEGYx4KdGKTk&sensor=false">
     </script>
+
+
+    <?php // Hide buttons exclusive to the pin's owner.
+        $pinOwner = getPinOwner($pin_id);
+        if ($pinOwner != $_SESSION['username']) {
+            echo 'here was here';
+            echo '<script>$(\'#editPinButton\').hide();</script>';
+            echo '<script>$(\'#addAddressButton\').hide();</script>';
+        }
+    ?>
 </body>
 
 </html>
