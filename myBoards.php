@@ -94,6 +94,8 @@
     </section>
 
 	<?php
+        $following = $_GET['username'];
+        $followed = isFollowing($user, $following);
 		$boardOwner = $_GET['username'];
 		if ($_GET['username'] == $_SESSION['username']) {
 			$isOwner = true;
@@ -121,8 +123,6 @@
                                                     $boardIDs = getBoardByUser($boardOwner); //TODO: insert board owner's name
                                                     $numberOfBoards = count($boardIDs);
 													$numberOfPins =  getNumberOfPins($boardOwner);
-                                                    $following = $_GET['username'];
-                                                    $followed = isFollowing($user, $following);
                                                 ?>
                                                 <ul class="nav nav-pills center">
                                                     <li class="active" style="padding-left:3em">
@@ -133,6 +133,7 @@
                                                         Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
                                                     </li>
                                                     <?php
+                                                        
                                                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && $isOwner){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="btn btn-primary btn-sm">Account Settings</button>

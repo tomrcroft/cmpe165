@@ -28,18 +28,17 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading" style="margin-top : -15px">
+                        <a class="btn btn-primary btn-sm" onclick="$('.pinbox').hide(); $('#repinBox').show()">Pin It</a>
                         <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
-
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
-                                        <button type="submit" class="btn btn-secondary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
                         </a>
 
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
-                        <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
-                                $('#repinBox').show()">Repin</a>
+                        
                     </div>
 
                     <div class="form-group">
@@ -164,32 +163,31 @@
 				<!-- Repin sub-modal -->
                 <div id="repinBox" class="panel-body" style="display:none;">
 					<form id="repinForm" class="form-horizontal" name="repinForm" action="repin.php" method="POST">
-                    <div class="col-md-20">
-                        <label for="boardname" class="col-md-3 control-label">Board</label>
-                        <select id="boardname" name="boardID" class="form-control" required="required">
-                            <option value="na" selected="">Choose One:</option>
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <div class="col-md-20">
+                                        <label for="boardname" class="col-md-3 control-label">Board</label>
+                                        <select id="boardname" name="boardId" class="form-control" required="required">
+                                            <option value="na" selected="">Choose One:</option>
 
-                            <?php
+                                            <?php
 
-                                $list = getBoardByUser($_SESSION['username']);
-                                $names = getBoardNames($_SESSION['username']);
+                                                $list = getBoardByUser($_SESSION['username']);
+                                                $names = getBoardNames($_SESSION['username']);
 
-                                for($i = 0; $i < count($names); $i++) {
-                                    echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
-                                }
-                            ?>
-                        </select>
-                    </div>
-					
-                    <div>
-                        <input type="hidden" name="repinID" class="repinID" val="">
-                    </div>
-					
-                    <div class="form-group">                      
-                        <div class="col-md-offset-3 col-md-9">
-							<button id="btn-signup" name="submitRepin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Repin</button>
+                                                for($i = 0; $i < count($names); $i++) {
+                                                    echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+			
+                        <div><input type="hidden" name="repinID" class="repinID" val=""></div>
+    					<button id="btn-signup" name="submitRepin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Repin</button>
                     </form>
                 </div>
 				

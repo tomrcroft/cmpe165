@@ -1,11 +1,34 @@
 <?php 
     session_start(); 
     include 'actions.php';
-	
-    if (!(isset($_SESSION['username']))) {
-        header("location:index.php"); //to redirect back to "index.php" after logging out
-        exit();
+
+    if (isset($_POST['submitLogin'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if (verifyPassword($username, $password))
+            $_SESSION['username'] = $username;
+        else
+            echo "Error. Incorrect username or password.";
     }
+
+    if (isset($_POST['submitRegister'])) {
+        global $con;
+
+        $realname = mysqli_real_escape_string ($con, $_POST['realname']);
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $password= mysqli_real_escape_string($con, $_POST['password']);
+        $passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
+                $question= mysqli_real_escape_string($con,$_POST['question']);
+                $answer= mysqli_real_escape_string($con, $_POST['answer']);
+                
+        if ($password == $passwordverify) {
+            addUser($username, $realname, $password, $question, $answer);
+                    
+        } else {
+            echo "Passwords did not match.";
+        }
+    }       
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +43,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/masonrystyle.css" rel="stylesheet" type="text/css">
 
     <!-- Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -27,46 +51,26 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="color/default.css" rel="stylesheet">
-
+    <script src="js/jquery.min.js"></script>
+   
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-		
-		<!-- Preloader -->
-	    <div id="preloader">
-	        <div id="load"></div>
-	    </div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
 
-	    <!-- Get modals and nav bar -->
-	    <?php include 'navbar.php' ?>
-            <?php include 'pinitmodal.php' ?>
-            <?php include 'pinmodal.php' ?>
-	    <section id="top" class="top">
-	    </section>
+    <!-- Get nav bar -->
+    <?php include 'navbar.php' ?>
+    <?php include 'reset.php'  ?>
+   
     
-
     <section id="top" class="top">
     </section>
-
     
-	<!-- Section: intro -->
-    <section id="intro" class="intro">
-	
-		<div class="slogan">
-			<h2>Corq</span> </h2>
-			<h4>Find things you like and share it</h4>
-		</div>
-		<div class="page-scroll">
-			<a href="#service" class="btn btn-circle">
-				<i class="fa fa-angle-double-down animated"></i>
-			</a>
-		</div>
-    </section>
-	<!-- /Section: intro -->
-
-
 	<!-- Section: services -->
-    <section id="service" class="home-section text-center bg-gray" style= " background-color:#FFFFCC">
+    <section id="service" class="home-section text-center bg-gray">
 		
 		<div class="heading-about">
 			<div class="container">
@@ -132,21 +136,6 @@
 		                </div>
 					</div>
 	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<a href="#video"><h5>Tutorial Videos</h5></a>
-								<p>         </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	           
 	        </div>		
 		</div>
 	</section>
@@ -154,7 +143,7 @@
 
 	<!-- section: pins-->
 
-	<a name="pins"><section id="service" class="home-section text-center bg-gray" style= " background-color:#CCFF33"></a>
+	<a name="pins"><section id="service" class="home-section text-center bg-gray"></a>
 		
 		<div class="heading-about">
 			<div class="container">
@@ -187,8 +176,7 @@
 							</div>
 							<div class="service-desc">
 								<h5>What are pins?</h5>
-								<p>Pins are visual bookmarks. Each Pin you see on Pinterest links back to the site it came from, so you can learn more—like how to make it or where to buy it. 
- </p>
+								<p>Pins are posts. Each Pin contains an image, a title, a description, and a list of comments. If the pin contains details of a restaurant, add its location with the map button.</p>
 							</div>
 		                </div>
 					</div>
@@ -201,8 +189,8 @@
 								<img src="img/icons/service-icon-2.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<h5>How can you pin?</h5> 
-								<p>It is simple. Next to each picture that you find on our site, there is PIN button that you can click. After clicking, you need to choose the board that you are pinning to.</p>
+								<h5>Cool, but how do I use them?</h5> 
+								<p>Click "Pin It" in the navigation bar at the top, then fill out the form. Hit submit and your pin will appear on the board, or find a pin you like and hit the "Pit It" button.</p>
 							</div>
 		                </div>
 					</div>
@@ -215,8 +203,8 @@
 								<img src="img/icons/service-icon-3.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<h5>What can you pin?</h5>
-								<p>Basically, you can pin anything and everything. You can pin something from your device like laptop or phone. Also you can pin visuals from different websites or from other users' pins. </p>
+								<h5>Alright, but what can I pin?</h5>
+								<p>Pin images, text, or images with text. No need to limit yourself to one choice. Insert an image URL or just type into the description to post a text post.</p>
 							</div>
 		                </div>
 					</div>
@@ -229,21 +217,8 @@
 								<img src="img/icons/service-icon-4.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<h5>How to find pins?</h5>
-								<p>Collect things you find around the web, or look through Pins already on Pinterest to see what other people have found. </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Adventure</h5>
-								<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+								<h5>Neat. Where can I find more pins?</h5>
+								<p>Use the search function at the top of the page to find users, pins, and boards. Type in what you're looking for and it'll give you a list of related results.</p>
 							</div>
 		                </div>
 					</div>
@@ -251,18 +226,11 @@
 	        </div>		
 		</div>
 	</section>
-
-
-
-
  	<!-- /section: pins-->
-	
-
-
 
 
  	<!-- section: boards-->
- 	<a name="boards"><section id="service" class="home-section text-center bg-gray" style= " background-color:#ff6699"></a>
+ 	<a name="boards"><section id="service" class="home-section text-center bg-gray"></a>
 		
 		<div class="heading-about">
 			<div class="container">
@@ -295,7 +263,7 @@
 							</div>
 							<div class="service-desc">
 								<h5>What are boards?</h5>
-								<p> Boards are the pin holder places. Basically everytime that you pin something, it asks you for specific place to pin it which is a specific board.</p>
+								<p>Collect your pins onto boards. Boards hold pins based on your own preferences, and you choose which board you want to add a pin to. Make one about dogs. That's always a good start.</p>
 							</div>
 		                </div>
 					</div>
@@ -308,8 +276,8 @@
 								<img src="img/icons/service-icon-2.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<a href="#boardes"><h5>How many types of boards are there?</h5> </a>
-								<p>There are two types of boards. One is private and another one is public. The names say everything about them. Private boaard is your own private place for pinning whatever you want. On the ither hand public board is visible to everyone.</p>
+								<h5>I see, and how many boards can I make?</h5>
+								<p>As much as you want. Set them to private or public, based on what you want people to see. Make a board entirely for one pin, or make one board for everything.</p>
 							</div>
 		                </div>
 					</div>
@@ -322,35 +290,8 @@
 								<img src="img/icons/service-icon-3.png" alt="" />
 							</div>
 							<div class="service-desc">
-								<h5>How can you create a board?</h5>
-								<p> You can create a board whenever you desire. Once you try to pin something, it will ask you which board you want to pin it to, then you can choose or create a board. Also, prior to pinning anything you can create new boards.</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>??</h5>
-								<p>	</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	            <div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>??</h5>
-								<p>	</p>
+								<h5>Fantastic, so how do I create a board?</h5>
+								<p>After signing up with Corq and logging in, you can click your username in the navigation bar and blick "My Boards". Here, you can click on the large "plus" icon labeled "Create a Board". Fill out the form and hit submit.</p>
 							</div>
 		                </div>
 					</div>
@@ -358,196 +299,7 @@
 	        </div>		
 		</div>
 	</section>
-
  	<!-- /section: boards-->
-
- 	<!-- section: profile-->
-
-
-<a name="profile"> <section id="service" class="home-section text-center bg-gray" style=" background-color: #0099FF"></a>
-		
-		<div class="heading-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-							<div class="section-heading">
-								<a name="boards"><h2>Profile</h2></a>
-								<i class="fa fa-2x fa-angle-down"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
-
-	        <div class="row">
-	            <div class="col-sm-3 col-md-3">
-					<div class="wow fadeInLeft" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-1.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>What can you do in your profile?</h5>
-								<p> You can view your boards and pins. You can edit them. </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-2.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<a href="#boardes"><h5>??</h5> </a>
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>??</h5>
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>??</h5>
-								<p>	</p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	           			
-
-
-	        </div>		
-		</div>
-	</section>
-
-
-
-
- 	<!-- /section:profile-->
-
-
-
-
-
-
-	<!-- section: videos-->
-	<a name="video"><section id="service" class="home-section text-center bg-gray" style= " background-color:#00FF66"></a>
-		
-		<div class="heading-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-							<div class="section-heading">
-								<h2>Tutorial Videos</h2>
-								<i class="fa fa-2x fa-angle-down"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
-
-	        <div class="row">
-	            <div class="col-sm-3 col-md-3">
-					<div class="wow fadeInLeft" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Video 1</h5>
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Video 2</h5> 
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Video 3</h5>
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-
-				<div class="col-sm-3 col-md-3">
-					<div class="wow fadeInRight" data-wow-delay="0.2s">
-		                <div class="service-box">
-							<div class="service-icon">
-								<img src="img/icons/service-icon-3.png" alt="" />
-							</div>
-							<div class="service-desc">
-								<h5>Video 4</h5>
-								<p> </p>
-							</div>
-		                </div>
-					</div>
-	            </div>
-	           
-	        </div>		
-		</div>
-	</section>
-	<!-- /section: videos-->
-
 
 
 	<!-- Section: about -->
@@ -558,7 +310,7 @@
 					<div class="col-lg-8 col-lg-offset-2">
 						<div class="wow bounceInDown" data-wow-delay="0.4s">
 							<div class="section-heading">
-								<h2>Who we are?</h2>
+								<h2>About Team Corq</h2>
 								<i class="fa fa-2x fa-angle-down"></i>
 							</div>
 						</div>
@@ -683,147 +435,10 @@
 	<!-- /Section: about -->
 
 
-<!-- Login/Register Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
-	    	<div class="modal-content">
-	        	<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">                    
-	            	<div class="panel panel-info" >
-
-	                    <div class="panel-heading">
-	                        <div class="panel-title">Login</div>
-	                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot your password?</a></div>
-	                    </div>     
-
-	                    <div style="padding-top:30px" class="panel-body" >
-	                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-	                        	<form id="loginform" class="form-horizontal" role="form" action="index.php" method="POST">
-	                                    
-	                            	<div style="margin-bottom: 25px" class="input-group">
-	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-	                                    <input required="" id="username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
-	                                </div>
-	                                
-	                            	<div style="margin-bottom: 25px" class="input-group">
-	                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                                        <input required="" id="password" type="password" class="form-control" name="password" placeholder="password">
-	                                </div>
-	                                    
-
-	                                
-	                            	<div class="input-group">
-	                                    <div class="checkbox">
-	                                        <label>
-	                                        	<input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-	                                        </label>
-	                                    </div>
-	                                </div>
-
-	                                <!-- Button -->
-	                                <div style="margin-top:10px" class="form-group">
-	                                    <div class="col-sm-12 controls">
-
-	                                    	<!-- Maybe I'll need to change to input type -->
-	                                    	<button type="submit" id="signin" name="submitLogin" class="btn btn-success">Login</button>
-	                                    	<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-	                                    </div>
-	                                </div>
-
-	                                <!-- Register Here footer -->
-	                                <div class="form-group">
-	                                    <div class="col-md-12 control">
-	                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account? 
-	                                        	<a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()"> Register Here</a>
-	                                        </div>
-	                                    </div>
-	                                </div>   
-
-	                            </form>
-	                        </div> <!-- Close Login Alert -->                   
-	                    </div> <!-- Close Panel Body -->   
-	        		</div> <!-- Close panel info -->
-	        	</div> <!-- Close Login Box -->
-
-        		<div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
-
-                        <div class="panel-heading">
-                            <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                            	<a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Or Login Here</a></div>
-                        </div>
-
-                        <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" name="signin" action="index.php" method="POST">
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                
-                                <!-- Email Field  
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
-                                    </div>
-                                </div>
-                                 -->
-                                
-                                <!-- Username Field -->
-                                <div class="form-group">
-                                    <label for="username" class="col-md-3 control-label">Username</label>
-                                    <div class="col-md-9">
-                                        <input type="username" class="form-control" name="username" placeholder="Username">
-                                    </div>
-                                </div>
-
-                                <!-- Name Field -->
-                                <div class="form-group">
-                                    <label for="realname" class="col-md-3 control-label">First and Last Name</label>
-                                    <div class="col-md-9">
-                                        <input type="realname" class="form-control" name="realname" placeholder="First and Last Name">
-                                    </div>
-                                </div>
-
-                                <!-- Password Field --> 
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="password" placeholder="Password">
-                                    </div>
-                                </div>
-
-                                <!-- Password Verify Field --> 
-                                <div class="form-group">
-                                    <label for="passverify" class="col-md-3 control-label">Password Verification</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passverify" placeholder="Password Verification">
-                                    </div>
-                                </div>
-
-								<!-- Register Button -->    
-                                <div class="form-group">                      
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" name="submitRegister" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Register</button>
-                                        <span style="margin-left:8px;">or</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- Facebook button -->
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                    </div>                                           
-                                </div>
-
-                        	</form>
-                        </div> <!-- Close panel body -->
-                    </div> <!-- Close panel info -->
-        		</div> <!-- Close Sign Up Box -->
-	    	</div> <!-- Close Modal Content -->
-		</div> <!-- Close Modal Dialog -->
-	</div> <!-- Close Modal Fade -->
+    <!-- Get login/register modal. -->
+    <?php include 'loginmodal.php' ?>
+    <!-- Get upload pin modal. -->
+    <?php include 'pinmodal.php' ?>
 
 
     <footer>
@@ -845,7 +460,6 @@
     </footer>
 
     <!-- Core JavaScript Files -->
-    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script> 
     <script src="js/jquery.scrollTo.js"></script>
@@ -854,6 +468,7 @@
     <script src="js/custom.js"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/masonry.pkgd.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEwhWN-eoYsw3SDy5L8vnQEGYx4KdGKTk&sensor=false">
 
 </body>
 

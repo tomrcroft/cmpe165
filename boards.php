@@ -52,11 +52,9 @@
 	
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
-		var title;
-		
 		$(document).on("click", ".open-viewPin", function () {
 			 var src = $(this).data('link');
-			 title = $(this).data('title');
+			 var title = $(this).data('title');
 			 var isRestaurant = $(this).attr('data-isRestaurant');
 			 var pinID = $(this).attr('data-getPinID');
 			 $(".repinID").val(pinID);
