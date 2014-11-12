@@ -24,19 +24,12 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading" style="margin-top : -15px">
-                        <button type="button" id="pinButton" class="btn btn-primary btn-sm" onClick="pinButtonClick();">Pin it</button>
-                        <button type="button" id="likeButton" class="btn btn-secondary btn-sm" onClick="likeButtonClick();">Like</button>
-                        
-                        <?php
-                        if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]) {
-                            $user = $_SESSION['username'];
-                            echo '
-                                    <a href="#editPin" data-toggle="modal" data-target="#editPin" onclick="dothis()">
-                                        <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
-                                    </a>';
-                                    
-                        }
-                        ?>
+                        <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
+
+                        <a href="#editPin" class="editButton" data-toggle="modal" data-target="#editPin" >
+                                        <button type="submit" class="btn btn-secondary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
+                        </a>
+
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
                                 $('#mapbox').show()">Add Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">

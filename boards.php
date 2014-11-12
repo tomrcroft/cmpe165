@@ -61,8 +61,13 @@
 			 
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
 				 $(".repinButton").hide();
+				 $(".editButton").show();
+				 $(".likeButton").hide();
+				 
 			 } else {
 			 	$(".repinButton").show();
+				$(".editButton").hide();
+				$(".likeButton").show();
 			 }
 			 if (isRestaurant == 1) {
  			 	$(".addmaplink").show();
