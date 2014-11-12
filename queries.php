@@ -436,6 +436,28 @@ function getNamesOfPinsOnBoard($board_id)
 	return $outputArray;
 }
 
+function getDescriptionsOfPinsOnBoard($board_id)
+{
+	global $con;
+
+	$query = "
+		select description
+		from pin
+		where pin_id IN (
+			SELECT pin_id
+			FROM pinned_on
+			WHERE board_id=".$board_id.");";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
+
 function getBoardsByCategory($category) 
 {
 	global $con;

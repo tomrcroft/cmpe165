@@ -116,7 +116,8 @@
                 $pins = getPinLinks($board_id);
 				$pinNames = getNamesOfPinsOnBoard($board_id);
 				$pinIDs = getPinId($board_id);
-				$isRestaurantArray = isRestuarant($board_id); 
+				$isRestaurantArray = isRestuarant($board_id);
+				$descriptions = getDescriptionsOfPinsOnBoard($board_id);
                 for($i = 0; $i < count($pins); $i++) {
 					//$_SESSION['imgLink'] = $pins[$i];
                     echo '
@@ -131,9 +132,9 @@
                                 <div class="body">
                                     <img src="'.$pins[$i].'" />
                                 </div>
-                                <div class="footer" style="margin-bottom:10px">
-                                    TODO: fetch description of pin
-                                </div>
+                                <div class="footer" style="margin-bottom:10px">'
+                                    .$descriptions[$i].
+                                '</div>
                             </div>';
 							/*
 					if (isset($_GET['owner'])) {

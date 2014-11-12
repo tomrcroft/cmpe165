@@ -41,14 +41,6 @@
                                 $('#mapbox').show()">Add Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
-							
-							<script type="text/javascript">
-							//TODO Change to check if pin is a restaurant
-							if (false) {
-								
-							}
-							</script>
-
                     </div>
 
                     <div class="form-group">
