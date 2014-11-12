@@ -29,7 +29,7 @@
                         </a>
 
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
-                                $('#mapbox').show()">Add Map</a>
+                                $('#mapbox').show()">Add or Edit Map</a>
                         <a class="btn btn-primary btn-sm viewmapBtn" href="mapview.php?=address">
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();

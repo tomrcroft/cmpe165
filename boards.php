@@ -77,6 +77,7 @@
 			     $('.commentField').html(commentHtml);
 			 
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
+				 $(".addmaplink").show();
 				 $(".repinButton").hide();
 				 $(".open-editPin").show();
 				 $(".likeButton").hide();
@@ -84,19 +85,16 @@
 			 } else {
 			 	$(".repinButton").show();
 				$(".open-editPin").hide();
+				$(".addmaplink").hide();
 				$(".likeButton").show();
 			 }
-			 if (isRestaurant == 1) {
-				if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
-					$(".addmaplink").show();
-				} 			 	
+			 if (isRestaurant == 1) {		 	
  				$(".viewmapBtn").show();
 			 	$(".pinID").val(pinID);			
 				var address = $(this).attr('data-address');
 				var addressLink = "mapview.php?address=" + address;
 				$(".viewmapBtn").attr("href", addressLink);
 			 } else {
-			 	$(".addmaplink").hide();
 				$(".viewmapBtn").hide();
 			 }
 			 

@@ -13,7 +13,5 @@ if (isset($_POST['submitRepin'])) {
     $boardID = $_POST['boardID'];
     repin($pinID, $boardID);
     header("location:myBoards.php?username=".$_SESSION['username']);
-} else {
-    header("location:index.php"); //to redirect back to "index.php" after logging out
 }
 ?>
