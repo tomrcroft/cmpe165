@@ -28,6 +28,13 @@
  
         addPin($owner, $boardId, $title, $desc, $url);	
     }
+
+    if (isset($_POST['submitFollow'])) {
+        $user = $_SESSION['username'];
+        $following = $_GET['username'];
+
+        follow($user, $following);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +127,9 @@
                                                             </li>';
                                                         } elseif (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"] && !$isOwner){ //TODO: change to "else if" condition to check if user is following this person already, then uncomment "else" statement below
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button type="submit" class="btn btn-primary btn-sm">Follow</button>
+                                                                <form method="POST">
+                                                                <button type="submit" name="submitFollow" class="btn btn-primary btn-sm">Follow</button>
+                                                                </form>
                                                             </li>';
                                                         } else {
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
