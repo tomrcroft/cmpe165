@@ -161,7 +161,7 @@ function addRestaurant($pinId, $owner, $restaurantAddress)
 	
 	$isRestuarant = 1;
 	
-	mysqli_query($con,"Update pin Set restaurant_indicator='$isRestuarant', restaurant_address='$restaurantAddress'WHERE pin_id='$pinId' and owner='$owner';");
+	mysqli_query($con,"Update pin Set restaurant_indicator='$isRestuarant', restaurant_address='$restaurantAddress' WHERE pin_id='$pinId' and owner='$owner';");
 		
 //	$result = mysqli_query($con,"select pin_id from pin WHERE name='$name'");
 //	$resultArray = mysqli_fetch_array($result);

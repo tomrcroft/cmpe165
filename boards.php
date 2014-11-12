@@ -78,6 +78,7 @@
 			 
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
 				 $(".addmaplink").show();
+				 $(".pinID").val(pinID);	
 				 $(".repinButton").hide();
 				 $(".open-editPin").show();
 				 $(".likeButton").hide();
@@ -89,8 +90,7 @@
 				$(".likeButton").show();
 			 }
 			 if (isRestaurant == 1) {		 	
- 				$(".viewmapBtn").show();
-			 	$(".pinID").val(pinID);			
+ 				$(".viewmapBtn").show();			 			
 				var address = $(this).attr('data-address');
 				var addressLink = "mapview.php?address=" + address;
 				$(".viewmapBtn").attr("href", addressLink);

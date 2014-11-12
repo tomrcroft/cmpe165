@@ -25,7 +25,6 @@
         $title = $_POST['pinTitle'];
         $desc = $_POST['pinDescription'];
         $url = $_POST['pinUrl'];
-
         addPin($owner, $boardId, $title, $desc, $url);	
     }
     if (isset($_POST['submitFollow'])) {
