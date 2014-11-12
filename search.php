@@ -54,18 +54,40 @@
 	?>
 	<section id="searchHits" class="home-section text-center">
 		<?php
-			if(count($userHits) > 0) {
+			echo '<h2>Users</h2>';
+			if(count($userHits) > 0) {				
 				for ($i = 0; $i < count($userHits); $i++) {
-					echo "<a href='myBoards.php?=$userHits[$i]>$userHits[$i]</a>";
+					echo '<a href="myBoards.php?username='.$userHits[$i].'">'.$userHits[$i].'</a>';
+					echo'<br>';
 				}
 			} else {
 				echo "<p>I'm sorry, no matching users found</p>";
+			}
+			//TODO get hits based on board categories
+			echo'<br>';
+			echo '<h2>Boards</h2>';
+			if (false) {
+				echo '';
+			} else {
+				echo "<p>I'm sorry, no matching boards found</p>";
+			}
+			//TODO get hits based on pins
+			echo'<br>';
+			echo '<h2>Pins</h2>';
+			if (false) {
+				echo '';
+			} else {
+				echo "<p>I'm sorry, no matching pins found</p>";
 			}
 		?>
     	
 	</section>
 
 
+
+    
+    <!-- Get login/register modal. -->
+    <?php include 'loginmodal.php' ?>
     <!-- Get upload pin modal. -->
     <?php include 'pinmodal.php' ?>
 
