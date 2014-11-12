@@ -621,6 +621,19 @@ function getPinImage($pin_id) {
 	return $resultArray[0];
 }
 
+function getPinOwner($pin_id) {
+    global $con;
+
+    $query = "
+        select owner
+        from pin
+        where pin_id = '$pin_id'";
+
+    $result = mysqli_query($con, $query);
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];
+}
+
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
