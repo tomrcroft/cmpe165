@@ -1,6 +1,10 @@
 <!-- View Pin modal -->
 
 <script>
+	$(document).on("click", ".open-editPin", function () {
+		$(".pinName").val(title);
+	});
+	
     function likeButtonClick() {
         document.getElementById("likeButton").value = "[Like button disabled]";
         // TODO: Disable like button
@@ -26,7 +30,7 @@
                     <div class="panel-heading" style="margin-top : -15px">
                         <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
 
-                        <a href="#editPin" class="editButton" data-toggle="modal" data-target="#editPin" >
+                        <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
                                         <button type="submit" class="btn btn-secondary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
                         </a>
 
@@ -178,7 +182,7 @@
                     </div>
 					
                     <div>
-                        <input type="hidden" name="repinid" class="repinID" val="">
+                        <input type="hidden" name="repinID" class="repinID" val="">
                     </div>
 					
                     <div class="form-group">                      

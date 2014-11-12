@@ -28,6 +28,14 @@
  
         addPin($owner, $boardId, $title, $desc, $url);	
     }
+	if (isset($_POST['editPin'])) {
+		$userName = $_SESSION['username'];
+		$oldPinName = $_POST['pinName'];
+		$newPinName = $_POST['pinTitle'];
+		$desc = $_POST['pinDescription'];
+		editPinName($userName, $oldPinName, $newPinName, $desc);
+	}
+		
 ?>
 
 <!DOCTYPE html>
@@ -220,6 +228,7 @@
     <?php include 'pinmodal.php' ?>
         <!-- Get create board modal. -->
     <?php include 'createboardmodal.php' ?>
+
 
     <footer>
         <div class="container">
