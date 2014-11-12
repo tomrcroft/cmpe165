@@ -514,6 +514,20 @@ function follow($uname, $userToFollow)
 		
 }
 
+function isFollowing($uname, $following) {
+	global $con;
+	$result = mysqli_query($con, "SELECT * FROM follow WHERE username='$uname' AND followUser='following'");
+
+	if (mysqli_num_rows($result) == 0)
+		return true;
+	else return false;
+}
+
+function unFollow($uname, $userToFollow) {
+	global $con;
+	$result = mysqli_query($con, "DELETE FROM follow WHERE username='$uname' AND followUser='$userToFollow'");
+}
+
 function getRestaurantAddress($pinId)
 {
     global $con;
