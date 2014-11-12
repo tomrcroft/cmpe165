@@ -559,9 +559,9 @@ function getFollowing($uname)
 
 function getSecurityQuestion($username) {
     global $con;
-    $result = mysqli_query($con, "SELECT securityQuestion FROM userInfo WHERE username='$username'");
-    $resultArray = mysqli_fetch_array($result);
-	return $resultArray[0]; 
+    $result = mysqli_query($con, "SELECT security_question FROM userInfo WHERE username='$username'");
+    $row=mysqli_fetch_array($result,MYSQLI_NUM);
+	return $row[0]; 
 }
 
 function validateSecurityAnswer($securityanswer, $uName) {
