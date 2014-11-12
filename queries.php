@@ -42,6 +42,20 @@ function checkUserName($uName) {
     }
 }
 
+function searchForUsername($uName) {
+    global $con;
+    $result=  mysqli_query($con, "
+		select username from userInfo  
+		where username LIKE '%$uName%'");
+    $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
+
 /** 
  * Checks a username's availability.
  * 

@@ -6,9 +6,9 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
-	$searchedTerm = $_GET['search'];			
-	if (checkUserName($searchedTerm) == false) {
-		header("location: myBoards.php?username=".$searchedTerm); //to redirect back to "index.php" after logging out
+				
+	if (isset($_POST['username'])) {
+		header("location: myBoards.php?username=".$_POST['username']); 
 	}
 ?>
 <!DOCTYPE html>
@@ -40,22 +40,32 @@
     <div id="preloader">
         <div id="load"></div>
     </div>
-
+	
+    <!-- Get nav bar -->
+    <?php include 'navbar.php' ?>
     
 
     <section id="top" class="top">
     </section>
 
-	<section id="failedSearch" class="home-section text-center">
-    	<p>I'm sorry, that user does not exist</p>
+	<?php
+		$searchTerm = $_GET['search'];
+		$userHits = searchForUsername($searchTerm);
+	?>
+	<section id="searchHits" class="home-section text-center">
+		<?php
+			if(count($userHits) > 0) {
+				for ($i = 0; $i < count($userHits); $i++) {
+					echo "<a href='myBoards.php?=$userHits[$i]>$userHits[$i]</a>";
+				}
+			} else {
+				echo "<p>I'm sorry, no matching users found</p>";
+			}
+		?>
+    	
 	</section>
 
 
-
-    <!-- Get nav bar -->
-    <?php include 'navbar.php' ?>
-    <!-- Get login/register modal. -->
-    <?php include 'loginmodal.php' ?>
     <!-- Get upload pin modal. -->
     <?php include 'pinmodal.php' ?>
 
