@@ -6,14 +6,15 @@
         header("location:index.php"); //to redirect back to "index.php" after logging out
         exit();
     }
+	
+	//create a board
     if (isset($_POST['submitCreateBoard'])) {
         $owner = $_SESSION['username'];
         $boardname = $_POST['boardname'];
         addBoard($owner, $boardname);
+		header("location:myBoards.php?username=".$_SESSION['username']);
     }
-	if (!isset($_GET['username'])) {
-		header("location:index.php");
-	}
+	// remove a board
     if (isset($_GET['boardname'])) {
         $board_id = $_GET['boardname'];
         removeBoard($board_id);

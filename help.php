@@ -122,7 +122,7 @@
                         </div>
                     </div>
                 </div>
- 
+ 			   <!--
                 <div class="col-sm-3 col-md-3">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <div class="service-box">
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>        
         </div>
     </section>
