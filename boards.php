@@ -20,7 +20,7 @@
         $board_id = $_GET['board'];
 		$boardOwner = getBoardOwner($board_id);
     } else {
-        header("location:boards.php"); //to redirect back to "index.php" after logging out
+        header("location:index.php"); 
         exit();
     }
 ?>
@@ -78,8 +78,7 @@
 			 
 			 if ("<?php echo $_SESSION['username']; ?>" == "<?php echo $boardOwner; ?>") {
 				 $(".addmaplink").show();
-				 $(".pinID").val(pinID);	
-				 
+				 $(".pinID").val(pinID);					 
 				 $(".open-editPin").show();
 				 $(".likeButton").hide();
 				 
