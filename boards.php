@@ -138,7 +138,7 @@
     
         <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
-			
+			<div class="wow bounceInDown" data-wow-delay="0.4s">
             <?php
                 
                 // Where to get board ID from? 
@@ -210,6 +210,7 @@
                         </a>';
                 }
             ?>
+		</div>
         </div>
 
     </section>
