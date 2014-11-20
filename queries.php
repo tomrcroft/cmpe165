@@ -209,7 +209,7 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	
 	
 	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
-
+	return $pinId;
 }
 
 function repin($pinId, $board_id) {
@@ -721,6 +721,42 @@ function getPinOwner($pin_id) {
     $result = mysqli_query($con, $query);
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];
+}
+
+function checkPrivacy($board_id)
+{
+	global $con;
+	
+	$query = "
+			select private
+			from board
+			where board_id = $board_id;";
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];
+	
+}
+
+function togglePrivacy($board_id)
+{
+	global $con;
+	
+	if(checkPrivacy($board_id))
+	{
+		$query = "
+				update board set private=0
+				where board_id = $board_id;";
+	}
+	
+	else
+	{
+		$query = "
+				update board set private=1
+				where board_id = $board_id;";
+	}
+	//print($query);
+	$result = mysqli_query($con, $query);
+	return $result;
 }
 
 /*
