@@ -25,6 +25,23 @@
                                         <input type="boardname" class="form-control" name="boardname" placeholder="Title your new board">
                                     </div>
                                 </div>
+                                <!-- Privacy setting radio button field -->
+                                <div class="form-group">
+                                    <div class="col-md-1 col-md-offset-3">
+                                      <label class="radio-inline">
+                                        <input type="radio" name="privacy" value="0" checked> Public
+                                      </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Privacy setting radio button field -->
+                                <div class="form-group">
+                                    <div class="col-md-2 col-md-offset-3">
+                                      <label class="radio-inline">
+                                        <input type="radio" name="privacy" value="1"> Private
+                                      </label>
+                                    </div>
+                                </div>
                                 <!-- Create Board Button -->    
                                 <div class="form-group">                      
                                     <div class="col-md-offset-3 col-md-9">
