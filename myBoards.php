@@ -11,7 +11,10 @@
     if (isset($_POST['submitCreateBoard'])) {
         $owner = $_SESSION['username'];
         $boardname = $_POST['boardname'];
+        $privacy   = $_POST['privacy'];
+        
         addBoard($owner, $boardname);
+        changePrivacy($boardname,$privacy); // set privacy for board
 		header("location:myBoards.php?username=".$_SESSION['username']);
     }
 	// remove a board
@@ -229,6 +232,7 @@
                         if (!(isset($boardPreview))) {
                             $boardPreview = "img/pins/preview.jpg";
                         }
+                        if($isOwner == true){
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
@@ -241,7 +245,23 @@
                                                 <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
                                             </div>
                                         </div>
-                                    </a>';
+                                    </a>'; }
+                        // not board owner this will check privacy of the board and show
+                        // public = 0 and private = 1
+                        if($isOwner != true && checkPrivacy($boardIDs[$i]) == 0){
+                        echo '
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                    <a href="boards.php?board='.$boardIDs[$i].'">
+                                        <div class="team boxed-grey">
+                                            <div class="inner">
+                                                <div style="margin-top:-15px">
+                                                    <h5>'.$boardNames[$i].'</h5>
+                                                </div>
+                                                <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
+                                            </div>
+                                        </div>
+                                    </a>'; }
 									if ($isOwner == true) {
 										echo '
                                 			<!-- Delete this board from database-->

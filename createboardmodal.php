@@ -29,14 +29,14 @@
                                 <div class="form-group">
                                     <div class="col-md-1 col-md-offset-3">
                                       <label class="radio-inline">
-                                        <input type="radio" name="privacy" value="0" checked> Public
+                                        <input type="radio" name="privacy" value="0"> Public
                                       </label>
                                     </div>
                                 </div>
                                 
                                 <!-- Privacy setting radio button field -->
                                 <div class="form-group">
-                                    <div class="col-md-2 col-md-offset-3">
+                                    <div class="col-md-1 col-md-offset-3">
                                       <label class="radio-inline">
                                         <input type="radio" name="privacy" value="1"> Private
                                       </label>
