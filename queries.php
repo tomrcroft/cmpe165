@@ -766,7 +766,7 @@ function changePrivacy($board_name, $privacy)
 	
 		$query = "
 				update board set private=$privacy
-				where board_name = $board_name;";
+				where board_name = '$board_name';";
 
 	$result = mysqli_query($con, $query);
 	return $result;
