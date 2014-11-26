@@ -17,6 +17,17 @@
         changePrivacy($boardname,$privacy); // set privacy for board
 		header("location:myBoards.php?username=".$_SESSION['username']);
     }
+    // change the name of a board and privacy
+     if (isset($_POST['submitEditBoard'])) {
+        $owner = $_SESSION['username'];
+        $oldboardname = $_GET['boardname'];
+        $newboardname = $_POST['newboardname'];
+        $privacy   = $_POST['privacy'];
+        changePrivacy($oldboardname,$privacy);
+        editBoardName($owner,$oldboardname,$newboardname);
+         // set privacy for board
+		header("location:myBoards.php?username=".$_SESSION['username']);
+    }
 	// remove a board
     if (isset($_GET['boardname'])) {
         $board_id = $_GET['boardname'];
@@ -104,6 +115,14 @@
             }
         
         }
+     function editboard(editboard)
+     {
+         if(confirm("Do you want to delete the board?"+editboard))
+        
+         { 
+             window.location = "myBoards.php?boardname ="+editboard;
+         }
+    } 
     </script>
 
 </head>
@@ -264,10 +283,18 @@
                                     </a>'; }
 									if ($isOwner == true) {
 										echo '
-                                			<!-- Delete this board from database-->
+                                                        <!-- edit board name & privacy -->
+                                                <div class="btn-group" role="group" aria-label="...">
+                                                <a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard"
+                                    			class="btn btn-md btn-success pull-left edit-board" onclick="removeboard('.$boardNames[$i].')">
+                                			<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
+    
+                                                      <!-- Delete this board from database-->
+                                                
                                 			<button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                    			class="btn btn btn-sm btn-secondary edit-board" onclick="removeboard('.$boardIDs[$i].')">
-                                			<i class="icon-hand-left"></i>delete</button>';
+                                    			class="btn btn-md btn-danger pull-right" onclick="removeboard('.$boardIDs[$i].')">
+                                			<i class="icon-hand-left"></i>delete</button>
+                                                </div>';
 									}
 								echo '
                             </div>
@@ -289,7 +316,8 @@
     <?php include 'createboardmodal.php' ?>
     <!-- Get account settings modal. -->
     <?php include 'accountsettingsmodal.php' ?>
-
+    <!-- Get board settings modal . -->
+    <?php include 'boardsettingmodal.php' ?>
     <footer>
         <div class="container">
             <div class="row">
