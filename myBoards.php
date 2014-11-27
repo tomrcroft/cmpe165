@@ -23,8 +23,9 @@
         $oldboardname = $_GET['boardname'];
         $newboardname = $_POST['newboardname'];
         $privacy   = $_POST['privacy'];
-        changePrivacy($oldboardname,$privacy);
+        
         editBoardName($owner,$oldboardname,$newboardname);
+        changePrivacy($newboardname,$privacy);
          // set privacy for board
 		header("location:myBoards.php?username=".$_SESSION['username']);
     }
@@ -286,7 +287,7 @@
                                                         <!-- edit board name & privacy -->
                                                 <div class="btn-group" role="group" aria-label="...">
                                                 <a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard"
-                                    			class="btn btn-md btn-success pull-left edit-board" onclick="removeboard('.$boardNames[$i].')">
+                                    			class="btn btn-md btn-success pull-left edit-board" onclick="editboard('.$boardNames[$i].')">
                                 			<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
     
                                                       <!-- Delete this board from database-->
