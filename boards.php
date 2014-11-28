@@ -52,18 +52,26 @@
 	
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
-		var title;
-
 		
 		$(document).on("click", ".open-viewPin", function () {
+			 $("#mapbox").hide(); 
+			 $("#repinBox").hide();
+			 $('#editPinform').hide()
+			 $(".pinbox").show();
+			 
 			 var src = $(this).data('link');
-			 title = $(this).data('title');
+			 var title = $(this).data('title');
 			 var isRestaurant = $(this).attr('data-isRestaurant');
 			 var pinID = $(this).attr('data-getPinID');
 			 var comments = $(this).data('comments').split("~");
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
+			 var desription = $(this).attr('data-pinDescription');
+			 
+			 $(".oldPinName").val(title);
+			 $(".newPinName").val(title);
+			 $(".pinDescription").val(desription);
 			 $(".repinID").val(pinID);
-			 $("commentPinID").val(pinID);
+			 $(".commentPinID").val(pinID);
 			 var commentHtml="<br />";
 			 $(".repinButton").show();
 			 for (i = 0; i < comments.length; i++) {
@@ -100,7 +108,7 @@
 			 // passes the correct image link to viewpinmodal
 		     $(".showPic").attr("src", src);
 			 // passes the pin title and a close button to viewpinmodal
-			 $(".title").html(title + '<button class="close" data-dismiss="modal" onclick="$("#viewPin").hide();">x</button>');
+			 $(".title").html(title + '<button class="close" data-dismiss="modal" onclick="$("#viewPin").hide()">x</button>');
 		});
 	</script>
 </head>
@@ -152,7 +160,7 @@
 					$comments = getComments($pinIDs[$i]);
 					$authors = getCommentAuthors($pinIDs[$i]);
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-comments="';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-pinDescription="'.$descriptions[$i].'" data-comments="';
 					
 					for ($j = 0; $j < count($comments); $j++) {
 						if ($j != 0) {

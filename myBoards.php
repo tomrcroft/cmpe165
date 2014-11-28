@@ -20,9 +20,9 @@
     // change the name of a board and privacy
      if (isset($_POST['submitEditBoard'])) {
         $owner = $_SESSION['username'];
-        $oldboardname = $_GET['boardname'];
+        $oldboardname = $_POST['oldboardname'];
         $newboardname = $_POST['newboardname'];
-        $privacy   = $_POST['privacy'];
+        $privacy = $_POST['privacy'];
         
         editBoardName($owner,$oldboardname,$newboardname);
         changePrivacy($newboardname,$privacy);
@@ -125,6 +125,26 @@
          }
     } 
     </script>
+	
+	<!-- This NEEDS to be here, JQuery needs to be defined before it can be used -->
+	<script src="js/jquery.min.js"></script>
+	
+	<!-- This is called when a pin is clicked, passes image link and pin title-->
+	<script type="text/javascript">
+		$(document).on("click", ".open-editBoard", function () {
+			var boardTitle = $(this).attr('data-boardName');
+			var privacyCheck = $(this).attr('data-privacyCheck');
+			alert(privacyCheck);
+		 	$(".oldBoardName").val(boardTitle);
+		 	$(".boardName").val(boardTitle);
+			if (privacyCheck == 1) {
+				$('.privateButton').prop('checked',true);
+			} else {
+				$('.publicButton').prop('checked',true);
+			}
+			
+		});
+	</script>
 
 </head>
 
@@ -248,6 +268,7 @@
                     $boardIDs = getBoardByUser($boardOwner);
                     $boardNames = getBoardNames($boardOwner);
                     for($i = 0; $i < count($boardIDs); $i++) {
+						$privacyCheck = checkPrivacy($boardIDs[$i]);
                         $boardPreview = getBoardPreview($boardIDs[$i]);
                         if (!(isset($boardPreview))) {
                             $boardPreview = "img/pins/preview.jpg";
@@ -268,7 +289,7 @@
                                     </a>'; }
                         // not board owner this will check privacy of the board and show
                         // public = 0 and private = 1
-                        if($isOwner != true && checkPrivacy($boardIDs[$i]) == 0){
+                        if($isOwner != true && $privacyCheck == 0){
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
@@ -281,23 +302,21 @@
                                                 <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
                                             </div>
                                         </div>
-                                    </a>'; }
-									if ($isOwner == true) {
-										echo '
-                                                        <!-- edit board name & privacy -->
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                <a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard"
-                                    			class="btn btn-md btn-success pull-left edit-board" onclick="editboard('.$boardNames[$i].')">
-                                			<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
-    
-                                                      <!-- Delete this board from database-->
-                                                
-                                			<button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                    			class="btn btn-md btn-danger pull-right" onclick="removeboard('.$boardIDs[$i].')">
-                                			<i class="icon-hand-left"></i>delete</button>
-                                                </div>';
-									}
-								echo '
+                                    </a>'; 
+						}
+						if ($isOwner == true) {
+							echo '<!-- edit board name & privacy -->
+                                 <div class="btn-group" role="group" aria-label="...">
+                                 	<a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard" data-boardName="'.$boardNames[$i].'"
+                                 		data-privacyCheck="'.$privacyCheck.'" class="btn btn-md btn-success pull-left edit-board open-editBoard" 										onclick="editboard('.$boardNames[$i].')">
+                                	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
+    								<!-- Delete this board from database-->
+                                    <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
+                                    	class="btn btn-md btn-danger pull-right" onclick="removeboard('.$boardIDs[$i].')">
+                                	<i class="icon-hand-left"></i>delete</button>
+                                 </div>';
+						}
+						echo '
                             </div>
                         </div>';
                     }
@@ -338,7 +357,6 @@
     </footer>
 
     <!-- Core JavaScript Files -->
-    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script> 
     <script src="js/jquery.scrollTo.js"></script>

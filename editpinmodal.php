@@ -1,4 +1,4 @@
-<!-- Upload Pin Modal -->
+<!-- Edit Pin Modal -->
 <div class="modal fade" id="editPin" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -17,7 +17,7 @@
                                     <div class="form-group">
                                             <label for="uploadPin" class="col-md-3 control-label">Title</label>
                                         <div class="col-md-20">
-                                            <input type="input" class="form-control" name="pinTitle" placeholder="Title of Image">
+                                            <input type="input" class="form-control newPinName" name="pinTitle" placeholder="Title of Image">
                                         </div>
                                         <label for="uploadPin" class="col-md-3 control-label">Description</label>
                                         <div class="col-md-20">
@@ -42,7 +42,7 @@
                                         </div>
 										-->
 										
-										<input type="hidden" name="pinName" class="pinName" value="">
+										<input type="hidden" name="pinName" class="oldPinName" value="">
                                     </div>
                                     <button id="btn-editPin" name="submitEditPin" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Save</button>
                                     

@@ -2,7 +2,8 @@
 
 <script>
 	$(document).on("click", ".open-editPin", function () {
-		$(".pinName").val(title);
+		$(".newPinName").val(title);
+		$(".oldPinName").val(title);
 	});
 	
     function likeButtonClick() {
@@ -24,8 +25,9 @@
                     <div class="panel-heading" style="margin-top : -15px">
                         <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
 
+						<!-- Edit Pin is not working, so it is now a submodal-->
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
-                                        <button type="submit" class="btn btn-primary btn-sm" onclick="$('#viewPin').hide()" >Edit</button>
+                                        <button type="submit" class="btn btn-primary btn-sm" onclick="$('.pinbox').hide(); $('#editPinform').show()" >Edit</button>
                         </a>
 
                         <a class="btn btn-primary btn-sm addmaplink" href="#" onclick="$('.pinbox').hide();
@@ -108,7 +110,8 @@
 
                     <div style="float:right; font-size: 85%; position: relative; top:-10px">
                         <a id="addmaplink" href="#" onclick="$('#mapbox').hide();
-                                $('.pinbox').show()">Go Back to Pin</a></div>
+                                $('.pinbox').show()">Go Back to Pin</a>
+					</div>
                     <form id="addressform" class="form-horizontal" name="addressform" action="addAddress.php" method="POST">
 
                         <div id="addressalert" style="display:none" class="alert alert-danger">
@@ -169,8 +172,9 @@
                 <div id="repinBox" class="panel-body" style="display:none;">
 					
 					<div style="float:right; font-size: 85%; position: relative; top:-10px">
-                    <a id="addmaplink" href="#" onclick="$('#repinBox').hide();
-                            $('.pinbox').show()">Go Back to Pin</a></div>
+                    	<a id="addmaplink" href="#" onclick="$('#repinBox').hide();
+                            $('.pinbox').show()">Go Back to Pin</a>
+					</div>
 					<form id="repinForm" class="form-horizontal" name="repinForm" action="repin.php" method="POST">
                     <div class="col-md-20">
                         <label for="boardname" class="col-md-3 control-label">Board</label>
@@ -203,17 +207,59 @@
 				
 				<!-- /Repin sub-modal -->
 
+				<!-- Edit pin sub-modal -->
 
+                <div id="editPinform" class="panel-body" style="display:none;">
+					<div style="float:right; font-size: 85%; position: relative; top:-10px">
+                    	<a id="addmaplink" href="#" onclick="$('#editPinform').hide();
+                            $('.pinbox').show()">Go Back to Pin</a>
+					</div>
+                    <form class="form-horizontal" name="editPin" action="myBoards.php?username=<?php echo $_SESSION['username']?>" method="POST">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <!-- Edit Pin Field -->
+                                <div class="form-group">
+                                        <label for="uploadPin" class="col-md-3 control-label">Title</label>
+                                    <div class="col-md-20">
+                                        <input type="input" class="form-control newPinName" name="pinTitle" value="" placeholder="Title of Image">
+                                    </div>
+                                    <label for="uploadPin" class="col-md-3 control-label">Description</label>
+                                    <div class="col-md-20">
+                                        <textarea rows="2" class="form-control pinDescription" name="pinDescription" value="" placeholder="Description of Image"></textarea>
+                                    </div>
+									<!--
+                                    <div class="col-md-20">
+                                        <label for="boardname" class="col-md-3 control-label">Board</label>
+                                        <select id="boardname" name="boardId" class="form-control" required="required">
+                                            <option value="na" selected="">Choose One:</option>
+
+                                            <?php/*
+
+                                                $list = getBoardByUser($_SESSION['username']);
+                                                $names = getBoardNames($_SESSION['username']);
+
+                                                for($i = 0; $i < count($names); $i++) {
+                                                    echo '<option value="'.$list[$i].'">'.$names[$i].'</option>';
+                                                }*/
+                                            ?>
+                                        </select>
+                                    </div>
+									-->
+									
+									<input type="hidden" name="pinName" class="oldPinName" value="">
+                                </div>
+                                <button id="btn-editPin" name="submitEditPin" type="submit" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Save</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+				<!-- /Edit pin sub-modal -->
+				
             </div>
         </div>
     </div>
 </div>
 
 <!-- Get view edit pin modal. -->
-<?php include 'editpinmodal.php' ?>
-<script>
-function dothis(){
-    $('#viewPin').hide();
-}
-
-</script>
+<!--<?php //include 'editpinmodal.php' ?> -->

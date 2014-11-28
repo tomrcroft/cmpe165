@@ -24,7 +24,7 @@
                 
 		if ($password == $passwordverify) {
 		    addUser($username, $realname, $password, $question, $answer);
-                    
+            $_SESSION['username'] = $username;
 		} else {
 		    echo "Passwords did not match.";
 		}
