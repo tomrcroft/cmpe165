@@ -80,14 +80,14 @@
                             <span></span>
                         </div>
 
-                        <!-- Email Field  
+                         
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Email</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="email" placeholder="Email Address">
                             </div>
                         </div>
-                        -->
+                      
 
                         <!-- Username Field -->
                         <div class="form-group">
