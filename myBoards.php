@@ -260,6 +260,41 @@
                             </div>
                         </div>';
                     }
+					
+					echo '<div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                <a href="#createBoard" data-toggle="modal" data-target="#createBoard">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <div style="margin-top:-15px">
+                                                <h5>Following</h5>
+                                            </div>
+                                            <div class="avatar">
+                                                <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>';
+						
+					echo '<div class="col-xs-6 col-sm-3 col-md-3">
+                            <div class="wow bounceInUp" data-wow-delay="0.2s">
+                                <a href="#createBoard" data-toggle="modal" data-target="#createBoard">
+                                    <div class="team boxed-grey">
+                                        <div class="inner">
+                                            <div style="margin-top:-15px">
+                                                <h5>Likes</h5>
+                                            </div>
+                                            <div class="avatar">
+                                                <img src="img/corqadd.png" alt="" class="img-responsive img-circle" /></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>';
+					
+					
+					
                 ?>
 
 
