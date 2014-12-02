@@ -6,7 +6,7 @@
                 <div class="panel panel-info" >
 
                     <div class="panel-heading">
-                        <div class="panel-title">Likes</div>
+                        <div class="panel-title">Following</div>
                     </div>     
 
                     
