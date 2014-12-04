@@ -105,14 +105,14 @@ global $con;
 
 $to=$email;
 $subject="Registration confirmation ";
-$header="from: ";
+$from="From: oursite@corq.com";
 
 
 $message="Your Comfirmation link \r\n";
 $message.="Click on the link to below to activate your account\r\n";
 $message.="localhost/SE165/confirmationCheck.php?passkey=$confirm_code";
 
-$sentmail = mail($to,$subject,$message,$header);
+$sentmail = mail($to,$subject,$message,$from);
 
 if($sentmail){
 echo "An email confirmation was sent to your email:".$email;

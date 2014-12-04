@@ -9,7 +9,20 @@
                         <div class="panel-title">Likes</div>
                     </div>     
 
+                    <?php 
+					$username = $_SESSION['username'];
+					$list = getLikes($username);
+					
+					for ($x=0; $x<count($list);$x++)
+					{
+					echo "\n";
+					echo '<h3> <span class="label label-default">'.$list[$x].'</span></h3>';
+					}
                     
+					
+					
+					
+					?>
 							
 							
 							
