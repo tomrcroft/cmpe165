@@ -87,14 +87,105 @@ function usernameAvailable($username) {
   * @param String $password is the password of the user whos information will be put in.
   * @param String $name is the email of the user whos information will be put in.
   */
-function addUser($uName, $realname, $password, $security_question, $security_answer)
+function addUser($uName, $realname, $password, $security_question, $security_answer, $email)
 {
 		global $con;	
-		
+		$confirm_code=md5(uniqid(rand())); 
 		$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
-
-	$result = mysqli_query($con,"insert into userInfo (username, realName, password, security_question, security_answer) values('$uName', '$realname', '$hPassword', '$security_question', '$security_answer');");
+		$verified = '0';
+	$result = mysqli_query($con,"insert into userInfo (username, realName, password, security_question, security_answer, email, verified,confirmKey) values('$uName', '$realname', '$hPassword', '$security_question', '$security_answer','$email','$verified','$confirm_code');");
+	sendMail ($email,$confirm_code);
+	
 	return $result;    
+}
+
+function sendMail ($email,$confirm_code)
+{
+global $con;
+
+$to=$email;
+$subject="Registration confirmation ";
+$header="from: ";
+
+
+$message="Your Comfirmation link \r\n";
+$message.="Click on the link to below to activate your account\r\n";
+$message.="localhost/SE165/confirmationCheck.php?passkey=$confirm_code";
+
+$sentmail = mail($to,$subject,$message,$header);
+
+if($sentmail){
+echo "An email confirmation was sent to your email:".$email;
+}
+else {
+echo "Cannot send Confirmation link to your e-mail address:".$email;
+}
+
+}
+
+
+function confirmUser ($confirm_key)
+{
+
+
+global $con;
+
+
+
+$query="SELECT * FROM userInfo WHERE confirmkey ='$confirm_key'";
+$resultExist= mysqli_query($con,$query);
+
+
+if($resultExist){
+
+$count =mysqli_num_rows($resultExist);
+
+if($count==1){
+
+$verified = '1';
+
+$queryUpdate="UPDATE userInfo SET verified = '$verified', confirmkey = 'NULL'  WHERE confirmkey = '$confirm_key'";
+
+$result = mysqli_query ($con,$queryUpdate);
+if ($result)
+{
+echo 'Account is now confirmed';
+}
+else {
+echo 'The data not updated';
+}
+
+}
+else {
+
+echo ' The confirm key exist more than once, Contact the admin ';
+}
+
+
+}
+
+else {
+
+echo ' cant find a user with this confirmation code ';
+}
+
+}
+
+function checkVerified($username)
+{
+
+global $con;
+
+$query = "SELECT verified FROM userInfo WHERE username = '$username'";
+
+$result = mysqli_query ($con,$query);
+$resultArray = mysqli_fetch_array($result);
+$verify = $resultArray[0];
+
+return $verify;
+
+
+
 }
 
 function getPassword($uName)

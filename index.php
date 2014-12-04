@@ -21,9 +21,10 @@
 		$passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
                 $question= mysqli_real_escape_string($con,$_POST['question']);
                 $answer= mysqli_real_escape_string($con, $_POST['answer']);
+				$email = mysqli_real_escape_string ($con, $_POST['email']);
                 
 		if ($password == $passwordverify) {
-		    addUser($username, $realname, $password, $question, $answer);
+		    addUser($username, $realname, $password, $question, $answer,$email);
             $_SESSION['username'] = $username;
 		} else {
 		    echo "Passwords did not match.";
@@ -60,6 +61,7 @@
 	<div id="preloader">
 		<div id="load"></div>
 	</div>
+	
 
     <!-- Get nav bar -->
     <?php include 'navbar.php' ?>
@@ -168,6 +170,7 @@
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/masonry.pkgd.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEwhWN-eoYsw3SDy5L8vnQEGYx4KdGKTk&sensor=false">
+	
 
 </body>
 

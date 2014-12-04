@@ -14,6 +14,20 @@
 		    		<?php
                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
                             $user = $_SESSION['username'];
+							$verify = checkVerified ($username);
+
+								 if (!$verify)
+							 {
+							 
+							 echo ' <div class="alert alert-danger" role="alert">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span class="sr-only">Error:</span>
+								Please verify your email address
+								</div>';
+							 
+							 }
+							
+							
                             echo '<li class="dropdown">
 							        <a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$user.'<b class="caret"></b></a>
 							        <ul class="dropdown-menu">
@@ -31,6 +45,10 @@
 						                <button type="submit" class="btn btn-primary btn-medium">Go</button>
 					                </form>
 				                </li>';
+								
+							
+								
+								
                         } else {
                             echo '<li><a href="#loginRegister" data-toggle="modal" data-target="#myModal">Login/Register</a></li>
 				                <li>
