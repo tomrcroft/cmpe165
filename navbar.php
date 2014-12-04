@@ -14,7 +14,7 @@
 		    		<?php
                         if (isset($_SESSION["username"]) && session_status() == PHP_SESSION_ACTIVE && $_SESSION["username"]){
                             $user = $_SESSION['username'];
-							$verify = checkVerified ($username);
+							$verify = checkVerified ($user);
 
 								 if (!$verify)
 							 {
