@@ -3,14 +3,16 @@ include 'queries.php';
 
 //TODO add correct variables except the last 1
 $pinId = addPin($username, $board_id, $name, $desc, "TBD in below code");
-
+//$pinId = 12345;
 
 //TODO add correct variables
 editPinLink($userName, $pinName, $pinId);
 
+$fileName = $pinId . substr($_FILES["fileToUpload"]["name"], -4);
+
 $target_dir = "./img/";
-//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$target_file = $target_dir . basename("tomsimage.jpg");
+$target_file = $target_dir . basename($fileName);
+//$target_file = $target_dir . basename("tomsimage.jpg");
 
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
