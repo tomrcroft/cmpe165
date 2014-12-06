@@ -6,14 +6,22 @@
                 <div class="panel panel-info" >
 
                     <div class="panel-heading">
-                        <div class="panel-title">Likes</div>
+                        <div class="panel-title">Following</div>
                     </div>     
-
+					<?php 
+					$username = $_SESSION['username'];
+					$list = getFollowing($username);
+					
+					for ($x=0; $x<count($list);$x++)
+					{
+					echo "\n";
+					echo '<h3> <span class="label label-default" href="myBoards.php?username='.$list[$x].'>'.$list[$x].'</span></h3>';
+					}
                     
-
 					
 					
 					
+					?>
 					
                     </div> <!-- Close Panel Body -->   
                 </div> <!-- Close panel info -->
