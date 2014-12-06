@@ -1,12 +1,14 @@
+<html>
+<body>
 <?php
 include 'queries.php';
 
 //TODO add correct variables except the last 1
-$pinId = addPin($username, $board_id, $name, $desc, "TBD in below code");
+//$pinId = addPin($username, $board_id, $name, $desc, "TBD in below code");
 
 
 //TODO add correct variables
-editPinLink($userName, $pinName, $pinId);
+//editPinLink($userName, $pinName, $pinId);
 
 $target_dir = "./img/";
 //$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -52,3 +54,5 @@ if ($uploadOk == 0) {
     }
 }
 ?>
+</body>
+</html>

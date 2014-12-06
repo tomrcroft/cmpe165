@@ -23,7 +23,9 @@
         $oldboardname = $_POST['oldboardname'];
         $newboardname = $_POST['newboardname'];
         $privacy = $_POST['privacy'];
-        
+        echo '<script>
+			alert('.$owner.');
+			</script>';
         editBoardName($owner,$oldboardname,$newboardname);
         changePrivacy($newboardname,$privacy);
          // set privacy for board
@@ -134,7 +136,6 @@
 		$(document).on("click", ".open-editBoard", function () {
 			var boardTitle = $(this).attr('data-boardName');
 			var privacyCheck = $(this).attr('data-privacyCheck');
-			alert(privacyCheck);
 		 	$(".oldBoardName").val(boardTitle);
 		 	$(".boardName").val(boardTitle);
 			if (privacyCheck == 1) {

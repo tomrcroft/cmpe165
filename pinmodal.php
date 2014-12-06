@@ -1,4 +1,14 @@
 <!-- Upload Pin Modal -->
+<script>
+function showURLField() {
+	$(".imageField").html('<input type="uploadPin" class="form-control" name="pinUrl" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">');
+}
+
+function showMyImageField() {
+	//$(".imageField").html('');
+	$(".imageField").html('<input type="file" name="fileToUpload" id="fileToUpload">');
+}
+</script>
 <div class="modal fade" id="uploadPin" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -14,9 +24,14 @@
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
-                                        <label for="uploadPin" class="col-md-3 control-label">Image</label>
-                                        <div class="col-md-20">
-                                            <input type="uploadPin" class="form-control" name="pinUrl" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">
+                                        <!--<label for="uploadPin" class="col-md-3 control-label">Image</label> -->
+										<div class="col-md-20">
+                                        	<label for="uploadPin" class="col-md-3 control-label">Select One:</label>
+											<button type="button" class="btn btn-secondary btn-sm" onClick="showURLField()">URL</button>
+											<button type="button" class="btn btn-secondary btn-sm" onClick="showMyImageField()">My Image</button>
+										</div>
+										<div class="col-md-20 imageField">
+                                            <!--<input type="uploadPin" class="form-control" name="pinUrl" placeholder="Paste a URL ending in .JPG, .PNG, or .GIF">-->
                                         </div>
                                             <label for="uploadPin" class="col-md-3 control-label">Title</label>
                                         <div class="col-md-20">
