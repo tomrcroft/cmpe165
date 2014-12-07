@@ -6,7 +6,8 @@
  */
 
 require_once 'constants.php';
-$con = connect();	
+$con = connect();
+
 function connect() {
 	return mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 }
@@ -44,18 +45,9 @@ function checkUserName($uName) {
 
 function searchForUsername($uName) {
     global $con;
-    $query =  "
+    $result=  mysqli_query($con, "
 		select username from userInfo  
-		where username LIKE '%$uName%'";
-			
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[username];
-		}
-		return $resultArray;
-}
-	/*
+		where username LIKE '%$uName%'");
     $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
 	$outputArray = array();
 	for($x=0; $x<sizeof($resultArray);$x++)
@@ -63,7 +55,7 @@ function searchForUsername($uName) {
 		array_push($outputArray, $resultArray[$x][0]);
 	}
 	return $outputArray;
-}*/
+}
 
 /** 
  * Checks a username's availability.
@@ -113,14 +105,16 @@ global $con;
 
 $to=$email;
 $subject="Registration confirmation ";
-$from="From: oursite@corq.com";
+$from="From: admin@corq.org";
 
 
 $message="Your Comfirmation link \r\n";
 $message.="Click on the link to below to activate your account\r\n";
-$message.="localhost/SE165/confirmationCheck.php?passkey=$confirm_code";
+$message.="www.corq.org/confirmationCheck.php?passkey=$confirm_code";
 
 $sentmail = mail($to,$subject,$message,$from);
+
+
 
 if($sentmail){
 echo "An email confirmation was sent to your email:".$email;
@@ -281,17 +275,18 @@ function getBoardOwner($board_id) {
 
 function isRestuarant($board_id) {
     global $con;
-    $query = "
+    $result=  mysqli_query($con, "
 		select restaurant_indicator from pin 
 		join pinned_on on pin.pin_id = pinned_on.pin_id 
-		where pinned_on.board_id = '$board_id';";
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[restaurant_indicator];
-		}
-		return $resultArray;
-}
+		where pinned_on.board_id = '$board_id' ");
+    $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}   
 
 function addPin($owner, $board_id, $name, $desc, $path)
 {
@@ -354,56 +349,62 @@ function getBoardPins($board_id)
 {
 	global $con;
 	
-	$query = "select pin_id from pinned_on WHERE board_id='$board_id'";
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[pin_id];
-		}
-		return $resultArray;
+	$result = mysqli_query($con,"select pin_id from pinned_on WHERE board_id='$board_id'");
+	if($result != '')
+		{die("error getting pin_id from database");}
+	//$resultArray = mysqli_fetch_array($result);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function getPinLinks($board_id) {
 	global $con;
-	$query = "select img_link, pin.pin_id from pin, pinned_on 
-		where pinned_on.board_id = '$board_id' AND pinned_on.pin_id = pin.pin_id
-		ORDER BY pin.pin_id;";
-	$result = $con->query($query);
-	$resultArray = array();
-	while ($row = $result->fetch_assoc()) {
-		$resultArray[] = $row[img_link];
-	}
-	return $resultArray;
+	
+	$result = mysqli_query($con, "
+		select img_link from pin 
+		join pinned_on on pin.pin_id = pinned_on.pin_id 
+		where pinned_on.board_id = '$board_id'");
+
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+		array_push($outputArray, $resultArray[$x][0]);
+
+	return $outputArray;
 }
 
 // Gets board IDs
 function getBoardByUser($user)
 {
 	global $con;
-	$query = "select board_id from board WHERE owner='$user';";
-	$result = $con->query($query);
-	$resultArray = array();
-	while ($row = $result->fetch_assoc()) {
-		$resultArray[] = $row[board_id];
+	
+	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
+	//if($result != '')
+	//	{die("error getting board_id from database");}
+	//$resultArray = mysqli_fetch_array($result);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
 	}
-	return $resultArray;
+	return $outputArray;
 }
 
 // Get board names.
 function getBoardNames($user)
 {
 	global $con;
+
 	$query = "	select board_name
 				from board
 				where owner = '$user';";
-				$result = $con->query($query);
-				$resultArray = array();
-				while ($row = $result->fetch_assoc()) {
-					$resultArray[] = $row[board_name];
-				}
-				return $resultArray;
-}
-	/*			
+
 	$result = mysqli_query($con, $query);
 	//$resultArray = mysqli_fetch_array($result);
 	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
@@ -413,8 +414,7 @@ function getBoardNames($user)
 		array_push($outputArray, $resultArray[$x][0]);
 	}
 	return $outputArray;
-	*/
-	//}
+}
 
 // Get board's first pin's image to show as a preview
 function getBoardPreview($boardId)
@@ -478,18 +478,11 @@ function getNumberOfPins($user)
 		select *
 		from pin
 		where owner = '$user';";
-		
-	//$result = mysqli_query($con, $query);
-	//$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	//return sizeof($resultArray);
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row;
-		}
-		return count($resultArray);
-}
 
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	return sizeof($resultArray);
+}
 
 function getDescriptionOfPins($user)
 {
@@ -500,12 +493,14 @@ function getDescriptionOfPins($user)
 		from pin
 		where owner = '$user';";
 
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[description];
-		}
-		return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function getNamesOfPins($user)
@@ -517,13 +512,16 @@ function getNamesOfPins($user)
 		from pin
 		where owner = '$user';";
 
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[name];
-		}
-		return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
+
 function getNamesOfPinsOnBoard($board_id)
 {
 	global $con;
@@ -536,13 +534,15 @@ function getNamesOfPinsOnBoard($board_id)
 			FROM pinned_on
 			WHERE board_id=".$board_id.");";
 
-			$result = $con->query($query);
-			$resultArray = array();
-			while ($row = $result->fetch_assoc()) {
-				$resultArray[] = $row[name];
-			}
-			return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
 	}
+	return $outputArray;
+}
 
 function getDescriptionsOfPinsOnBoard($board_id)
 {
@@ -556,13 +556,15 @@ function getDescriptionsOfPinsOnBoard($board_id)
 			FROM pinned_on
 			WHERE board_id=".$board_id.");";
 
-			$result = $con->query($query);
-			$resultArray = array();
-			while ($row = $result->fetch_assoc()) {
-				$resultArray[] = $row[description];
-			}
-			return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
 	}
+	return $outputArray;
+}
 
 function getBoardsByCategory($category) 
 {
@@ -588,12 +590,14 @@ function getPinId($board_id)
     global $con;
 	
 	$query = "Select pin_id from pinned_on WHERE board_id='$board_id';";
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[pin_id];
-		}
-		return $resultArray;
+    $result= mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function follow($uname, $userToFollow)
@@ -636,12 +640,14 @@ function getFollowing($uname)
 		from follow
 		where username = '$uname';";
 
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[followUser];
-		}
-		return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function getSecurityQuestion($username) {
@@ -727,12 +733,14 @@ function getComments($pin_id) {
 		FROM comments
 		WHERE pin_id = '$pin_id';";
 
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[comment_content];
-		}
-		return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function getCommentAuthors($pin_id) {
@@ -743,12 +751,14 @@ function getCommentAuthors($pin_id) {
 		FROM comments
 		WHERE pin_id = '$pin_id';";
 
-		$result = $con->query($query);
-		$resultArray = array();
-		while ($row = $result->fetch_assoc()) {
-			$resultArray[] = $row[author];
-		}
-		return $resultArray;
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
 }
 
 function addLike($user_id, $pin_id)
