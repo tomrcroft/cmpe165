@@ -13,21 +13,23 @@
 	}
 
 	if (isset($_POST['submitRegister'])) {
-		global $con;
-
-		$realname = mysqli_real_escape_string ($con, $_POST['realname']);
-		$username = mysqli_real_escape_string($con, $_POST['username']);
-		$password= mysqli_real_escape_string($con, $_POST['password']);
-		$passwordverify = mysqli_real_escape_string($con, $_POST['passverify']);
-                $question= mysqli_real_escape_string($con,$_POST['question']);
-                $answer= mysqli_real_escape_string($con, $_POST['answer']);
-				$email = mysqli_real_escape_string ($con, $_POST['email']);
-                
-		if ($password == $passwordverify) {
-		    addUser($username, $realname, $password, $question, $answer,$email);
-            $_SESSION['username'] = $username;
+		if (checkUserName($_POST['username']) == 0) {
+			echo "Username taken.";
 		} else {
-		    echo "Passwords did not match.";
+			$realname = $_POST['realname'];
+			$username = $_POST['username'];
+			$password= $_POST['password'];
+			$passwordverify = $_POST['passverify'];
+            $question = $_POST['question'];
+            $answer = $_POST['answer'];
+			$email = $_POST['email'];
+                
+			if ($password == $passwordverify) {
+		    	addUser($username, $realname, $password, $question, $answer,$email);
+            	$_SESSION['username'] = $username;
+			} else {
+		    	echo "Passwords did not match.";
+			}
 		}
 	}       
 ?>

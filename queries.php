@@ -37,9 +37,9 @@ function checkUserName($uName) {
     global $con;
     $result = mysqli_query($con, "SELECT * FROM userInfo WHERE username='$uName'");
     if (mysqli_num_rows($result) == 0) {
-        return true;
+        return 1;
     } else {
-        return false;
+        return 0;
     }
 }
 

@@ -26,7 +26,6 @@
         editBoardName($owner,$oldboardname,$newboardname);
         changePrivacy($newboardname,$privacy);
          // set privacy for board
-		header("location:myBoards.php?username=".$_SESSION['username']);
     }
 	// remove a board
     if (isset($_GET['boardname'])) {
