@@ -7,15 +7,20 @@
         exit();
     }
 
-    if (isset($_POST['submitCommentSend'])) {
-        // Add a comment to a pin.
-        $pinId = $_POST['pinId'];
-        $author = $_SESSION['username'];
-        $comment = $_POST['comment'];
- 
-        submitComment($pinId, $author, $comment);
-    }
-   
+	if (isset($_POST['submitCommentSend'])) {
+		$pin_id = $_POST['commentPinID'];
+		$author = $_SESSION['username'];
+	   	$comment_content = $_POST['comment']; 
+	   addComment($pin_id, $author, $comment_content);
+	}
+	
+	if (isset($_POST['submitEditPin'])) {
+		$userName = $_SESSION['username'];
+		$oldPinName = $_POST['pinName'];
+		$newPinName = $_POST['pinTitle'];
+		$desc = $_POST['pinDescription'];
+		editPinName($userName, $oldPinName, $newPinName, $desc);
+	}
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
 		$boardOwner = getBoardOwner($board_id);
@@ -146,7 +151,7 @@
     
         <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
-			<div class="wow bounceInDown" data-wow-delay="0.4s">
+			<div class="wow bounceInUp" data-wow-delay="0.4s">
             <?php
                 
                 // Where to get board ID from? 

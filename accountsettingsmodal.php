@@ -15,7 +15,7 @@
                                 <div class="col-md-9">
                                     <!-- Edit Pin Field -->
                                     <div class="form-group">
-                                        <label for="realname" class="col-lg-3 control-label" style="font-size: 85%">Full Name</label>
+                                        <label for="realname" class="col-lg-3 control-label realNameFormField" style="font-size: 85%">Full Name</label>
                                         <div class="col-md-20">
                                             <input type="input" class="form-control" name="realname">
                                         </div>

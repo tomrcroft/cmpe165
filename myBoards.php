@@ -23,9 +23,6 @@
         $oldboardname = $_POST['oldboardname'];
         $newboardname = $_POST['newboardname'];
         $privacy = $_POST['privacy'];
-        echo '<script>
-			alert('.$owner.');
-			</script>';
         editBoardName($owner,$oldboardname,$newboardname);
         changePrivacy($newboardname,$privacy);
          // set privacy for board
@@ -99,13 +96,7 @@
         $following = $_GET['username'];
         unFollow($user, $following);
     }		
-	if (isset($_POST['submitEditPin'])) {
-		$userName = $_SESSION['username'];
-		$oldPinName = $_POST['pinName'];
-		$newPinName = $_POST['pinTitle'];
-		$desc = $_POST['pinDescription'];
-		editPinName($userName, $oldPinName, $newPinName, $desc);
-	}
+	
 	if (isset($_POST['submitEditPassword'])) {
 		$userName = $_SESSION['username'];
 		$fullName = $_POST['realname'];
@@ -167,7 +158,7 @@
          if(confirm("Do you want to delete the board?"+editboard))
         
          { 
-             window.location = "myBoards.php?boardname ="+editboard;
+             window.location = "myBoards.php?boardname="+editboard;
          }
     } 
     </script>
@@ -189,6 +180,11 @@
 			}
 			
 		});
+		
+		(document).on("click", ".open-accountSettings", function () {
+			alert(<?php echo getRealName($_SESSION['username']); ?>);
+				 	$(".realNameFormField").val(<?php echo getRealName($_SESSION['username']); ?>);
+				});
 	</script>
 
 </head>
@@ -247,7 +243,7 @@
                                                     <?php
                                                         if ($isOwner){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="btn btn-primary btn-sm">Account Settings</button>
+                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
                                                         } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">

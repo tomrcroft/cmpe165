@@ -42,7 +42,7 @@
                         <img style="height:auto; max-width:560px;" src="" class=showPic />
                     </div>
 
-                    <form id="commentform" class="form-horizontal" action="addComment.php" name="commentform" method="POST">
+                    <form id="commentform" class="form-horizontal" name="commentform" method="POST">
                         <div class="form-group">
                             <div class="col-md-9">
                                 <!-- Upload Pin Field -->
@@ -214,7 +214,7 @@
                     	<a id="addmaplink" href="#" onclick="$('#editPinform').hide();
                             $('.pinbox').show()">Go Back to Pin</a>
 					</div>
-                    <form class="form-horizontal" name="editPin" action="myBoards.php?username=<?php echo $_SESSION['username']?>" method="POST">
+                    <form class="form-horizontal" name="editPin" method="POST">
                         <div class="form-group">
                             <div class="col-md-9">
                                 <!-- Edit Pin Field -->
