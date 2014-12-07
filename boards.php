@@ -75,7 +75,7 @@
 			 var comments = $(this).data('comments').split("~");
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
-			 var pinLikes = $(this).attr('ddata-pinLikes');
+			 var pinLikes = $(this).attr('data-pinLikes');
 			 $('.pinLikesBadge').html('
                         <li class="active" style="padding-left:3em">
                              Likes<span class="badge pull-right"></span>
