@@ -101,10 +101,10 @@ function sendMail ($email,$confirm_code)
 global $con;
 $to=$email;
 $subject="Registration confirmation ";
-$from="From: oursite@corq.com";
-$message="Your Comfirmation link \r\n";
-$message.="Click on the link to below to activate your account\r\n";
-$message.="localhost/SE165/confirmationCheck.php?passkey=$confirm_code";
+$from="From: admin@corq.org";
+$message="Your Comfirmation link  ";
+$message.="Click on the link to below to activate your account ";
+$message.="www.corq.com/confirmationCheck.php?passkey=$confirm_code";
 $sentmail = mail($to,$subject,$message,$from);
 if($sentmail){
 echo "An email confirmation was sent to your email:".$email;
