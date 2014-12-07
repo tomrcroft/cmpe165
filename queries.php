@@ -21,10 +21,10 @@ function checkConnection() {
 	} else return true;
 }
 //removed change username because it is much more involved than this single update
-function editUser($uName, $realname, $password) {
+function editUser($uName, $password) {
     global $con;
 	$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
-    $result = mysqli_query($con, "update userInfo SET realName='$realname', password='$hPassword' WHERE username='$uName';");
+    $result = mysqli_query($con, "update userInfo SET password='$hPassword' WHERE username='$uName';");
 	return $result;
 }
 function checkUserName($uName) {

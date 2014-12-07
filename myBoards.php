@@ -98,7 +98,6 @@
 	
 	if (isset($_POST['submitEditPassword'])) {
 		$userName = $_SESSION['username'];
-		$fullName = $_POST['realname'];
 		$oldPassword = $_POST['oldpassword'];
 		$newPassword = $_POST['newpassword'];
 		$confirmedPassword = $_POST['passverify'];
@@ -238,7 +237,7 @@
                                                     <?php
                                                         if ($isOwner){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Account Settings</button>
+                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Change Password</button>
                                                             </li>';
                                                         } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
