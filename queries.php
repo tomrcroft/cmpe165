@@ -36,7 +36,7 @@ function editUser($uName, $realname, $password) {
 function checkUserName($uName) {
     global $con;
     $result = mysqli_query($con, "SELECT * FROM userInfo WHERE username='$uName'");
-    if (mysqli_num_rows($result) == 0) {
+    if (mysqli_num_rows($result) == 0)) {
         return 1;
     } else {
         return 0;
