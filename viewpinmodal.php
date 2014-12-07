@@ -36,6 +36,9 @@
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
                                 $('#repinBox').show()">PIN IT</a>
+						<div class="pinLikesBadge">
+									<!-- set in boards.php-->
+						</div>                       
                     </div>
 
                     <div class="form-group">

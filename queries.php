@@ -692,6 +692,21 @@ function removeLike($user_id, $pin_id)
 									WHERE user_id=$user_id AND pin_id=$pin_id;");
 	return $result;
 }
+
+function getNumberOfLikes($pin_id) {
+	global $con;
+	$query = "
+		SELECT user_id
+		FROM likes
+		WHERE pin_id = '$pin_id';";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[comment_content];
+		}
+		return count($resultArray);
+}
+
 function getPinName($pin_id) {
     global $con;
     $query = "

@@ -75,7 +75,11 @@
 			 var comments = $(this).data('comments').split("~");
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
-			 
+			 var pinLikes = $(this).attr('ddata-pinLikes');
+			 $('.pinLikesBadge').html('
+                        <li class="active" style="padding-left:3em">
+                             Likes<span class="badge pull-right"></span>
+                        </li>');
 			 $(".oldPinName").val(title);
 			 $(".newPinName").val(title);
 			 $(".pinDescription").val(desription);
@@ -168,8 +172,9 @@
                 for($i = 0; $i < count($pins); $i++) {
 					$comments = getComments($pinIDs[$i]);
 					$authors = getCommentAuthors($pinIDs[$i]);
+					$numLikes = getNumberOfLikes($pinIDs[$i])
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-pinDescription="'.$descriptions[$i].'" data-comments="';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-pinLikes="'.$numLikes.'" data-pinDescription="'.$descriptions[$i].'" data-comments="';
 					
 					for ($j = 0; $j < count($comments); $j++) {
 						if ($j != 0) {

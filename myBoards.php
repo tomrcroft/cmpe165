@@ -306,7 +306,7 @@
                         </div>';
 					
 
-						#by clicking on this, it will show the list of the pins that user liked 
+					/*	#by clicking on this, it will show the list of the pins that user liked 
 					echo '<div class="col-xs-6 col-sm-3 col-md-3">
                             <div class="wow bounceInUp" data-wow-delay="0.2s">
                                 <a href="#likesList" data-toggle="modal" data-target="#likeList">
@@ -321,7 +321,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>';
+                        </div>';*/
 						
 				
                         echo '<div class="col-xs-6 col-sm-3 col-md-3">
