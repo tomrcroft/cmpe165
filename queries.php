@@ -108,8 +108,8 @@ $subject="Registration confirmation ";
 $from="From: admin@corq.org";
 
 
-$message="Your Comfirmation link \r\n";
-$message.="Click on the link to below to activate your account\r\n";
+$message="Your Comfirmation link   ";
+$message.="Click on the link to below to activate your account ";
 $message.="www.corq.org/confirmationCheck.php?passkey=$confirm_code";
 
 $sentmail = mail($to,$subject,$message,$from);
