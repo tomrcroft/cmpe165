@@ -108,7 +108,10 @@
                         </div>
                     </div>
                 </div>
- 
+                
+                
+                
+                
                 <div class="col-sm-3 col-md-3">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <div class="service-box">
@@ -225,6 +228,26 @@
                 </div>
             </div>        
         </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-4">
+                    <div class="service-icon">
+                        <img src="img/icons/service-icon-4.png" alt="" />
+                        <h4> Pin Tutorial Video"</h4>
+                    </div>
+                    <div class="col-md-3 col-md-offset-4">
+                        <iframe width="300" height="300" src="//www.youtube.com/embed/83gmiey7S7w" 
+                        frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+                
+       
+        
+        
     </section>
     <!-- /section: pins-->
  
@@ -297,6 +320,21 @@
                     </div>
                 </div>
             </div>        
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <div class="service-icon">
+                        <img src="img/icons/service-icon-4.png" alt="" />
+                        <h4> Board Tutorial Video"</h4>
+                    </div>
+                    <div class="col-md-3 col-md-offset-4">
+                       <iframe width="300" height="300" 
+                       src="//www.youtube.com/embed/ICemupWG56U" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- /section: boards-->
