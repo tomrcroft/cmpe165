@@ -181,10 +181,6 @@
 			
 		});
 		
-		(document).on("click", ".open-accountSettings", function () {
-			alert(<?php echo getRealName($_SESSION['username']); ?>);
-				 	$(".realNameFormField").val(<?php echo getRealName($_SESSION['username']); ?>);
-				});
 	</script>
 
 </head>

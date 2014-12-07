@@ -54,10 +54,12 @@
 	
 	<!-- This NEEDS to be here, JQuery needs to be defined before it can be used -->
 	<script src="js/jquery.min.js"></script>
-	
+	<script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
-		
+	imagesLoaded( document.querySelector('#pin-container'), function( instance ) {
+	  console.log('all images are loaded');
+	});
 		$(document).on("click", ".open-viewPin", function () {
 			 $("#mapbox").hide(); 
 			 $("#repinBox").hide();
@@ -151,7 +153,7 @@
     
         <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
-			<div class="wow bounceInUp" data-wow-delay="0.4s">
+			<div>
             <?php
                 
                 // Where to get board ID from? 
