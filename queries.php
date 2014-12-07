@@ -832,13 +832,28 @@ function searchForPin($pinName)
 {
     global $con;
     $query = "
-    	     SELECT DISTINCT pin_id
+    	     SELECT pin_id
 	     FROM pin
 	     WHERE name LIKE '%pinName%'";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
     	  $resultArray[] = $row[pin_id];
+    }
+    return $resultArray;
+}
+
+function searchForBoard($boardName) 
+{
+    global $con;
+    $query = "
+    	     SELECT board_id
+	     FROM board
+	     WHERE board_name LIKE '%boardName%'";
+    $result = $con->query($query);
+    $resultArray = array();
+    while ($row = $result->fetch_assoc()) {
+    	  $resultArray[] = $row[board_id];
     }
     return $resultArray;
 }
