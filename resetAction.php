@@ -1,18 +1,12 @@
-<<<<<<< HEAD
 <?php
       include 'index.php';
       include 'reset.php';
-  // validate username here
-  $nameresult;
-    if(isset($_POST['submitResetBtn']))
+  
+    if(!isset($_POST['submitResetBtn']))
     {
-        $resetusername = $_POST['resetusername'];
-        $_SESSION['resetusername'] = $resetusername;
-        //TODO: need to connect with database
-       // $nameresult = validateUser($resetusername);
-        $nameresult =true;
-        $_SESSION['nameresult']= $nameresult;
-      
+        //TODO: go back     
+    } else {
+    	$_SESSION['resetUsername'] = $_POST['resetusername'];
     }
     
     
@@ -67,11 +61,11 @@
 
                         <?php
                                 // the result of name validation (true or false)
-                               $nameresult = $_SESSION['nameresult'];
+                               
                                // the  username of forget password account
-                               $resetusername = $_SESSION['resetusername'];
+                               $resetusername = $_POST['resetusername'];
                                // check ture of false
-                                 if($nameresult) {
+                                 if(checkUserName($resetusername) == 0) {
                                      // the question will get it from database
                                     //$question =  getSecurityQuestion($resetusername);
                                     $question = getSecurityQuestion($resetusername);
@@ -83,7 +77,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <form id="resetform2" class="form-horizontal" name="resetprocess1" 
-                                                action="resetAction2.php" method="POST">
+                                                action="index.php" method="POST">
                                                 <div class="form-group">
                                                             <!-- label for Security Question field-->
                                                     <div class="col-md-8 col-md-offset-2">
@@ -99,8 +93,10 @@
                                                 <!-- buttons for cancel and submit-->
                                                 <div class="col-md-offset-6" style="padding-top:5px">
                                                     <a href="index.php" class="btn btn-default btn-md">Cancel</a>
-                                                    <button type="submit" class="btn btn-primary btn-md" name="submitConfirmBtn">
+													<a href="index.php" class="btn btn-default btn-md">
+                                                    	<button type="submit" class="btn btn-primary btn-md" name="submitConfirmBtn">
                                                     Send  <span class="glyphicon glyphicon-send"></span></button>
+													</a>
                                                 </div><!--end of buttons-->
                                             </form>
                                         </div><!--end of row-->
@@ -114,9 +110,7 @@
                                             <h5> <span class="glyphicon glyphicon-ban-circle"></span>Error: '.$resetusername.'</h5>
                                                 <p class="bg-danger"><strong> Invalid User Name!</strong></p>
                                                    <p>
-                                                      <button type="button" class="btn btn-info btn-md" onclick= "dothis()" >Retry</button>
-                                                      <button type="button" class="btn btn-default btn-md " data-dismiss="modal">Close</button>
-                                                      
+                                                     <a href="index.php" class="btn btn-default btn-md">Close</a>                                                   
                                                   </p>
                                     </div>
                                 </div> ';}

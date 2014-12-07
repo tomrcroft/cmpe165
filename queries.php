@@ -127,25 +127,29 @@ function sendMail($email,$confirmLink)
 	$message = Swift_Message::newInstance('Verify Your Account')
 	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
 	  ->setTo(array($email))
-	  ->setBody('Here is your confirmation code:'.$confirmLink);
+	  ->setBody('Here is your confirmation code: '.$confirmLink);
 
 	$result = $mailer->send($message);	
-/*
-global $con;
-$to=$email;
-$subject="Registration confirmation ";
-$from="From: admin@corq.org";
-$message="Your Comfirmation link  ";
-$message.="Click on the link to below to activate your account ";
-$message.="www.corq.com/confirmationCheck.php?passkey=$confirm_code";
-$sentmail = mail($to,$subject,$message,$from);
-if($sentmail){
-echo "An email confirmation was sent to your email:".$email;
 }
-else {
-echo "Cannot send Confirmation link to your e-mail address:".$email;
-}*/
+
+function sendPasswordResetMail($uName, $tempPassword)
+{
+	require_once 'swift/lib/swift_required.php';
+	$email = getEmail($uName);
+	$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+	  ->setUsername('corq.org')
+	  ->setPassword('wearecorq');
+
+	$mailer = Swift_Mailer::newInstance($transport);
+
+	$message = Swift_Message::newInstance('Password Reset')
+	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
+	  ->setTo(array($email))
+	  ->setBody('Here is your temporary password: '.$tempPassword);
+
+	$result = $mailer->send($message);	
 }
+
 function confirmUser ($uname, $confirm_key)
 {
 global $con;
@@ -233,6 +237,12 @@ function verifyLogin($username, $password) {
 		} else return false;
 	}
 }
+function setTempPassword($username, $tempPassword) {
+	global $con;		    
+	$hPassword = $hash = password_hash($tempPassword, PASSWORD_DEFAULT);
+	mysqli_query($con,"Update userInfo Set password='$hPassword' WHERE username='$username';");
+}
+
 function addRestaurant($pinId, $owner, $restaurantAddress)
 {
 	global $con;

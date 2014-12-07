@@ -11,7 +11,6 @@
 		else
 			echo "Error. Incorrect username or password.";
 	}
-
 	if (isset($_POST['submitRegister'])) {
 		if (checkUserName($_POST['username']) == 0) {
 			echo "Username taken.";
@@ -36,7 +35,23 @@
 		$verifyCode = $_GET['verify'];
 		$username = $_GET['username'];
 		confirmuser($username, $verifyCode);
-	}   
+	} 
+	if (isset($_POST['submitConfirmBtn'])) {
+		$username = $_SESSION['resetUsername'];
+		if (validateSecurityAnswer($_POST['useranswer'], $username)) {			
+		    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		    $tempPassword = '';
+
+		    for ($i = 0; $i < 12; $i++) {
+		        $tempPassword .= $characters[mt_rand(0, strlen($characters) - 1)];
+		    }
+				
+			setTempPassword($username, $tempPassword);			
+			sendPasswordResetMail($username, $tempPassword);
+		} else {
+			echo "Your answer to your security question is wrong.";
+		}
+	}  
 ?>
 <!DOCTYPE html>
 <html lang="en">

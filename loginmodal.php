@@ -7,6 +7,7 @@
 
                     <div class="panel-heading">
                         <div class="panel-title">Login</div>
+						<!--<button class="close" data-dismiss="modal" onclick="$('#myModal').hide()">x</button>-->
                         <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#"  onclick=
                                                                                                    "$('#resetModal').modal('show');
                                     $('#myModal').modal('hide');
