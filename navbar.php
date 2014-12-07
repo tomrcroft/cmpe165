@@ -23,6 +23,8 @@
 								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 								<span class="sr-only">Error:</span>
 								Please verify your email address
+								<iframe style="display:none;" name="target"></iframe>
+								<a href="resendverification.php" target="target">Resend Verification</a>
 								</div>';
 							 
 							 }

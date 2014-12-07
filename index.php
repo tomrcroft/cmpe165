@@ -31,7 +31,12 @@
 		    	echo "Passwords did not match.";
 			}
 		}
-	}       
+	}    
+	if (isset($_GET['verify'])) {
+		$verifyCode = $_GET['verify'];
+		$username = $_GET['username'];
+		confirmuser($username, $verifyCode);
+	}   
 ?>
 <!DOCTYPE html>
 <html lang="en">

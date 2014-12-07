@@ -89,15 +89,40 @@ function addUser($uName, $realname, $password, $security_question, $security_ans
 {
 		global $con;	
 		$confirm_code=md5(uniqid(rand())); 
+		$confirmLink = "www.corq.org/index.php?username=$uName&verify=$confirm_code";
 		$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
 		$verified = '0';
 	$result = mysqli_query($con,"insert into userInfo (username, realName, password, security_question, security_answer, email, verified,confirmKey) values('$uName', '$realname', '$hPassword', '$security_question', '$security_answer','$email','$verified','$confirm_code');");
-	sendMail ($email,$confirm_code);
+	sendMail ($email,$confirmLink);
 	
 	return $result;    
 }
-function sendMail ($email,$confirm_code)
+
+function getEmail($uName){
+	global $con;
+	
+	$result = mysqli_query($con,"select email from userInfo WHERE username='$uName'");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
+}
+
+function sendMail($email,$confirmLink)
 {
+	require_once 'swift/lib/swift_required.php';
+
+	$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+	  ->setUsername('corq.org')
+	  ->setPassword('wearecorq');
+
+	$mailer = Swift_Mailer::newInstance($transport);
+
+	$message = Swift_Message::newInstance('Verify Your Account')
+	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
+	  ->setTo(array($email))
+	  ->setBody('Here is your confirmation code:'.$confirm_code);
+
+	$result = $mailer->send($message);	
+/*
 global $con;
 $to=$email;
 $subject="Registration confirmation ";
@@ -111,15 +136,15 @@ echo "An email confirmation was sent to your email:".$email;
 }
 else {
 echo "Cannot send Confirmation link to your e-mail address:".$email;
+}*/
 }
-}
-function confirmUser ($confirm_key)
+function confirmUser ($uname, $confirm_key)
 {
 global $con;
-$query="SELECT * FROM userInfo WHERE confirmkey ='$confirm_key'";
+$query="SELECT * FROM userInfo WHERE confirmkey ='$confirm_key' AND username='$uname'";
 $resultExist= mysqli_query($con,$query);
 if($resultExist){
-$count =mysqli_num_rows($resultExist);
+$count = mysqli_num_rows($resultExist);
 if($count==1){
 $verified = '1';
 $queryUpdate="UPDATE userInfo SET verified = '$verified', confirmkey = 'NULL'  WHERE confirmkey = '$confirm_key'";
