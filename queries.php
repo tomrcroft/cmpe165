@@ -829,6 +829,22 @@ function changePrivacy($board_name, $privacy)
 	$result = mysqli_query($con, $query);
 	return $result;
 }
+
+
+function searchForPin($pinName) 
+{
+    global $con;
+    $query = "
+    	     SELECT DISTINCT pin_id
+	     FROM pin
+	     WHERE name LIKE '%pinName%'";
+    $result = $con->query($query);
+    $resultArray = array();
+    while ($row = $result->fetch_assoc()) {
+    	  $resultArray[] = $row[pin_id];
+    }
+    return $resultArray;
+}
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
