@@ -15,7 +15,7 @@
 					for ($x=0; $x<count($list);$x++)
 					{
 					
-					echo '<h3 > <a href="www.corq.org/myBoards.php?username='.$list[$x].'"> <span class="label label-default" >'.$list[$x].'</span></a></h3>';
+					echo '<h3 > <a href="myBoards.php?username='.$list[$x].'"> <span class="label label-default" >'.$list[$x].'</span></a></h3>';
 					}
                     
 					
