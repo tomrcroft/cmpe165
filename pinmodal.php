@@ -19,7 +19,7 @@ function showMyImageField() {
 						<button class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="panel-body" >
-                        <form id="uploadPinform" class="form-horizontal" name="pinUpload" action="myBoards.php?username=<?php echo $_SESSION['username']; ?>" method="POST">
+                        <form id="uploadPinform" class="form-horizontal" name="pinUpload" action="myBoards.php?username=<?php echo $_SESSION['username']; ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="col-md-9">
                                     <!-- Upload Pin Field -->
