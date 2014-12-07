@@ -365,9 +365,9 @@ function getBoardPins($board_id)
 
 function getPinLinks($board_id) {
 	global $con;
-	$query = "select img_link from pin 
-		join pinned_on on pin.pin_id = pinned_on.pin_id 
-		where pinned_on.board_id = '$board_id';";
+	$query = "select img_link, pin.pin_id from pin, pinned_on 
+		where pinned_on.board_id = '$board_id' AND pinned_on.pin_id = pin.pin_id
+		ORDER BY pin.pin_id;";
 	$result = $con->query($query);
 	$resultArray = array();
 	while ($row = $result->fetch_assoc()) {
