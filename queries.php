@@ -89,7 +89,7 @@ function addUser($uName, $realname, $password, $security_question, $security_ans
 {
 		global $con;	
 		$confirm_code=md5(uniqid(rand())); 
-		$confirmLink = "www.corq.org/index.php?username=$uName&verify=$confirm_code";
+		$confirmLink = "http://www.corq.org/index.php?username=".$uName."&verify=".$confirm_code;
 		$hPassword = $hash = password_hash($password, PASSWORD_DEFAULT);
 		$verified = '0';
 	$result = mysqli_query($con,"insert into userInfo (username, realName, password, security_question, security_answer, email, verified,confirmKey) values('$uName', '$realname', '$hPassword', '$security_question', '$security_answer','$email','$verified','$confirm_code');");
@@ -102,6 +102,14 @@ function getEmail($uName){
 	global $con;
 	
 	$result = mysqli_query($con,"select email from userInfo WHERE username='$uName'");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray[0]; 
+}
+
+function getConfirmKey($uName){
+	global $con;
+	
+	$result = mysqli_query($con,"select confirmKey from userInfo WHERE username='$uName'");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0]; 
 }
@@ -119,7 +127,7 @@ function sendMail($email,$confirmLink)
 	$message = Swift_Message::newInstance('Verify Your Account')
 	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
 	  ->setTo(array($email))
-	  ->setBody('Here is your confirmation code:'.$confirm_code);
+	  ->setBody('Here is your confirmation code:'.$confirmLink);
 
 	$result = $mailer->send($message);	
 /*
