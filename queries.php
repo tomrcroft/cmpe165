@@ -1,17 +1,13 @@
 <?php
-
 /*
  * Includes all the functions from "DatabaseFunctions.php" and
  * "queries.php".
  */
-
 require_once 'constants.php';
-$con = connect();
-
+$con = connect();	
 function connect() {
 	return mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 }
-
 /** 
  * Checks the connection to the database.
  * 
@@ -24,7 +20,6 @@ function checkConnection() {
 		return false;
 	} else return true;
 }
-
 //removed change username because it is much more involved than this single update
 function editUser($uName, $realname, $password) {
     global $con;
@@ -32,7 +27,6 @@ function editUser($uName, $realname, $password) {
     $result = mysqli_query($con, "update userInfo SET realName='$realname', password='$hPassword' WHERE username='$uName';");
 	return $result;
 }
-
 function checkUserName($uName) {
     global $con;
     $result = mysqli_query($con, "SELECT * FROM userInfo WHERE username='$uName'");
@@ -42,12 +36,20 @@ function checkUserName($uName) {
         return 0;
     }
 }
-
 function searchForUsername($uName) {
     global $con;
-    $result=  mysqli_query($con, "
+    $query =  "
 		select username from userInfo  
-		where username LIKE '%$uName%'");
+		where username LIKE '%$uName%'";
+			
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[username];
+		}
+		return $resultArray;
+}
+	/*
     $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
 	$outputArray = array();
 	for($x=0; $x<sizeof($resultArray);$x++)
@@ -55,8 +57,7 @@ function searchForUsername($uName) {
 		array_push($outputArray, $resultArray[$x][0]);
 	}
 	return $outputArray;
-}
-
+}*/
 /** 
  * Checks a username's availability.
  * 
@@ -65,19 +66,16 @@ function searchForUsername($uName) {
  */
 function usernameAvailable($username) {
 	global $con;
-
 	$result = mysqli_query($con,
 		"SELECT username 
 		 FROM userInfo
 		 WHERE username = '$username'"
 	);
-
 	if (mysqli_num_rows($result) > 0)
 		return false;
 	else
 		return true;
 }
-
 /**
   * Function used to input user into database with all the information
   *
@@ -98,56 +96,33 @@ function addUser($uName, $realname, $password, $security_question, $security_ans
 	
 	return $result;    
 }
-
 function sendMail ($email,$confirm_code)
 {
 global $con;
-
 $to=$email;
 $subject="Registration confirmation ";
-$from="From: admin@corq.org";
-
-
-$message="Your Comfirmation link   ";
-$message.="Click on the link to below to activate your account ";
-$message.="www.corq.org/confirmationCheck.php?passkey=$confirm_code";
-
+$from="From: oursite@corq.com";
+$message="Your Comfirmation link \r\n";
+$message.="Click on the link to below to activate your account\r\n";
+$message.="localhost/SE165/confirmationCheck.php?passkey=$confirm_code";
 $sentmail = mail($to,$subject,$message,$from);
-
-
-
 if($sentmail){
 echo "An email confirmation was sent to your email:".$email;
 }
 else {
 echo "Cannot send Confirmation link to your e-mail address:".$email;
 }
-
 }
-
-
 function confirmUser ($confirm_key)
 {
-
-
 global $con;
-
-
-
 $query="SELECT * FROM userInfo WHERE confirmkey ='$confirm_key'";
 $resultExist= mysqli_query($con,$query);
-
-
 if($resultExist){
-
 $count =mysqli_num_rows($resultExist);
-
 if($count==1){
-
 $verified = '1';
-
 $queryUpdate="UPDATE userInfo SET verified = '$verified', confirmkey = 'NULL'  WHERE confirmkey = '$confirm_key'";
-
 $result = mysqli_query ($con,$queryUpdate);
 if ($result)
 {
@@ -156,40 +131,24 @@ echo 'Account is now confirmed';
 else {
 echo 'The data not updated';
 }
-
 }
 else {
-
 echo ' The confirm key exist more than once, Contact the admin ';
 }
-
-
 }
-
 else {
-
 echo ' cant find a user with this confirmation code ';
 }
-
 }
-
 function checkVerified($username)
 {
-
 global $con;
-
 $query = "SELECT verified FROM userInfo WHERE username = '$username'";
-
 $result = mysqli_query ($con,$query);
 $resultArray = mysqli_fetch_array($result);
 $verify = $resultArray[0];
-
 return $verify;
-
-
-
 }
-
 function getPassword($uName)
 {
 		global $con;
@@ -198,7 +157,6 @@ function getPassword($uName)
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];    
 }
-
 function verifyPassword($uName, $potentialPassword)
 {
 		global $con;
@@ -213,7 +171,6 @@ function verifyPassword($uName, $potentialPassword)
 			return false;
 			}
 }
-
 function getName($uName)
 {
 		global $con;
@@ -222,7 +179,6 @@ function getName($uName)
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];   
 }
-
 /** 
  * Validates a user's username and password on login
  * 
@@ -231,23 +187,19 @@ function getName($uName)
  */
 function verifyLogin($username, $password) {
 	global $con;
-
 	$query = "SELECT * FROM userInfo
 		WHERE username = ?
 		AND password = ?
 		LIMIT 1";
-
 	if ($statement = $con->prepare($query)) {
 		$statement->bind_param('ss', $username, $password);
 		$statement->execute();
-
 		if ($statement->fetch()) {
 			$statement->close();
 			return true;
 		} else return false;
 	}
 }
-
 function addRestaurant($pinId, $owner, $restaurantAddress)
 {
 	global $con;
@@ -262,7 +214,6 @@ function addRestaurant($pinId, $owner, $restaurantAddress)
 //	
 //	
 //	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinIds', '$board_id')"); 
-
 }
 function getBoardOwner($board_id) {
 	global $con;
@@ -272,22 +223,19 @@ function getBoardOwner($board_id) {
 	
 	return $resultArray[0];
 }
-
 function isRestuarant($board_id) {
     global $con;
-    $result=  mysqli_query($con, "
+    $query = "
 		select restaurant_indicator from pin 
 		join pinned_on on pin.pin_id = pinned_on.pin_id 
-		where pinned_on.board_id = '$board_id' ");
-    $resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
-}   
-
+		where pinned_on.board_id = '$board_id';";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[restaurant_indicator];
+		}
+		return $resultArray;
+}
 function addPin($owner, $board_id, $name, $desc, $path)
 {
 	global $con;
@@ -304,13 +252,11 @@ function addPin($owner, $board_id, $name, $desc, $path)
 	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
 	return $pinId;
 }
-
 function repin($pinId, $board_id) {
 	global $con;
 	
 	$result = mysqli_query($con,"INSERT INTO pinned_on VALUES ('$pinId', '$board_id')"); 
 }
-
 function removePin($user, $pin_id)
 {
 	global $con;
@@ -327,16 +273,13 @@ function removePin($user, $pin_id)
 	$boardId = $resultArray[0];
 	
 	$result = mysqli_query($con,"delete from pinned_on where pin_id='$pin_id' and board_id='$boardId'");
-
 }
-
 function addBoard($user, $name)
 {
 	global $con;
 	
 	$result = mysqli_query($con,"insert into board (owner, board_name) values ('$user', '$name')");
 }
-
 function removeBoard($board_id)
 {
 	global $con;
@@ -344,67 +287,57 @@ function removeBoard($board_id)
 	$result = mysqli_query($con,"delete from board where board_id='$board_id'");
 	$result = mysqli_query($con,"delete from pinned_on where board_id='$board_id'");
 }
-
 function getBoardPins($board_id)
 {
 	global $con;
 	
-	$result = mysqli_query($con,"select pin_id from pinned_on WHERE board_id='$board_id'");
-	if($result != '')
-		{die("error getting pin_id from database");}
-	//$resultArray = mysqli_fetch_array($result);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+	$query = "select pin_id from pinned_on WHERE board_id='$board_id'";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[pin_id];
+		}
+		return $resultArray;
 }
-
 function getPinLinks($board_id) {
 	global $con;
-	
-	$result = mysqli_query($con, "
-		select img_link from pin 
+	$query = "select img_link from pin 
 		join pinned_on on pin.pin_id = pinned_on.pin_id 
-		where pinned_on.board_id = '$board_id'");
-
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-		array_push($outputArray, $resultArray[$x][0]);
-
-	return $outputArray;
+		where pinned_on.board_id = '$board_id';";
+	$result = $con->query($query);
+	$resultArray = array();
+	while ($row = $result->fetch_assoc()) {
+		$resultArray[] = $row[img_link];
+	}
+	return $resultArray;
 }
-
 // Gets board IDs
 function getBoardByUser($user)
 {
 	global $con;
-	
-	$result = mysqli_query($con,"select board_id from board WHERE owner='$user'");
-	//if($result != '')
-	//	{die("error getting board_id from database");}
-	//$resultArray = mysqli_fetch_array($result);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
+	$query = "select board_id from board WHERE owner='$user';";
+	$result = $con->query($query);
+	$resultArray = array();
+	while ($row = $result->fetch_assoc()) {
+		$resultArray[] = $row[board_id];
 	}
-	return $outputArray;
+	return $resultArray;
 }
-
 // Get board names.
 function getBoardNames($user)
 {
 	global $con;
-
 	$query = "	select board_name
 				from board
 				where owner = '$user';";
-
+				$result = $con->query($query);
+				$resultArray = array();
+				while ($row = $result->fetch_assoc()) {
+					$resultArray[] = $row[board_name];
+				}
+				return $resultArray;
+}
+	/*			
 	$result = mysqli_query($con, $query);
 	//$resultArray = mysqli_fetch_array($result);
 	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
@@ -414,44 +347,37 @@ function getBoardNames($user)
 		array_push($outputArray, $resultArray[$x][0]);
 	}
 	return $outputArray;
-}
-
+	*/
+	//}
 // Get board's first pin's image to show as a preview
 function getBoardPreview($boardId)
 {
 	global $con;
-
 	$query = "	select img_link
 				from board join pinned_on on board.board_id = pinned_on.board_id 
 					join pin on pinned_on.pin_id = pin.pin_id
 				where board.board_id = '$boardId'
 				limit 1;";
-
 	$result = mysqli_query($con, $query);
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];
 }
-
 function getBoardName($board_id) {
 	global $con;
-
 	$query = "
 		select board_name
 		from board
 		where board_id = '$board_id'";
-
 	$result = mysqli_query($con, $query);
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];   
 }
-
 function editBoardName($userName, $oldBoardName, $newBoardName)
 {
 	global $con;
 	
 	$result = mysqli_query($con,"update board set board_name='$newBoardName' where owner='$userName' and board_name='$oldBoardName';");
 }
-
 function editPinName($userName, $oldPinName, $newPinName, $desc)
 {
 	global $con;
@@ -460,7 +386,6 @@ function editPinName($userName, $oldPinName, $newPinName, $desc)
 	
 	return $result;
 }
-
 function editPinLink($userName, $pinName, $newPinImageLink)
 {
 	global $con;
@@ -469,63 +394,55 @@ function editPinLink($userName, $pinName, $newPinImageLink)
 	
 	return $result;
 }
-
 function getNumberOfPins($user)
 {
 	global $con;
-
 	$query = "
 		select *
 		from pin
 		where owner = '$user';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	return sizeof($resultArray);
+		
+	//$result = mysqli_query($con, $query);
+	//$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	//return sizeof($resultArray);
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row;
+		}
+		return count($resultArray);
 }
-
 function getDescriptionOfPins($user)
 {
 	global $con;
-
 	$query = "
 		select description
 		from pin
 		where owner = '$user';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[description];
+		}
+		return $resultArray;
 }
-
 function getNamesOfPins($user)
 {
 	global $con;
-
 	$query = "
 		select name
 		from pin
 		where owner = '$user';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[name];
+		}
+		return $resultArray;
 }
-
 function getNamesOfPinsOnBoard($board_id)
 {
 	global $con;
-
 	$query = "
 		select name
 		from pin
@@ -533,21 +450,16 @@ function getNamesOfPinsOnBoard($board_id)
 			SELECT pin_id
 			FROM pinned_on
 			WHERE board_id=".$board_id.");";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
+			$result = $con->query($query);
+			$resultArray = array();
+			while ($row = $result->fetch_assoc()) {
+				$resultArray[] = $row[name];
+			}
+			return $resultArray;
 	}
-	return $outputArray;
-}
-
 function getDescriptionsOfPinsOnBoard($board_id)
 {
 	global $con;
-
 	$query = "
 		select description
 		from pin
@@ -555,26 +467,20 @@ function getDescriptionsOfPinsOnBoard($board_id)
 			SELECT pin_id
 			FROM pinned_on
 			WHERE board_id=".$board_id.");";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
+			$result = $con->query($query);
+			$resultArray = array();
+			while ($row = $result->fetch_assoc()) {
+				$resultArray[] = $row[description];
+			}
+			return $resultArray;
 	}
-	return $outputArray;
-}
-
 function getBoardsByCategory($category) 
 {
 	global $con;
-
 	$query = "
 		select *
 		from board
 		where category = '$category';";
-
 	$result = mysqli_query($con, $query);
 	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
 	$outputArray = array();
@@ -584,22 +490,18 @@ function getBoardsByCategory($category)
 	}
 	return $outputArray;
 }
-
 function getPinId($board_id)
 {
     global $con;
 	
 	$query = "Select pin_id from pinned_on WHERE board_id='$board_id';";
-    $result= mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[pin_id];
+		}
+		return $resultArray;
 }
-
 function follow($uname, $userToFollow)
 {
 	global $con;
@@ -607,22 +509,18 @@ function follow($uname, $userToFollow)
 		$result = mysqli_query($con,"INSERT INTO follow VALUES ('$uname', '$userToFollow')");
 		
 }
-
 function isFollowing($uname, $following) {
 	global $con;
 	$result = mysqli_query($con, "SELECT * FROM follow WHERE username='$uname' AND followUser='$following'");
-
 	if (mysqli_num_rows($result) == 0)
 		return false;
 	else 
 		return true;
 }
-
 function unFollow($uname, $userToFollow) {
 	global $con;
 	$result = mysqli_query($con, "DELETE FROM follow WHERE username='$uname' AND followUser='$userToFollow'");
 }
-
 function getRestaurantAddress($pinId)
 {
     global $con;
@@ -634,29 +532,23 @@ function getRestaurantAddress($pinId)
 function getFollowing($uname)
 {
 	global $con;
-
 	$query = "
 		select followUser
 		from follow
 		where username = '$uname';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[followUser];
+		}
+		return $resultArray;
 }
-
 function getSecurityQuestion($username) {
     global $con;
     $result = mysqli_query($con, "SELECT security_question FROM userInfo WHERE username='$username'");
     $row=mysqli_fetch_array($result,MYSQLI_NUM);
 	return $row[0]; 
 }
-
 function validateSecurityAnswer($securityanswer, $uName) {
     global $con;
     $result = mysqli_query($con, "SELECT security_answer FROM userInfo WHERE username='$uName'");
@@ -667,21 +559,18 @@ function validateSecurityAnswer($securityanswer, $uName) {
         return false;
     }
 }
-
 function getLatitude($pinid) {
     global $con;
     $result = mysqli_query($con, "SELECT latitude FROM pin WHERE pin_id='$pinid'");
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0]; 
 }
-
 function getLongitude($pinid) {
     global $con;
     $result = mysqli_query($con, "SELECT longitude FROM pin WHERE pin_id='$pinid'");
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0]; 
 }
-
 function validateUser($username)
 {
 	global $con;
@@ -692,7 +581,6 @@ function validateUser($username)
         return true;
     }
 }
-
 function addTag($board_id, $tag)
 {
 	global $con;
@@ -700,7 +588,6 @@ function addTag($board_id, $tag)
 									VALUES('$board_id', '$tag');");
 	return $result;
 }
-
 function removeTag($board_id, $tag)
 {
 	global $con;
@@ -708,7 +595,6 @@ function removeTag($board_id, $tag)
 									WHERE board_id=$board_id AND tag='$tag';");
 	return $result;
 }
-
 function addComment($pin_id, $author, $comment_content)
 {
 	global $con;
@@ -716,7 +602,6 @@ function addComment($pin_id, $author, $comment_content)
 									VALUES('$pin_id', '$author', '$comment_content');");
 	return $result;
 }
-
 function removeComment($pin_id, $author, $comment_content)
 {
 	global $con;
@@ -724,43 +609,32 @@ function removeComment($pin_id, $author, $comment_content)
 									WHERE pin_id=$pin_id AND author='$author' AND comment_content='$comment_content';");
 	return $result;
 }
-
 function getComments($pin_id) {
 	global $con;
-
 	$query = "
 		SELECT comment_content
 		FROM comments
 		WHERE pin_id = '$pin_id';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[comment_content];
+		}
+		return $resultArray;
 }
-
 function getCommentAuthors($pin_id) {
 	global $con;
-
 	$query = "
 		SELECT author
 		FROM comments
 		WHERE pin_id = '$pin_id';";
-
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[author];
+		}
+		return $resultArray;
 }
-
 function addLike($user_id, $pin_id)
 {
 	global $con;
@@ -768,7 +642,6 @@ function addLike($user_id, $pin_id)
 									VALUES($user_id, $pin_id);");
 	return $result;
 }
-
 function removeLike($user_id, $pin_id)
 {
 	global $con;
@@ -776,46 +649,36 @@ function removeLike($user_id, $pin_id)
 									WHERE user_id=$user_id AND pin_id=$pin_id;");
 	return $result;
 }
-
 function getPinName($pin_id) {
     global $con;
-
     $query = "
         select name
         from pin
         where pin_id = '$pin_id'";
-
     $result = mysqli_query($con, $query);
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];   
 }
-
 function getPinImage($pin_id) {
     global $con;
-
     $query = "
         select img_link
         from pin
         where pin_id = '$pin_id'";
-
     $result = mysqli_query($con, $query);
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];
 }
-
 function getPinOwner($pin_id) {
     global $con;
-
     $query = "
         select owner
         from pin
         where pin_id = '$pin_id'";
-
     $result = mysqli_query($con, $query);
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];
 }
-
 function checkPrivacy($board_id)
 {
 	global $con;
@@ -829,7 +692,6 @@ function checkPrivacy($board_id)
 	return $resultArray[0];
 	
 }
-
 function togglePrivacy($board_id)
 {
 	global $con;
@@ -851,7 +713,6 @@ function togglePrivacy($board_id)
 	$result = mysqli_query($con, $query);
 	return $result;
 }
-
 function changePrivacy($board_name, $privacy)
 {
 	global $con;
@@ -860,15 +721,10 @@ function changePrivacy($board_name, $privacy)
 		$query = "
 				update board set private=$privacy
 				where board_name = '$board_name';";
-
 	$result = mysqli_query($con, $query);
 	return $result;
 }
-
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
-
-
-
 ?>
