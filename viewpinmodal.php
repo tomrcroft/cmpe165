@@ -22,7 +22,7 @@
                 </div>
                 <div class="panel-body pinbox">
 
-                    <div class="panel-heading" style="margin-top : -15px">
+                    <div class="panel-heading pinButtonBar" style="margin-top : -15px">
                         <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
 
 						<!-- Edit Pin is not working, so it is now a submodal-->
@@ -36,9 +36,9 @@
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
                                 $('#repinBox').show()">PIN IT</a>
-						<div class="pinLikesBadge">
-									<!-- set in boards.php-->
-						</div>                       
+						<!--<div class="pinLikesBadge">
+									set in boards.php
+						</div>      -->                 
                     </div>
 
                     <div class="form-group">

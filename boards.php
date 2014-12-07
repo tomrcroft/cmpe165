@@ -76,7 +76,7 @@
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
 			 var pinLikes = $(this).attr('data-pinLikes');
-			 $('.pinLikesBadge').html('<li class="active">Likes<span class="badge pull-right">' + pinLikes + '</span></li>');
+			 $('.pinButtonBar').append('<p>Likes<span class="badge pull-right">' + pinLikes + '</span><p>');
 			 $(".oldPinName").val(title);
 			 $(".newPinName").val(title);
 			 $(".pinDescription").val(desription);
