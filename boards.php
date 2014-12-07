@@ -57,8 +57,10 @@
 	<script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
 	<!-- This is called when a pin is clicked, passes image link and pin title-->
 	<script type="text/javascript">
-	imagesLoaded( document.querySelector('#pin-container'), function( instance ) {
-	  console.log('all images are loaded');
+	var $container = $('#pin-container');
+	// initialize Masonry after all images have loaded  
+	$container.imagesLoaded( function() {
+	  $container.masonry();
 	});
 		$(document).on("click", ".open-viewPin", function () {
 			 $("#mapbox").hide(); 
