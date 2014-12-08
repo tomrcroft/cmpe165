@@ -763,16 +763,13 @@ function getFeed($username) {
 			SELECT followUser
 			FROM follow
 			WHERE username = '$username'
-		) ORDER BY pin_id ASC LIMIT 20;";
+		) ORDER BY pin_id ASC LIMIT 8;";
 
-	$result = mysqli_query($con, $query);
-	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
-	$outputArray = array();
-	for($x=0; $x<sizeof($resultArray);$x++)
-	{
-		array_push($outputArray, $resultArray[$x][0]);
-	}
-	return $outputArray;
+	$result = $con->query($query);
+	$resultArray = array();
+	while ($row = $result->fetch_assoc()) {
+		$resultArray[] = $row[pin_id];
+	} return $resultArray;
 }
 function getPinOwner($pin_id) {
     global $con;
