@@ -74,7 +74,7 @@
 			echo'<br>';
 			echo '<h2>Boards</h2>';
 			if (count($boardHits) > 0) {
-				echo '<a class="btn btn-primary btn-sm searchPins" href="myBoards.php?term='.$searchTerm.';">View Matching Boards</a>';
+				echo '<a class="btn btn-primary btn-sm searchPins" href="searchBoards.php?term='.$searchTerm.'">View Matching Boards</a>';
 			} else {
 				echo "<p>I'm sorry, no matching boards found</p>";
 			}
@@ -82,7 +82,7 @@
 			echo'<br>';
 			echo '<h2>Pins</h2>';
 			if (count($pinHits) > 0) {
-				echo '<a class="btn btn-primary btn-sm searchPins" href="searchPins.php?term='.$searchTerm.';">View Matching Pins</a>';
+				echo '<a class="btn btn-primary btn-sm searchPins" href="searchPins.php?term='.$searchTerm.'">View Matching Pins</a>';
 			} else {
 				echo "<p>I'm sorry, no matching pins found</p>";
 			}
