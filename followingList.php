@@ -6,7 +6,9 @@
                 <div class="panel panel-info" >
 
                     <div class="panel-heading">
+						<button class="btn btn-link pull-right" data-dismiss="modal" onclick=" $('#followingList').hide()">X</button>
                         <div class="panel-title">Following</div>
+						
                     </div>     
 					<?php 
 					$username = $_SESSION['username'];
