@@ -103,7 +103,7 @@
 		$confirmedPassword = $_POST['passverify'];
 		if (verifyPassword($userName, $oldPassword)) {
 			if ($newPassword == $confirmedPassword) {
-				editUser($userName, $fullName, $newPassword);
+				editUser($userName, $newPassword);
 				echo '<script type="text/javascript">';
 				echo 'alert("Account Updated")';
 				echo '</script>';
