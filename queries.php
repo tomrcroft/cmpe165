@@ -269,7 +269,7 @@ function getBoardOwner($board_id) {
 
 function checkBoardExists($uName, $boardName) {
     global $con;
-    $result = mysqli_query($con, "SELECT * FROM boards WHERE owner='$uName' AND board_name='$boardName';");
+    $result = mysqli_query($con, "SELECT * FROM board WHERE owner='$uName' AND board_name='$boardName';");
     if (mysqli_num_rows($result) == 0) {
         return 0;
     } else {
@@ -886,7 +886,7 @@ function searchForBoardName($boardName)
     $query = "
     	     SELECT board_name
 	     FROM board
-	     WHERE board_name LIKE '%$boardName%'";
+	     WHERE board_name LIKE '%a%'";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
