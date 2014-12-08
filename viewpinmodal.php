@@ -23,7 +23,7 @@
 				$(".likesBadge").html(++currentLikes);
 		      }
 		    });
-			$('.likeButton').off('click').on('click', 'unLikeButtonClick()');
+		$('.likeButton').off('click').on('click', 'unLikeButtonClick()');
 		//var pin_id = $(".pinID").val();
 		//alert(pin_id);
 		//var jqxhr = $.post("addlike.php", {pin_id: 10 } );
@@ -65,9 +65,8 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading pinButtonBar" style="margin-top : -15px">
-						<div class="likeButtonDiv">
-                        	<button type="button" class="btn btn-secondary btn-sm likeButton">Like</button>
-						</div>
+                        <button id="btn-signup" name="submitRepin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Repin</button>
+						<button type="button" class="btn btn-secondary btn-sm likeButton" onclick="likeButtonClick();">Like</button>
 						<!-- Edit Pin is not working, so it is now a submodal-->
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
                                         <button type="submit" class="btn btn-primary btn-sm" onclick="$('.pinbox').hide(); $('#editPinform').show()" >Edit</button>
