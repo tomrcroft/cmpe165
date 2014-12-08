@@ -886,7 +886,7 @@ function searchForBoardName($boardName)
     $query = "
     	     SELECT board_name
 	     FROM board
-	     WHERE board_name LIKE '%$boardName%'"
+	     WHERE board_name LIKE '%$boardName%'";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
