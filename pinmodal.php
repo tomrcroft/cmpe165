@@ -25,7 +25,7 @@ function showMyImageField() {
                                     <!-- Upload Pin Field -->
                                     <div class="form-group">
                                         <!--<label for="uploadPin" class="col-md-3 control-label">Image</label> -->
-										<div class="col-md-20">
+										<div class="col-md-20" style="padding-bottom:20px">
                                         	<label for="uploadPin" class="col-md-3 control-label">Select One:</label>
 											<button type="button" class="btn btn-secondary btn-sm" onClick="showURLField()">URL</button>
 											<button type="button" class="btn btn-secondary btn-sm" onClick="showMyImageField()">My Image</button>
