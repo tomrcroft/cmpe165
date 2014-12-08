@@ -690,8 +690,23 @@ function removeLike($user_id, $pin_id)
 {
 	global $con;
 	$result = mysqli_query($con, "delete from likes
-									WHERE username=$user_id AND pin_id=$pin_id;");
+									WHERE username='$user_id' AND pin_id=$pin_id;");
 	return $result;
+}
+
+function getPinLikes($board_id, $userName) {
+	global $con;
+	$query = "
+		SELECT likes.pin_id 
+		FROM likes, board
+		WHERE board_id='$board_id' AND likes.pin_id = board_id.pin_id  AND likes.username = '$userName'
+		ORDER BY likes.pin_id;";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[comment_content];
+		}
+		return count($resultArray);
 }
 
 function getNumberOfLikes($pin_id) {

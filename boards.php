@@ -11,7 +11,7 @@
 		$pin_id = $_POST['commentPinID'];
 		$author = $_SESSION['username'];
 	   	$comment_content = $_POST['comment']; 
-	    addComment($pin_id, $author, $comment_content);
+	   addComment($pin_id, $author, $comment_content);
 	}
 	
 	if (isset($_POST['submitEditPin'])) {
@@ -76,7 +76,14 @@
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
 			 var pinLikes = $(this).attr('data-pinLikes');
-			 $('.likesBadgeDiv').html('<p>Likes<span class="badge likesBadge pull-right">' + pinLikes + '</span><p>'); // TODO: Make this line up properly
+			 var pinIsLiked = $(this).attr('data-pinLiked');
+			 
+			 if (pinIsLiked == 1) {
+			 	$('.likeButton').on('click', unLikeButtonClick);
+			 } else {
+			 	$('.likeButton').on('click', likeButtonClick);
+			 }			 
+			 $('.likesBadge').html(pinLikes); // TODO: Make this line up properly
 			 $(".oldPinName").val(title);
 			 $(".newPinName").val(title);
 			 $(".pinDescription").val(desription);
@@ -165,7 +172,12 @@
 				$pinIDs = getPinId($board_id);
 				$isRestaurantArray = isRestuarant($board_id);
 				$descriptions = getDescriptionsOfPinsOnBoard($board_id);				
-				
+				$pinsLiked = getPinLikes($board_id, $_SESSION['username']);
+				if (count($pinsLiked) == 0) {
+					$j = -1;
+				} else {
+					$j = 0;
+				}
                 for($i = 0; $i < count($pins); $i++) {
 					$comments = getComments($pinIDs[$i]);
 					$authors = getCommentAuthors($pinIDs[$i]);
@@ -189,6 +201,15 @@
 					}
 					echo '" ';
 					
+					if ($pinsLiked[$j] == $pinIDs[$i] && $j != -1) {
+						echo 'data-pinLiked=1 ';
+						$j++;
+						if ($j == count($pinsLiked)) {
+							$j = -1;
+						}
+					} else {
+						echo 'data-pinLiked=0 ';
+					}
 					if ($isRestaurantArray[$i] == 1) {
 						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
 					}

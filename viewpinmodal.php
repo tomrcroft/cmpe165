@@ -7,21 +7,23 @@
 	});
 	
     function likeButtonClick() {
-        $(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
+        //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
 		var pin_id = $(".repinID").val();
 		$.ajax({
 		      method: 'get',
-		      url: 'addLike.php',
+		      url: 'addRemoveLike.php',
 		      data: {
+				'add': true 
 		        'pin_id': pin_id,
 		        'ajax': true
 		      },
 		      success: function(data) {
 		        alert("It worked");
-				//var currentLikes = $(".likesBadge").html();
-				//$(".likesBadge").html('<p>Likes<span class="badge likesBadge pull-right">' + () + '</span><p>');
+				var currentLikes = parseInt($(".likesBadge").html(), 10);
+				$(".likesBadge").html(++currentLikes);
 		      }
 		    });
+			$('.likeButton').off('click').on('click', unLikeButtonClick);
 		//var pin_id = $(".pinID").val();
 		//alert(pin_id);
 		//var jqxhr = $.post("addlike.php", {pin_id: 10 } );
@@ -33,7 +35,23 @@
     }
 	
 	function unLikeButtonClick() {
-		$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>');
+		//$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>');
+		var pin_id = $(".repinID").val();
+		$.ajax({
+		      method: 'get',
+		      url: 'addRemoveLike.php',
+		      data: {
+				'remove': true 
+		        'pin_id': pin_id,
+		        'ajax': true
+		      },
+		      success: function(data) {
+		        alert("It worked");
+				var currentLikes = parseInt($(".likesBadge").html(), 10);
+				$(".likesBadge").html(--currentLikes);
+		      }
+		    });
+		$('.likeButton').off('click').on('click', likeButtonClick);
 	}
 </script>
 
@@ -48,7 +66,7 @@
 
                     <div class="panel-heading pinButtonBar" style="margin-top : -15px">
 						<div class="likeButtonDiv">
-                        	<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
+                        	<button type="button" class="btn btn-secondary btn-sm likeButton">Like</button>
 						</div>
 						<!-- Edit Pin is not working, so it is now a submodal-->
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
@@ -61,6 +79,7 @@
                             <span class="glyphicon glyphicon-globe"></span>Map</a>
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
                                 $('#repinBox').show()">PIN IT</a>
+						<p>Likes<span class="badge likesBadge pull-right"></span><p>
 						<!--<div class="pinLikesBadge">
 									set in boards.php //TODO: make this look ok
 						</div>      -->                 

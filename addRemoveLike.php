@@ -1,0 +1,11 @@
+<?php
+	session_start(); 
+	include 'actions.php';
+	if ($_GET['ajax']) {
+		if ($_GET['add']) {
+			addLike($_SESSION['username'], $_GET['pin_id']);
+		} else if ($_GET['remove']) {
+			removeLike($_SESSION['username'], $_GET['pin_id'])
+		}
+	}
+?>
