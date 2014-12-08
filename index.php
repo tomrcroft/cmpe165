@@ -249,6 +249,7 @@
 			if (isset($_SESSION['username'])) {
 				$board_id = getBoardID('admin', $_SESSION['username']."followBoard");
 			}
+			echo "Board_id = ".$board_id;
                 // Where to get board ID from? 
                 $pins = getPinLinks($board_id);
 				$pinNames = getNamesOfPinsOnBoard($board_id);
