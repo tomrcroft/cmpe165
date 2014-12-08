@@ -126,32 +126,20 @@
         <!-- Show all pins based on board ID -->
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
 			
-            <!-- TODO: PHP code here: fill feed with newest posts from all followers in reverse time/date order. Below are just dummies -->
-            <a href="#viewPin" data-toggle="modal" data-target="#viewPin"><div class="item"><img src="img/pins/pidgeotto.gif" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div></a>
-            <div class="item"><img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/tumblr_n96doc8WMO1rtpgrxo1_500.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/Ben-Affleck-in-Batman-vs.-Superman-2016-Movie-Image1.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/patrick.png" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/pidgeotto.gif" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/tumblr_na2lcm9Qg71r9kz6do2_500.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/tumblr_n8cwonFIBH1tbe79ko1_1280.jpg" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <div class="item"><img src="img/pins/patrick.png" />
-                <div class="footer" style="margin-bottom:10px">TODO: fetch description of pin</div></div>
-            <!-- end dummy code -->
+			<?php 
+				if (isset($_SESSION['username'])) {
+					// Get pins
+					$pinIDs = getFeed($_SESSION['username']);
 
+					for($i = 0; $i < count($pinIDs); $i++) {
+						$pinImage = getPinImage($pinIDs[$i]);
+						$pinDescription = getPinDescription($pinIDs[$i]);
 
+						echo '<a href="#viewPin" data-toggle="modal" data-target="#viewPin"><div class="item"><img src="'.$pinImage.'" />';
+						echo '<div class="footer" style="margin-bottom:10px">'.$pinDescription.'</div></div></a>';
+					}
+				}
+			?>
         </div>
 	</section>
 	

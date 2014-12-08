@@ -727,6 +727,37 @@ function getPinImage($pin_id) {
     $resultArray = mysqli_fetch_array($result);
 	return $resultArray[0];
 }
+function getPinDescription($pin_id) {
+    global $con;
+    $query = "
+        select description
+        from pin
+        where pin_id = '$pin_id'";
+    $result = mysqli_query($con, $query);
+    $resultArray = mysqli_fetch_array($result);
+	return $resultArray[0];
+}
+function getFeed($username) {
+	global $con;
+
+	$query = "
+		SELECT distinct pin_id
+		FROM pin NATURAL JOIN userInfo
+		WHERE username IN (
+			SELECT followUser
+			FROM follow
+			WHERE username = '$username'
+		) ORDER BY pin_id ASC LIMIT 20;";
+
+	$result = mysqli_query($con, $query);
+	$resultArray = mysqli_fetch_all($result, MYSQLI_NUM);
+	$outputArray = array();
+	for($x=0; $x<sizeof($resultArray);$x++)
+	{
+		array_push($outputArray, $resultArray[$x][0]);
+	}
+	return $outputArray;
+}
 function getPinOwner($pin_id) {
     global $con;
     $query = "
