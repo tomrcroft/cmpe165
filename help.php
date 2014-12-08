@@ -28,7 +28,35 @@
         } else {
             echo "Passwords did not match.";
         }
-    }       
+    } 
+	
+	if (isset($_GET['download_file'])) {
+		$path = $_SERVER['DOCUMENT_ROOT']."documents/"; // change the path to fit your websites document structure
+		$fullPath = $path.$_GET['download_file'];
+
+		if ($fd = fopen ($fullPath, "r")) {
+		$fsize = filesize($fullPath);
+		$path_parts = pathinfo($fullPath);
+		$ext = strtolower($path_parts["extension"]);
+		switch ($ext) {
+		    case "pdf":
+		    header("Content-type: application/pdf"); // add here more headers for diff. extensions
+		    header("Content-Disposition: inline; filename=\"".$path_parts["basename"]."\"");     
+		    break;
+		    default;
+		    header("Content-type: application/octet-stream");
+		    header("Content-Disposition: filename=\"".$path_parts["basename"]."\"");
+		}
+		header("Content-length: $fsize");
+		header("Cache-control: private"); //use this to open files directly
+		while(!feof($fd)) {
+		    $buffer = fread($fd, 2048);
+		    echo $buffer;
+		}
+		}
+		fclose ($fd);
+		exit;
+	}      
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +148,20 @@
                             </div>
                             <div class="service-desc">
                                 <a href="#boards"><h5>Boards</h5></a>
+                                <p>   </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <img src="img/icons/service-icon-4.png" alt="" />
+                            </div>
+                            <div class="service-desc">
+                                <a href="help.php?download_file=end_users_guide.pdf"><h5>User Guide</h5></a>
                                 <p>   </p>
                             </div>
                         </div>
@@ -227,23 +269,6 @@
                     </div>
                 </div>
             </div>       
-        	<div class="row">
-            	<div class="col-sm-3 col-md-3">
-                	<div class="wow fadeInLeft" data-wow-delay="0.2s">
-                    	<div class="service-box">
-                        	<div class="service-icon">
-                        		<img src="img/icons/service-icon-4.png" alt="" />
-							</div>
-							<div class="service-desc">
-                        		<h4>Pin Tutorial Video</h4>
-								<div class="embed-responsive embed-responsive-16by9">
-						  	  	<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/ICemupWG56U"></iframe>
-								</div>
-							</div>
-                		</div>
-            		</div>      
-        		</div>
-			</div>
     	</div>
     </section>
     <!-- /section: pins-->
@@ -316,19 +341,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3">
-                    <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="service-box">
-                            <div class="service-icon">
-		                        <img src="img/icons/service-icon-4.png" alt="" />
-		                        <h4>Board Tutorial Video</h4>
-		                    </div>
-								<div class="embed-responsive embed-responsive-4by3">
-								  <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/ICemupWG56U"></iframe>
-								</div>
-		                </div>
-		            </div>
-		        </div>
 			</div>        
         </div>
         
