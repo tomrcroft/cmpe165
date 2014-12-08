@@ -237,12 +237,7 @@
                                                     <?php
                                                         if ($isOwner){
                                                             echo '
-                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#followingList" data-toggle="modal" data-target="#followingList" class="btn btn-primary btn-sm">Following</button>
-                                                            </li>
-                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#likesList" data-toggle="modal" data-target="#likeList" class="btn btn-primary btn-sm">Likes</button>
-                                                            </li>
+                                                            
                                                             <li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
@@ -346,6 +341,9 @@
                                 </a>
                             </div>
                         </div>';
+						
+						
+						
 						
                     }
                 ?>
