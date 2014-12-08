@@ -34,6 +34,9 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="color/default.css" rel="stylesheet">
 
+	<!-- This NEEDS to be here, JQuery needs to be defined before it can be used -->
+	<script src="js/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -128,14 +131,6 @@
             </div>      
         </div>
     </section>
-
-
-
-    <!-- Get login/register modal. -->
-    <?php include 'loginmodal.php' ?>
-    <!-- Get upload pin modal. -->
-    <?php include 'pinmodal.php' ?>
-    <!-- Get create board modal. -->
 	
     <footer>
         <div class="container">
