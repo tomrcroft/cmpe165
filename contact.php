@@ -124,9 +124,9 @@
                                         <label for="subject">Subject</label>
                                         <select id="subject" name="subject" class="form-control" required="required">
                                             <option value="na" selected="">Choose One:</option>
-                                            <option value="service">General Customer Service</option>
-                                            <option value="suggestions">Suggestions</option>
-                                            <option value="product">Product Support</option>
+                                            <option value="General Customer Service">General Customer Service</option>
+                                            <option value="Suggestions">Suggestions</option>
+                                            <option value="Product Support">Product Support</option>
                                         </select>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Message</label>
-                                        <textarea name="message" name="body" id="body" class="form-control" rows="9" cols="25" required="required"
+                                        <textarea name="body" id="body" class="form-control" rows="9" cols="25" required="required"
                                             placeholder="Message"></textarea>
                                     </div>
                                 </div>
