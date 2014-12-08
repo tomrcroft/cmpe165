@@ -10,9 +10,9 @@
 	if (isset($_GET['term'])) {
 		$boardName = $_GET['term'];
 		if (checkBoardExists('admin', $boardName) == 0) {
-			addBoard('admin', $_GET['term']);
+			addBoard('admin', $boardName);
 			$board_id = getBoardID('admin', $boardName);
-			$pinHits = searchForPin($searchTerm);
+			$pinHits = searchForPin($_GET['term']);
 			$max = 20;
 			if (count($pinHits) < 20) {
 				$max = count($pinHits);
