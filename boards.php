@@ -11,7 +11,7 @@
 		$pin_id = $_POST['commentPinID'];
 		$author = $_SESSION['username'];
 	   	$comment_content = $_POST['comment']; 
-	   addComment($pin_id, $author, $comment_content);
+	    addComment($pin_id, $author, $comment_content);
 	}
 	
 	if (isset($_POST['submitEditPin'])) {
@@ -76,7 +76,7 @@
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
 			 var pinLikes = $(this).attr('data-pinLikes');
-			 $('.pinButtonBar').append('<p>Likes<span class="badge pull-right">' + pinLikes + '</span><p>'); // TODO: Make this line up properly
+			 $('.likesBadgeDiv').html('<p>Likes<span class="badge likesBadge pull-right">' + pinLikes + '</span><p>'); // TODO: Make this line up properly
 			 $(".oldPinName").val(title);
 			 $(".newPinName").val(title);
 			 $(".pinDescription").val(desription);

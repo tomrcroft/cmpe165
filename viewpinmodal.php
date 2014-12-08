@@ -8,8 +8,23 @@
 	
     function likeButtonClick() {
         $(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
-		var pin_id = $(".pinID").val();
-		var jqxhr = $.post("addlike.php", {pin_id: pin_id } );
+		var pin_id = $(".repinID").val();
+		$.ajax({
+		      method: 'get',
+		      url: 'addLike.php',
+		      data: {
+		        'pin_id': pin_id,
+		        'ajax': true
+		      },
+		      success: function(data) {
+		        alert("It worked");
+				//var currentLikes = $(".likesBadge").html();
+				//$(".likesBadge").html('<p>Likes<span class="badge likesBadge pull-right">' + () + '</span><p>');
+		      }
+		    });
+		//var pin_id = $(".pinID").val();
+		//alert(pin_id);
+		//var jqxhr = $.post("addlike.php", {pin_id: 10 } );
 		//alert( "success" );
 		//addLike($user_id, $pin_id)
 		//})
