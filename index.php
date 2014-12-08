@@ -220,6 +220,14 @@
 				repin($pinHits[$i], $board_id);
 			}
 			for ($i = $max, $j = 0; $i < 20; $i++, $j++) {
+				$foundNewPin = 0;
+				while ($foundNewPin == 0) {
+					if (in_array($pins[$j], $pinHits)) {
+						$j++;
+					} else {
+						$foundNewPin = 1;
+					}
+				}
 				repin($pins[$j], $board_id);
 			}
 	}
