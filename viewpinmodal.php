@@ -7,13 +7,18 @@
 	});
 	
     function likeButtonClick() {
-        $(".likeButton").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
-        // TODO: Disable like button
+        $(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
+		var pin_id = $(".pinID").val();
+		var jqxhr = $.post("addlike.php", {pin_id: pin_id } );
+		//alert( "success" );
+		//addLike($user_id, $pin_id)
+		//})
+		// TODO: Disable like button
         // TODO: Run query to like from JS function
     }
 	
 	function unLikeButtonClick() {
-		$(".unlikeButton").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Unlike</button>');
+		$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>');
 	}
 </script>
 
