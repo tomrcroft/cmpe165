@@ -236,7 +236,10 @@
                                                     </li>
                                                     <?php
                                                         if ($isOwner){
-
+                                                            echo '
+                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button href="#followingList" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Following Users</button>
+                                                            </li>';
                                                         } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <form method="POST">
