@@ -153,7 +153,7 @@
                         <a id="addmaplink" href="#" onclick="$('#mapbox').hide();
                                 $('.pinbox').show()">Go Back to Pin</a>
 					</div>
-                    <form id="addressform" class="form-horizontal" name="addressform" action="addAddress.php" method="POST">
+                    <form id="addressform" class="form-horizontal" name="addressform" method="POST">
 
                         <div id="addressalert" style="display:none" class="alert alert-danger">
                             <p>Error:</p>

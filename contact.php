@@ -153,7 +153,7 @@
                         <address>
                             <strong>Squas Design, Inc.</strong><br>
                             1 Washington Square<br>
-                            San Jose, CA 94107<br>
+                            San Jose, CA 95192<br>
                             <abbr title="Phone">P:</abbr> (555) 456-7890
                         </address>
  
