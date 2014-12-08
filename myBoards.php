@@ -396,13 +396,14 @@
 						if ($isOwner == true) {
 							echo '<!-- edit board name & privacy -->
                                  <div class="btn-group" role="group" aria-label="...">
-                                 	<a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard" data-boardName="'.$boardNames[$i].'"
-                                 		data-privacyCheck="'.$privacyCheck.'" class="btn btn-sm btn-secondary pull-left edit-board open-editBoard" 										onclick="editboard('.$boardNames[$i].')">
-                                	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
-    								<!-- Delete this board from database-->
+                                    <a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard" data-boardName="'.$boardNames[$i].'"
+                                        data-privacyCheck="'.$privacyCheck.'" class="btn btn-sm btn-secondary pull-left edit-board open-editBoard" 
+                                        onclick="editboard('.$boardNames[$i].')" style="margin-top:-30px; margin-right:-65px">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>                            
+                                    <!-- Delete this board from database-->
                                     <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                    	class="btn btn-sm btn-secondary pull-right" onclick="removeboard('.$boardIDs[$i].')">
-                                	<i class="icon-hand-left"></i>delete</button>
+                                        class="btn btn-sm btn-secondary pull-right" onclick="removeboard('.$boardIDs[$i].')" style="margin-top:-30px; margin-right:65px">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                  </div>';
 						}
 						echo '
