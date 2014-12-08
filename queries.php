@@ -879,6 +879,21 @@ function searchForBoard($boardName)
     }
     return $resultArray;
 }
+
+function searchForBoardName($boardName)
+{
+    global $con;
+    $query = "
+    	     SELECT board_name
+	     FROM board
+	     WHERE board_name LIKE '%boardName%'"
+    $result = $con->query($query);
+    $resultArray = array();
+    while ($row = $result->fetch_assoc()) {
+    	  $resultArray[] = $row[board_name];
+    }
+    return $resultArray;
+}  
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
