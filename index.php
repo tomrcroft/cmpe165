@@ -198,7 +198,7 @@
 		}		
 		$pins = getNewPins();
 		for ($i = 0; $i < 20; $i++) {
-			repin($pinHits[$i], $board_id);
+			repin($pins[$i], $board_id);
 		}
 	} else {
 		$boardName = $_SESSION['username']."followBoard";
