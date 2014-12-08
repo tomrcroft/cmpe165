@@ -229,15 +229,22 @@
                                                 <ul class="nav nav-pills center">
                                                     <li class="active" style="padding-left:3em">
                                                         <!-- TODO: count all pins on all boards -->
-                                                        Pins<span class="badge pull-right"><?php echo $numberOfPins; ?></span>
+                                                        Pins<span class="badge pull-right"><?php echo $numberOfPins '  '; ?></span>
                                                     </li>
                                                     <li class="active" style="padding-left:3em">
-                                                        Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
+                                                        Boards<span class="badge pull-right"> <?php echo $numberOfBoards '  '; ?></span>
                                                     </li>
                                                     <?php
                                                         if ($isOwner){
-                                                            echo '<li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Change Password</button>
+                                                            echo '
+                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button href="#followingList" data-toggle="modal" data-target="#followingList" class="btn btn-primary btn-sm">Following</button>
+                                                            </li>
+                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button href="#likesList" data-toggle="modal" data-target="#likeList" class="btn btn-primary btn-sm">Likes</button>
+                                                            </li>
+                                                            <li class="active" style="padding-left:3em; margin-top:-5px">
+                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
                                                         } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
@@ -287,7 +294,7 @@
 					
 					
 					
-					#by clicking on this, it will show the list of the following boards 
+					/*#by clicking on this, it will show the list of the following boards 
 						
 						echo '<div class="col-xs-6 col-sm-3 col-md-3">
                             <div class="wow bounceInUp" data-wow-delay="0.2s">
@@ -306,7 +313,7 @@
                         </div>';
 					
 
-					/*	#by clicking on this, it will show the list of the pins that user liked 
+						#by clicking on this, it will show the list of the pins that user liked 
 					echo '<div class="col-xs-6 col-sm-3 col-md-3">
                             <div class="wow bounceInUp" data-wow-delay="0.2s">
                                 <a href="#likesList" data-toggle="modal" data-target="#likeList">
@@ -340,15 +347,7 @@
                             </div>
                         </div>';
 						
-						
-						
-						
                     }
-					
-				
-					
-					
-					
                 ?>
 
 
