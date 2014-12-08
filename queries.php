@@ -143,8 +143,8 @@ function sendMailFromContact($email,$name,$subject,$body)
 	$mailer = Swift_Mailer::newInstance($transport);
 
 	$message = Swift_Message::newInstance('Contact us message from '.$name.': '.$subject)
-	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
-	  ->setTo(array($email))
+	  ->setFrom(array($email => 'Corq.org'))
+	  ->setTo(array('corq.org@gmail.com'))
 	  ->setBody($body);
 
 	$result = $mailer->send($message);	
