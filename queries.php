@@ -699,14 +699,14 @@ function getPinLikes($board_id, $userName) {
 	$query = "
 		SELECT likes.pin_id 
 		FROM likes, pinned_on
-		WHERE board_id='$board_id' AND likes.pin_id = pinned_on.pin_id  AND likes.username = '$userName'
-		ORDER BY likes.pin_id;";
+		WHERE board_id='$board_id' AND likes.pin_id = pinned_on.pin_id  AND username = '$userName'
+		ORDER BY pin_id;";
 		$result = $con->query($query);
 		$resultArray = array();
 		while ($row = $result->fetch_assoc()) {
 			$resultArray[] = $row[pin_id];
 		}
-		return count($resultArray);
+		return $resultArray;
 }
 
 function getNumberOfLikes($pin_id) {

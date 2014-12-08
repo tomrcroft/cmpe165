@@ -175,13 +175,14 @@
 				$pinNames = getNamesOfPinsOnBoard($board_id);
 				$pinIDs = getPinId($board_id);
 				$isRestaurantArray = isRestuarant($board_id);
-				$descriptions = getDescriptionsOfPinsOnBoard($board_id);				
+				$descriptions = getDescriptionsOfPinsOnBoard($board_id);			
 				$pinsLiked = getPinLikes($board_id, $_SESSION['username']);
+				//echo '<p>'.$pinsLiked[0].'</p>';
+				$k = 0
 				if (count($pinsLiked) == 0) {
-					$j = -1;
-				} else {
-					$j = 0;
-				}
+					$k = -1;
+				} 
+				
                 for($i = 0; $i < count($pins); $i++) {
 					$comments = getComments($pinIDs[$i]);
 					$authors = getCommentAuthors($pinIDs[$i]);
@@ -206,13 +207,13 @@
 					echo '" ';
 					
 					if ($pinsLiked[$j] == $pinIDs[$i] && $j != -1) {
-						echo 'data-j ='$j' data-pinLiked=1 ';
-						$j++;
-						if ($j == count($pinsLiked)) {
-							$j = -1;
+						echo 'data-j='.$k.' data-pinLiked=1 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].'';
+						$k++
+						if ($k == count($pinsLiked)) {
+							$k = -1;
 						}
 					} else {
-						echo 'data-j ='$j' data-pinLiked=0 ';
+						echo 'data-j='.$k.' data-pinLiked=1 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].'';
 					}
 					if ($isRestaurantArray[$i] == 1) {
 						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
