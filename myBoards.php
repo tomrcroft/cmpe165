@@ -229,17 +229,16 @@
                                                 <ul class="nav nav-pills center">
                                                     <li class="active" style="padding-left:3em">
                                                         <!-- TODO: count all pins on all boards -->
-                                                        Pins<span class="badge pull-right"><?php echo $numberOfPins; ?></span>
+                                                        Pins<span class="badge pull-right" style="margin-left:10px"><?php echo $numberOfPins; ?></span>
                                                     </li>
                                                     <li class="active" style="padding-left:3em">
-                                                        Boards<span class="badge pull-right"> <?php echo $numberOfBoards; ?></span>
+                                                        Boards<span class="badge pull-right" style="margin-left:10px"> <?php echo $numberOfBoards; ?></span>
                                                     </li>
                                                     <?php
                                                         if ($isOwner){
                                                             echo '
-
                                                             <li class="active" style="padding-left:3em; margin-top:-5px">
-                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Change Password</button>
+                                                                <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Account Settings</button>
                                                             </li>';
                                                         } elseif ($followed == false){
                                                             echo '<li class="active" style="padding-left:3em; margin-top:-5px">
@@ -397,13 +396,17 @@
 						}
 						if ($isOwner == true) {
 							echo '<!-- edit board name & privacy -->
-                                 <div class="btn-group" role="group" aria-label="..." style="margin-top:-30px">
-                                 	<a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard" data-boardName="'.$boardNames[$i].'" data-privacyCheck="'.$privacyCheck.'" class="btn btn-sm btn-secondary pull-left edit-board open-editBoard" onclick="editboard('.$boardNames[$i].')">
-                                	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>                            
+                                 <div class="btn-group" role="group" aria-label="..." style="margin-top:-55px">
+                                    <div style="margin-left:-75px">
+                                     	<a id="btn-editBoard"  name="editButton" data-toggle="modal" data-target="#editBoard" data-boardName="'.$boardNames[$i].'" data-privacyCheck="'.$privacyCheck.'" class="btn btn-sm btn-secondary pull-left edit-board open-editBoard" onclick="editboard('.$boardNames[$i].')">
+                                    	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit</a>
+                                    </div>                          
     								<!-- Delete this board from database-->
-                                    <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
-                                    	class="btn btn-sm btn-secondary pull-right" onclick="removeboard('.$boardIDs[$i].')">
-                                	<i class="icon-hand-left"></i>delete</button>
+                                    <div style="margin-right:-75px">
+                                        <button id="btn-deleteBoard"  name="submitDeleteButton" type="submit"
+                                        	class="btn btn-sm btn-secondary pull-right" onclick="removeboard('.$boardIDs[$i].')">
+                                    	<i class="icon-hand-left"></i>delete</button>
+                                    </div>
                                  </div>';
 						}
 						echo '

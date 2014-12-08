@@ -35,7 +35,7 @@
 							        <ul class="dropdown-menu">
 								        <li><a href="myBoards.php?username='.$_SESSION['username'].'">My Boards</a></li>
 										<li><a href="help.php">Help</a></li>
-										<li><a href="#accountSettings" data-toggle="modal" data-target="#accountSettings">Reset Password</a></li>
+										<li><a href="#accountSettings" data-toggle="modal" data-target="#accountSettings">My Account</a></li>
 										<li><a href="logout.php">Logout</a></li>
 							        </ul>
 						        </li>
