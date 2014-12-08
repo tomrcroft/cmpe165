@@ -204,7 +204,7 @@
     </section>
         <!-- Show all pins based on board ID -->
 	    
-	<?php /*
+	<?php 
 	//initialize feed board
 	if (isset($_SESSION['username'])) {
 		if (checkBoardExists('admin', 'guest') == 0) {
@@ -223,7 +223,8 @@
 		} else {
 			removeBoard($board_id);
 		}
-			$pinHits = 
+			$pinHits = getFollowPins($_SESSION['username']);
+			$pins = getNewPins();
 			$max = 20;
 			if (count($pinHits) < 20) {
 				$max = count($pinHits);
@@ -231,13 +232,98 @@
 			for ($i = 0; $i < $max; $i++) {
 				repin($pinHits[$i], $board_id);
 			}
+			for ($i = $max, $j = 0; $i < 20; $i++) {
+				repin($pins[$j], $board_id);
+			}
 	}
-	$board_id = getBoardID('admin', $boardName);
-	//header("location:boards.php?board=".$board_id);
-	}*/
 	?>
-	
+    <section id="board" class="home-section text-center">
+        <div class="heading-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="wow bounceInDown" data-wow-delay="0.4s">
+                            <div class="section-heading">
+                                <h2><?php echo getBoardName($board_id); ?></h2>
+                                <i class="fa fa-2x fa-angle-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Show all pins based on board ID -->
+        <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
+			<div>
+            <?php
+                
+                // Where to get board ID from? 
+                $pins = getPinLinks($board_id);
+				$pinNames = getNamesOfPinsOnBoard($board_id);
+				$pinIDs = getPinId($board_id);
+				$isRestaurantArray = isRestuarant($board_id);
+				$descriptions = getDescriptionsOfPinsOnBoard($board_id);			
+				$pinsLiked = getPinLikes($board_id, $_SESSION['username']);
+				//echo '<p>'.$pinsLiked[0].'</p>';
+				$k = 0;
+				if (count($pinsLiked) == 0) {
+					$k = -1;
+				} 
+				
+                for($i = 0; $i < count($pins); $i++) {
+					$comments = getComments($pinIDs[$i]);
+					$authors = getCommentAuthors($pinIDs[$i]);
+					$numLikes = getNumberOfLikes($pinIDs[$i]);
+                    echo '
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-count='.count($pinsLiked).' data-pinLikes="'.$numLikes.'" data-pinDescription="'.$descriptions[$i].'" data-pinOwner="'.getPinOwner($pinIDs[$i]).'" data-comments="';
+					
+					for ($j = 0; $j < count($comments); $j++) {
+						if ($j != 0) {
+							echo '~';
+						}
+						echo $comments[$j];
+					}
+					echo '" ';
+					echo 'data-commentAuthors="';
+					for ($j = 0; $j < count($authors); $j++) {
+						if ($j != 0) {
+							echo '~';
+						}
+						echo $authors[$j];
+					}
+					echo '" ';
+					
+					if ($k != -1 && $pinsLiked[$k] == $pinIDs[$i]) {
+						echo 'data-j='.$k.' data-pinLiked=1 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].' ';
+						$k++;
+						if ($k == count($pinsLiked)) {
+							$k = -1;
+						}
+					} else {
+						echo 'data-j='.$k.' data-pinLiked=0 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].' ';
+					}
+					if ($isRestaurantArray[$i] == 1) {
+						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
+					}
+					
+					echo 'data-isRestaurant="'.$isRestaurantArray[$i].'" data-getPinID="'.(string)$pinIDs[$i].'" data-link="'.$pins[$i].'" data-title="'.$pinNames[$i].'">
+                            <div class="item">
+                                <div class="body">
+                                    <img src="'.$pins[$i].'" />
+                                </div>
+                                <div class="footer" style="margin-bottom:10px">'
+                                    .$descriptions[$i].
+                                '</div>
+                            </div>';
+					echo '
+                        </a>';
+                }
+            ?>
+		</div>
+        </div>
 
+    </section>
 
 
 	<!-- Get login/register modal. -->

@@ -910,7 +910,7 @@ function getNewPins()
     return $resultArray;
 }
 
-function getNewPins($user)
+function getFollowPins($user)
 {
     global $con;
     $query = "
@@ -919,7 +919,7 @@ function getNewPins($user)
 	     WHERE username IN (
 	     	   SELECT followUser
 		   FROM follow
-		   WHERE username = $user
+		   WHERE username = '$user'
 		   )
 	     ORDER BY pin_id DESC LIMIT 20";
     $result = $con->query($query);
