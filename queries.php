@@ -266,6 +266,26 @@ function getBoardOwner($board_id) {
 	
 	return $resultArray[0];
 }
+
+function checkBoardExists($uName, $boardName) {
+    global $con;
+    $result = mysqli_query($con, "SELECT * FROM boards WHERE owner='$uName' AND board_name='$boardName';");
+    if (mysqli_num_rows($result) == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+function getBoardID($uName, $boardName) {
+	global $con;
+	
+	$result = mysqli_query($con,"select board_id from board WHERE board_name='$boardName' AND owner='$uName';");
+	$resultArray = mysqli_fetch_array($result);
+	
+	return $resultArray[0];
+}
+
 function isRestuarant($board_id) {
     global $con;
     $query = "
@@ -330,6 +350,8 @@ function removeBoard($board_id)
 	$result = mysqli_query($con,"delete from board where board_id='$board_id'");
 	$result = mysqli_query($con,"delete from pinned_on where board_id='$board_id'");
 }
+
+
 function getBoardPins($board_id)
 {
 	global $con;
@@ -834,7 +856,7 @@ function searchForPin($pinName)
     $query = "
     	     SELECT pin_id
 	     FROM pin
-	     WHERE name LIKE '%pinName%'";
+	     WHERE name LIKE '%$pinName%'";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
