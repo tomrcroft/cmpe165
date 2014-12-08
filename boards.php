@@ -76,9 +76,9 @@
 			 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 			 var desription = $(this).attr('data-pinDescription');
 			 var pinLikes = $(this).attr('data-pinLikes');
-			 var pinIsLiked = $(this).attr('data-pinLiked');
+			 var pinIsLiked = parseInt($(this).attr('data-pinLiked'));
 			 
-			 
+			 alert(pinIsLiked);
 			 if (pinIsLiked == 1) {
 	 	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
 	 	        $('.likeButton').html("Unlike");
@@ -187,7 +187,7 @@
 					$authors = getCommentAuthors($pinIDs[$i]);
 					$numLikes = getNumberOfLikes($pinIDs[$i]);
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-pinLikes="'.$numLikes.'" data-pinDescription="'.$descriptions[$i].'" data-comments="';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-count='.count($pinsLiked).' data-pinLikes="'.$numLikes.'" data-pinDescription="'.$descriptions[$i].'" data-comments="';
 					
 					for ($j = 0; $j < count($comments); $j++) {
 						if ($j != 0) {
@@ -206,13 +206,13 @@
 					echo '" ';
 					
 					if ($pinsLiked[$j] == $pinIDs[$i] && $j != -1) {
-						echo 'data-pinLiked=1 ';
+						echo 'data-j ='$j' data-pinLiked=1 ';
 						$j++;
 						if ($j == count($pinsLiked)) {
 							$j = -1;
 						}
 					} else {
-						echo 'data-pinLiked=0 ';
+						echo 'data-j ='$j' data-pinLiked=0 ';
 					}
 					if ($isRestaurantArray[$i] == 1) {
 						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
