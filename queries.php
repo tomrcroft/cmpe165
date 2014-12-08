@@ -299,6 +299,21 @@ function isRestuarant($board_id) {
 		}
 		return $resultArray;
 }
+
+function isRestuarantOrdered($board_id) {
+    global $con;
+    $query = "
+		select restaurant_indicator, pin.pin_id from pin 
+		join pinned_on on pin.pin_id = pinned_on.pin_id 
+		where pinned_on.board_id = '$board_id'
+		ORDER BY pin.pin_id;";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[restaurant_indicator];
+		}
+		return $resultArray;
+}
 function addPin($owner, $board_id, $name, $desc, $path)
 {
 	global $con;
@@ -521,7 +536,26 @@ function getNamesOfPinsOnBoard($board_id)
 				$resultArray[] = $row[name];
 			}
 			return $resultArray;
-	}
+}
+
+function getNamesOfPinsOnBoardOrdered($board_id)
+{
+	global $con;
+	$query = "
+		select name, pin_id
+		from pin
+		where pin_id IN (
+			SELECT pin_id
+			FROM pinned_on
+			WHERE board_id=".$board_id.")
+		ORDER BY pin_id;";
+			$result = $con->query($query);
+			$resultArray = array();
+			while ($row = $result->fetch_assoc()) {
+				$resultArray[] = $row[name];
+			}
+			return $resultArray;
+}
 function getDescriptionsOfPinsOnBoard($board_id)
 {
 	global $con;
@@ -539,6 +573,26 @@ function getDescriptionsOfPinsOnBoard($board_id)
 			}
 			return $resultArray;
 	}
+	
+function getDescriptionsOfPinsOnBoardOrdered($board_id)
+{
+		global $con;
+		$query = "
+			select description, pin_id
+			from pin
+			where pin_id IN (
+				SELECT pin_id
+				FROM pinned_on
+				WHERE board_id=".$board_id.")
+			ORDER BY pin_id;";
+				$result = $con->query($query);
+				$resultArray = array();
+				while ($row = $result->fetch_assoc()) {
+					$resultArray[] = $row[description];
+				}
+				return $resultArray;
+}
+		
 function getBoardsByCategory($category) 
 {
 	global $con;
@@ -560,6 +614,19 @@ function getPinId($board_id)
     global $con;
 	
 	$query = "Select pin_id from pinned_on WHERE board_id='$board_id';";
+		$result = $con->query($query);
+		$resultArray = array();
+		while ($row = $result->fetch_assoc()) {
+			$resultArray[] = $row[pin_id];
+		}
+		return $resultArray;
+}
+
+function getPinIdOrdered($board_id)
+{
+    global $con;
+	
+	$query = "Select pin_id from pinned_on WHERE board_id='$board_id' ORDER BY pin_id;";
 		$result = $con->query($query);
 		$resultArray = array();
 		while ($row = $result->fetch_assoc()) {

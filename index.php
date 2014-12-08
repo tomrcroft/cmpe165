@@ -1,3 +1,4 @@
+<<<<<<< Local Changes
 <?php 
 	session_start(); 
 	include 'actions.php';
@@ -249,13 +250,22 @@
 			if (isset($_SESSION['username'])) {
 				$board_id = getBoardID('admin', $_SESSION['username']."followBoard");
 			}
-			echo "Board_id = ".$board_id;
                 // Where to get board ID from? 
-                $pins = getPinLinks($board_id);
-				$pinNames = getNamesOfPinsOnBoard($board_id);
-				$pinIDs = getPinId($board_id);
-				$isRestaurantArray = isRestuarant($board_id);
-				$descriptions = getDescriptionsOfPinsOnBoard($board_id);			
+                //ordered by pin_id
+				$pinsOrdered = getPinLinks($board_id);
+				$pins = array_reverse($pinsOrdered);
+				//ordered by pin_id
+				$pinNamesOrdered = getNamesOfPinsOnBoardOrdered($board_id);
+				$pinNames = array_reverse($pinNamesOrdered);
+				//ordered by pin_id
+				$pinIDsOrdered = getPinIdOrdered($board_id);
+				$pinIDs = array_reverse($pinIDsOrdered);
+				//ordered by pin_id
+				$isRestaurantArrayOrdered = isRestuarantOrdered($board_id);
+				$isRestaurantArray = array_reverse($isRestaurantArrayOrdered);
+				//ordered by pin_id
+				$descriptionsOrdered = getDescriptionsOfPinsOnBoardOrdered($board_id);	
+				$descriptions = array_reverse($descriptionsOrdered);			
 
 				
                 for($i = 0; $i < count($pins); $i++) {
@@ -342,3 +352,5 @@
 </body>
 
 </html>
+=======
+>>>>>>> External Changes
