@@ -65,7 +65,6 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading pinButtonBar" style="margin-top : -15px">
-                        <button id="btn-signup" name="submitRepin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Repin</button>
 						<button type="button" class="btn btn-secondary btn-sm likeButton" onclick="likeButtonClick();">Like</button>
 						<!-- Edit Pin is not working, so it is now a submodal-->
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
