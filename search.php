@@ -51,12 +51,19 @@
 	<?php
 		$searchTerm = $_GET['search'];
 		$userHits = searchForUsername($searchTerm);
+		$pinHits = searchForPin($searchTerm);
+		$boardHits;
 	?>
 	<section id="searchHits" class="home-section text-center">
 		<?php
 			echo '<h2>Users</h2>';
-			if(count($userHits) > 0) {				
-				for ($i = 0; $i < count($userHits); $i++) {
+			if(count($userHits) > 0) {	
+				//max 20
+				$j = 20;
+				if (count($userHits) < 20) {
+					$j = count($userHits);
+				}			
+				for ($i = 0; $i < $j; $i++) {
 					echo '<a href="myBoards.php?username='.$userHits[$i].'">'.$userHits[$i].'</a>';
 					echo'<br>';
 				}
@@ -74,8 +81,8 @@
 			//TODO get hits based on pins
 			echo'<br>';
 			echo '<h2>Pins</h2>';
-			if (false) {
-				echo '';
+			if (count($pinHits) > 0) {
+				echo '<button type="button" class="btn btn-secondary btn-sm likeButton" onclick="searchPins.php?term='.$searchTerm.';">View Matching Pins</button>';
 			} else {
 				echo "<p>I'm sorry, no matching pins found</p>";
 			}
