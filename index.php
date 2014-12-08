@@ -207,24 +207,30 @@
 	<?php /*
 	//initialize feed board
 	if (isset($_SESSION['username'])) {
-		if (!checkBoardExists('admin', 'guest')) {
-			
-		}
-	} else {
-	checkBoardExists('admin', $boardName)
-	getBoardID('admin', $boardName);
-	removeBoard($board_id);
-	if (checkBoardExists('admin', $boardName) == 0) {
-		addBoard('admin', $_GET['term']);
-		$board_id = getBoardID('admin', $boardName);
-		$pinHits = searchForPin($searchTerm);
-		$max = 20;
-		if (count($pinHits) < 20) {
-			$max = count($pinHits);
-		}
+		if (checkBoardExists('admin', 'guest') == 0) {
+			addBoard('admin', 'guest');
+		} 
+		$board_id = getBoardID('admin', 'guest');
+		$pins = getNewPins();
 		for ($i = 0; $i < $max; $i++) {
 			repin($pinHits[$i], $board_id);
 		}
+	} else {
+		$boardName = $_SESSION['username']."followBoard";
+		$board_id = getBoardID('admin', $boardName);
+		if (checkBoardExists('admin', $boardName) == 0) {
+			addBoard('admin', $_GET['term']);
+		} else {
+			removeBoard($board_id);
+		}
+			$pinHits = 
+			$max = 20;
+			if (count($pinHits) < 20) {
+				$max = count($pinHits);
+			}
+			for ($i = 0; $i < $max; $i++) {
+				repin($pinHits[$i], $board_id);
+			}
 	}
 	$board_id = getBoardID('admin', $boardName);
 	//header("location:boards.php?board=".$board_id);
