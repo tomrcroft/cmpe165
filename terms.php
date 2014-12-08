@@ -123,6 +123,18 @@
                 </div>
             </div>
             <div class="col-sm-3 col-md-3">
+                <div class="wow fadeInRight" data-wow-delay="0.2s">
+                <div class="service-box">
+                    <div class="service-desc">
+                        <h5>Security</h5>
+                        <p> While we take many precautions to protect your security, by using Corq you agree that Corq is not liable for any breach of security.
+                            By using Corq, you agree that you may not sue Corq for any reason whatsoever.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+			
+            <div class="col-sm-3 col-md-3">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
                     <div class="service-icon">
@@ -130,23 +142,12 @@
                     </div>
                     <div class="service-desc">
                         <h5>Miscellaneous</h5>
-                        <p>Upon termination of your account Corq retains the rights to any content that you uploaded during your course of use.
-                            While we take many precautions to protect your security, by using Corq you agree that Corq is not liable for any breach of security.
-                            By using Corq, you agree that you may not sue Corq for any reason whatsoever.</p>
+                        <p>Upon termination of your account Corq retains the rights to any content that you uploaded during your course of use.</p>
                     </div>
                 </div>
                 </div>
             </div>
-            <div class="col-sm-3 col-md-3">
-                <div class="wow fadeInRight" data-wow-delay="0.2s">
-                <div class="service-box">
-                    <div class="service-desc">
-                        <h5>Insert Image</h5>
-                        <p>Stock Image</p>
-                    </div>
-                </div>
-                </div>
-            </div>
+            
         </div>      
         </div>
     </section>
