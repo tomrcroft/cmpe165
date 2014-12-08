@@ -893,7 +893,43 @@ function searchForBoardName($boardName)
     	  $resultArray[] = $row[board_name];
     }
     return $resultArray;
-}  
+}
+
+function getNewPins()
+{
+    global $con;
+    $query = "
+    	     SELECT pin_id
+	     FROM pin
+	     ORDER BY pin_id DESC LIMIT 20";
+    $result = $con->query($query);
+    $resultArray = array();
+    while ($row = $result->fetch_assoc()) {
+    	  $resultArray[] = $row[pin_id];
+    }
+    return $resultArray;
+}
+
+function getNewPins($user)
+{
+    global $con;
+    $query = "
+    	     SELECT pin_id
+	     FROM pin JOIN userInfo ON owner = username
+	     WHERE username IN (
+	     	   SELECT followUser
+		   FROM follow
+		   WHERE username = $user
+		   )
+	     ORDER BY pin_id DESC LIMIT 20";
+    $result = $con->query($query);
+    $resultArray = array();
+    while ($row = $result->fetch_assoc()) {
+    	  $resultArray[] = $row[pin_id];
+    }
+    return $resultArray;
+}
+
 /*
  * ADD NEW DATABASE/QUERY FUNCTIONS HERE.
  */
