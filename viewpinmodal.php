@@ -23,7 +23,7 @@
 				$(".likesBadge").html(++currentLikes);
 		      }
 		    });
-			$('.likeButton').off('click').on('click', unLikeButtonClick);
+			$('.likeButton').off('click').on('click', 'unLikeButtonClick()');
 		//var pin_id = $(".pinID").val();
 		//alert(pin_id);
 		//var jqxhr = $.post("addlike.php", {pin_id: 10 } );
@@ -51,7 +51,7 @@
 				$(".likesBadge").html(--currentLikes);
 		      }
 		    });
-		$('.likeButton').off('click').on('click', likeButtonClick);
+		$('.likeButton').off('click').on('click', 'likeButtonClick()');
 	}
 </script>
 
