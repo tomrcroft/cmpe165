@@ -237,7 +237,7 @@
                                                     <?php
                                                         if ($isOwner){
                                                             echo '
-                                                            
+
                                                             <li class="active" style="padding-left:3em; margin-top:-5px">
                                                                 <button href="#accountSettings" data-toggle="modal" data-target="#accountSettings" class="open-accountSettings btn btn-primary btn-sm">Change Password</button>
                                                             </li>';
@@ -289,7 +289,7 @@
 					
 					
 					
-					/*#by clicking on this, it will show the list of the following boards 
+					#by clicking on this, it will show the list of the following boards 
 						
 						echo '<div class="col-xs-6 col-sm-3 col-md-3">
                             <div class="wow bounceInUp" data-wow-delay="0.2s">
