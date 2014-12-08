@@ -9,7 +9,7 @@
 	function likeButtonClick() {
 	        //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLi$
 	                var pin_id = $(".repinID").val();
-	                alert('like pressed');
+	                //alert('like pressed');
 	                $.ajax({
 	                      method: 'get',
 	                      url: 'addRemoveLike.php',
@@ -19,7 +19,7 @@
 	                        'ajax': true
 	                      },
 	                      success: function(data) {
-	                      		alert("It worked");
+	                      		//alert("It worked");
 	                            var currentLikes = parseInt($(".likesBadge").html(), 10);
 	                            $(".likesBadge").html(currentLikes+1);
 	                      }

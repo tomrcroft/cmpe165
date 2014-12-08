@@ -78,7 +78,7 @@
 			 var pinLikes = $(this).attr('data-pinLikes');
 			 var pinIsLiked = parseInt($(this).attr('data-pinLiked'));
 			 
-			 alert(pinIsLiked);
+			 //alert(pinIsLiked);
 			 if (pinIsLiked == 1) {
 	 	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
 	 	        $('.likeButton').html("Unlike");
