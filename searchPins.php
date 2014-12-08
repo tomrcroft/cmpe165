@@ -13,7 +13,11 @@
 			addBoard('admin', $_GET['term']);
 			$board_id = getBoardID('admin', $boardName);
 			$pinHits = searchForPin($searchTerm);
-			for ($i = 0; $i < count($pinHits); $i++) {
+			$max = 20;
+			if (count($pinHits) < 20) {
+				$max = count($pinHits);
+			}
+			for ($i = 0; $i < $max; $i++) {
 				repin($pinHits[$i], $board_id);
 			}
 		}
