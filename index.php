@@ -127,7 +127,7 @@
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
 			
 			<?php 
-				if (isset($_SESSION['username'])) {
+				/*if (isset($_SESSION['username'])) {
 					// Get pins
 					$pinIDs = getFeed($_SESSION['username']);
 
@@ -138,7 +138,7 @@
 						echo '<a href="#viewPin" data-toggle="modal" data-target="#viewPin"><div class="item"><img src="'.$pinImage.'" />';
 						echo '<div class="footer" style="margin-bottom:10px">'.$pinDescription.'</div></div></a>';
 					}
-				}
+				}*/
 			?>
         </div>
 	</section>
