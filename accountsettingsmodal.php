@@ -15,22 +15,27 @@
                                 <div class="col-md-9">
                                     <!-- Edit Pin Field -->
                                     <div class="form-group">
+										<div class="col-md-20" style="margin-top: 10px;">
 	                                    <label for="password" class="col-lg-3 control-label" style="font-size: 85%">Old Password</label>
-	                                    <div class="col-md-20">
+	                                    
 	                                    	<input type="password" class="form-control" name="oldpassword">
 	                                    </div>
+										<div class="col-md-20" style="margin-top: 10px;">
                                         <label for="password" class="col-lg-3 control-label" style="font-size: 85%">New Password</label>
-                                        <div class="col-md-20">
+                                        
                                             <input type="password" class="form-control" name="newpassword">
                                         </div>
+										<div class="col-md-20" style="margin-top: 10px;">
                                         <label for="passverify" class="col-lg-3 control-label" style="font-size: 85%">Confirm New Password</label>
-                                        <div class="col-md-20">
+                                        
                                             <input type="password" class="form-control" name="passverify">
                                         </div>
                                     </div>
+									<div class="col-md-20" style="margin-top: 10px;">
                                     <button id="btn-editPin" name="submitEditPassword" type="submit" type="button" class="btn btn-info">
                                         <i class="icon-hand-right"></i>Save Settings
                                     </button>
+								</div>
                                     
                                 </div>
                             </div>
