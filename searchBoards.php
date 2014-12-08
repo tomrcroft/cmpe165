@@ -93,14 +93,7 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <hr class="marginbot-50">
-                </div>
-            </div>
-
-            <div class="row">
-        
+            <div class="row">      
                 <?php
                     // Fetches boards based on user
                     $boardNames = searchForBoardName($searchTerm);
@@ -112,7 +105,7 @@
                         }
                         // not board owner this will check privacy of the board and show
                         // public = 0 and private = 1
-                        if($isOwner != true && $privacyCheck == 0){
+                        if($privacyCheck == 0) {
                         echo '
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="wow bounceInUp" data-wow-delay="0.2s">
@@ -125,14 +118,13 @@
                                                 <div class="circle-image" style="background-image:url(\''.$boardPreview.'\');"></div>
                                             </div>
                                         </div>
-                                    </a>'; 
-						}
-						echo '
-                            </div>
-                        </div>';
+                                    </a>
+							     </div>
+							</div>'; 
+									
+						}						
                     }
-                ?>
-            
+                ?>          
             </div>      
         </div>
     </section>
@@ -144,17 +136,6 @@
     <!-- Get upload pin modal. -->
     <?php include 'pinmodal.php' ?>
     <!-- Get create board modal. -->
-    <?php include 'createboardmodal.php' ?>
-    <!-- Get account settings modal. -->
-    <?php include 'accountsettingsmodal.php' ?>
-    <!-- Get board settings modal . -->
-    <?php include 'boardsettingmodal.php' ?>
-	
-	
-	
-	<?php include 'followingList.php' ?>
-	
-	<?php include 'likesList.php' ?>
 	
     <footer>
         <div class="container">
