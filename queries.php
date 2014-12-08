@@ -132,6 +132,24 @@ function sendMail($email,$confirmLink)
 	$result = $mailer->send($message);	
 }
 
+function sendMailFromContact($email,$name,$subject,$body)
+{
+	require_once 'swift/lib/swift_required.php';
+
+	$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+	  ->setUsername('corq.org')
+	  ->setPassword('wearecorq');
+
+	$mailer = Swift_Mailer::newInstance($transport);
+
+	$message = Swift_Message::newInstance('Contact us message from '.$name.': '.$subject)
+	  ->setFrom(array('corq.org@gmail.com' => 'Corq.org'))
+	  ->setTo(array($email))
+	  ->setBody($body);
+
+	$result = $mailer->send($message);	
+}
+
 function sendPasswordResetMail($uName, $tempPassword)
 {
 	require_once 'swift/lib/swift_required.php';

@@ -29,6 +29,11 @@
             echo "Passwords did not match.";
         }
     }       
+	
+	if(isset($_POST['submitSendMessage'])) {
+		sendMailFromContact($_POST['email'], $_POST['name'], $_POST['subject'], $_POST['body']);
+		echo '<script> alert("Message sent, expect a reply with 48 business hours");</script>';
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,20 +103,20 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="boxed-grey">
-                        <form id="contact-form">
+                        <form id="contact-form" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
  
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required="required" />
                                     </div>
  
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                                            <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" />
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required="required" />
                                         </div>
                                     </div>
  
@@ -129,13 +134,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Message</label>
-                                        <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                        <textarea name="message" name="body" id="body" class="form-control" rows="9" cols="25" required="required"
                                             placeholder="Message"></textarea>
                                     </div>
                                 </div>
  
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-skin pull-right" id="btnContactUs">Send Message</button>
+                                    <button type="submit" class="btn btn-skin pull-right" name="submitSendMessage" id="btnContactUs">Send Message</button>
                                 </div>
                             </div>
                         </form>
@@ -147,14 +152,14 @@
                         <h5>Main Office</h5>
                         <address>
                             <strong>Squas Design, Inc.</strong><br>
-                            Tower 795 Folsom Ave, Beautiful Suite 600<br>
-                            San Francisco, CA 94107<br>
+                            1 Washington Square<br>
+                            San Jose, CA 94107<br>
                             <abbr title="Phone">P:</abbr> (123) 456-7890
                         </address>
  
                         <address>
                             <strong>Email</strong><br>
-                            <a href="mailto:#">email.name@example.com</a>
+                            <a href="mailto:#">corq.org@gmail.com</a>
                         </address>  
  
                         <address>
