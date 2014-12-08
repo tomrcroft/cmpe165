@@ -7,10 +7,14 @@
 	});
 	
     function likeButtonClick() {
-        document.getElementById("likeButton").value = "[Like button disabled]";
+        $(".likeButton").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
         // TODO: Disable like button
         // TODO: Run query to like from JS function
     }
+	
+	function unLikeButtonClick() {
+		$(".unlikeButton").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Unlike</button>');
+	}
 </script>
 
 <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -23,8 +27,9 @@
                 <div class="panel-body pinbox">
 
                     <div class="panel-heading pinButtonBar" style="margin-top : -15px">
-                        <button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
-
+						<div class="likeButtonDiv">
+                        	<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>
+						</div>
 						<!-- Edit Pin is not working, so it is now a submodal-->
                         <a href="#editPin" class="open-editPin" data-toggle="modal" data-target="#editPin" >
                                         <button type="submit" class="btn btn-primary btn-sm" onclick="$('.pinbox').hide(); $('#editPinform').show()" >Edit</button>
@@ -37,7 +42,7 @@
                         <a class="btn btn-primary btn-sm repinButton" href="#" onclick="$('.pinbox').hide();
                                 $('#repinBox').show()">PIN IT</a>
 						<!--<div class="pinLikesBadge">
-									set in boards.php
+									set in boards.php //TODO: make this look ok
 						</div>      -->                 
                     </div>
 
