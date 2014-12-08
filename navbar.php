@@ -20,8 +20,7 @@
 							 {
 							
 							
-                            echo '<li class="dropdown">
-
+                            echo '<li>
                             		<div class="alert alert-danger" role="alert">
 										<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 										<span class="sr-only">Error:</span>
@@ -29,6 +28,8 @@
 										<iframe style="display:none;" name="target"></iframe>
 										<a href="resendverification.php" target="target"> Resend Verification</a>
 									</div>
+								</li>
+                            	<li class="dropdown">
 								        <a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$user.'<b class="caret"></b></a>
 							        <ul class="dropdown-menu">
 								        <li><a href="myBoards.php?username='.$_SESSION['username'].'">My Boards</a></li>
