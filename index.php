@@ -34,7 +34,9 @@
 	if (isset($_GET['verify'])) {
 		$verifyCode = $_GET['verify'];
 		$username = $_GET['username'];
-		confirmuser($username, $verifyCode);
+		if (confirmuser($username, $verifyCode) == 1) {
+			$_SESSION['username'] = $username;
+		}
 	} 
 	if (isset($_POST['submitConfirmBtn'])) {
 		$username = $_SESSION['resetUsername'];

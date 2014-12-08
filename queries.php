@@ -181,18 +181,18 @@ $queryUpdate="UPDATE userInfo SET verified = '$verified', confirmkey = 'NULL'  W
 $result = mysqli_query ($con,$queryUpdate);
 if ($result)
 {
-echo 'Account is now confirmed';
+	return 1;
 }
 else {
-echo 'The data not updated';
-}
-}
-else {
-echo ' The confirm key exist more than once, Contact the admin ';
+	return 0;
 }
 }
 else {
-echo ' cant find a user with this confirmation code ';
+	return 0;
+}
+}
+else {
+	return 0;
 }
 }
 function checkVerified($username)
