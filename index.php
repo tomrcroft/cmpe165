@@ -74,8 +74,88 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
+
+	<!-- This NEEDS to be here, JQuery needs to be defined before it can be used -->
 	<script src="js/jquery.min.js"></script>
-   
+	<script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
+	<!-- This is called when a pin is clicked, passes image link and pin title-->
+	<script type="text/javascript">
+	var $container = $('#pin-container');
+	// initialize Masonry after all images have loaded  
+	$container.imagesLoaded( function() {
+  	  $container.masonry();
+	});
+	$(document).on("click", ".open-viewPin", function () {
+		 $("#mapbox").hide(); 
+		 $("#repinBox").hide();
+		 $('#editPinform').hide()
+		 $(".pinbox").show();
+		 
+		 var src = $(this).data('link');
+		 var title = $(this).data('title');
+		 var isRestaurant = $(this).attr('data-isRestaurant');
+		 var pinID = $(this).attr('data-getPinID');
+		 var comments = $(this).data('comments').split("~");
+		 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
+		 var desription = $(this).attr('data-pinDescription');
+		 var pinLikes = $(this).attr('data-pinLikes');
+		 var pinIsLiked = parseInt($(this).attr('data-pinLiked'));
+		 var pinOwner = $(this).attr('data-pinOwner');
+		 
+		 //alert(pinIsLiked);
+		 if (pinIsLiked == 1) {
+ 	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
+ 	        $('.likeButton').html("Unlike");
+		 } else {
+                $('.likeButton').attr('onclick', "likeButtonClick()");
+                $('.likeButton').html("Like");
+		 }
+		 			 
+		 $('.likesBadge').html(pinLikes); // TODO: Make this line up properly
+		 $(".oldPinName").val(title);
+		 $(".newPinName").val(title);
+		 $(".pinDescription").val(desription);
+		 $(".repinID").val(pinID);
+		 $(".commentPinID").val(pinID);
+		 var commentHtml="<br />";
+		 $(".repinButton").show();
+		 for (i = 0; i < comments.length; i++) {
+			 if (commentAuthors[i] == '') {
+				 commentHtml = '<br /><br />Be the first!';
+				 break;
+			 }
+		 	commentHtml += commentAuthors[i] + ' says "' + comments[i] + '"<br /> <br />';
+		 }
+		     //We add vPool HTML content to #myDIV
+		     $('.commentField').html(commentHtml);
+		 
+		 if ("<?php echo $_SESSION['username']; ?>" == pinOwner) {
+			 $(".addmaplink").show();
+			 $(".pinID").val(pinID);					 
+			 $(".open-editPin").show();
+			 $(".likeButton").hide();
+			 
+		 } else {
+		 	
+			$(".open-editPin").hide();
+			$(".addmaplink").hide();
+			$(".likeButton").show();
+		 }
+		 if (isRestaurant == 1) {		 	
+				$(".viewmapBtn").show();			 			
+			var address = $(this).attr('data-address');
+			var addressLink = "mapview.php?address=" + address;
+			$(".viewmapBtn").attr("href", addressLink);
+		 } else {
+			$(".viewmapBtn").hide();
+		 }
+		 
+		 // passes the correct image link to viewpinmodal
+	     $(".showPic").attr("src", src);
+		 // passes the pin title and a close button to viewpinmodal
+		 $(".title").html(title + '<button class="close" data-dismiss="modal" onclick="$("#viewPin").hide()">x</button>');
+	});
+</script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -107,8 +187,7 @@
 		</div>
     </section>
 	<!-- /Section: intro -->
-
-
+	
  	<section id="feed" class="home-section text-center">
         <div class="heading-contact">
             <div class="container">
@@ -122,26 +201,35 @@
                 </div>
             </div>
         </div>
-    
+    </section>
         <!-- Show all pins based on board ID -->
-        <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
+	    
+	<?php /*
+	//initialize feed board
+	if (isset($_SESSION['username'])) {
+		if (!checkBoardExists('admin', 'guest')) {
 			
-			<?php 
-				/*if (isset($_SESSION['username'])) {
-					// Get pins
-					$pinIDs = getFeed($_SESSION['username']);
-
-					for($i = 0; $i < count($pinIDs); $i++) {
-						$pinImage = getPinImage($pinIDs[$i]);
-						$pinDescription = getPinDescription($pinIDs[$i]);
-
-						echo '<a href="#viewPin" data-toggle="modal" data-target="#viewPin"><div class="item"><img src="'.$pinImage.'" />';
-						echo '<div class="footer" style="margin-bottom:10px">'.$pinDescription.'</div></div></a>';
-					}
-				}*/
-			?>
-        </div>
-	</section>
+		}
+	} else {
+	checkBoardExists('admin', $boardName)
+	getBoardID('admin', $boardName);
+	removeBoard($board_id);
+	if (checkBoardExists('admin', $boardName) == 0) {
+		addBoard('admin', $_GET['term']);
+		$board_id = getBoardID('admin', $boardName);
+		$pinHits = searchForPin($searchTerm);
+		$max = 20;
+		if (count($pinHits) < 20) {
+			$max = count($pinHits);
+		}
+		for ($i = 0; $i < $max; $i++) {
+			repin($pinHits[$i], $board_id);
+		}
+	}
+	$board_id = getBoardID('admin', $boardName);
+	//header("location:boards.php?board=".$board_id);
+	}*/
+	?>
 	
 
 
