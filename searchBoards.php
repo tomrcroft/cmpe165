@@ -103,7 +103,7 @@
         
                 <?php
                     // Fetches boards based on user
-                    $boardNames = searchForBoardName($searchTerm)
+                    $boardNames = searchForBoardName($searchTerm);
                     for($i = 0; $i < count($boardIDs); $i++) {
 						$privacyCheck = checkPrivacy($boardIDs[$i]);
                         $boardPreview = getBoardPreview($boardIDs[$i]);
