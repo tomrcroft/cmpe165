@@ -52,7 +52,7 @@
 		$searchTerm = $_GET['search'];
 		$userHits = searchForUsername($searchTerm);
 		$pinHits = searchForPin($searchTerm);
-		$boardHits;
+		$boardHits = searchForBoard($searchTerm);
 	?>
 	<section id="searchHits" class="home-section text-center">
 		<?php
@@ -73,8 +73,8 @@
 			//TODO get hits based on board categories
 			echo'<br>';
 			echo '<h2>Boards</h2>';
-			if (false) {
-				echo '';
+			if (count($boardHits) > 0) {
+				echo '<a class="btn btn-primary btn-sm searchPins" href="myBoards.php?term='.$searchTerm.';">View Matching Boards</a>';
 			} else {
 				echo "<p>I'm sorry, no matching boards found</p>";
 			}
