@@ -31,7 +31,7 @@
     } 
 	
 	if (isset($_GET['download_file'])) {
-		$path = $_SERVER['DOCUMENT_ROOT']."documents/"; // change the path to fit your websites document structure
+		$path = $_SERVER['DOCUMENT_ROOT']."pdf/"; // change the path to fit your websites document structure
 		$fullPath = $path.$_GET['download_file'];
 
 		if ($fd = fopen ($fullPath, "r")) {
