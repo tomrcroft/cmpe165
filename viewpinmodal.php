@@ -32,15 +32,15 @@
 	                //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick$
 	                var pin_id = $(".repinID").val();
 	                $.ajax({
-   method: 'get',
+   					 	method: 'get',
                         url: 'addRemoveLike.php',
                         data: {
-                                  'remove': 1,
+                          'remove': 1,
                           'pin_id': pin_id,
                           'ajax': true
                         },
                         success: function(data) {
-                          alert("It worked");
+                          //alert("It worked");
                                   var currentLikes = parseInt($(".likesBadge").html(), 10);
                                   $(".likesBadge").html(currentLikes-1);
                         }
