@@ -82,7 +82,7 @@
 			echo'<br>';
 			echo '<h2>Pins</h2>';
 			if (count($pinHits) > 0) {
-				echo '<button type="button" class="btn btn-secondary btn-sm likeButton" onclick="searchPins.php?term='.$searchTerm.';">View Matching Pins</button>';
+				echo '<a class="btn btn-primary btn-sm searchPins" href="searchPins.php?term='.$searchTerm.';">View Matching Pins</a>';
 			} else {
 				echo "<p>I'm sorry, no matching pins found</p>";
 			}

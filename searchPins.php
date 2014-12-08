@@ -8,14 +8,16 @@
     }
 	
 	if (isset($_GET['term'])) {
-		if (checkBoardExists($uName, $boardName) == 0) {
-			addBoard($user, $name);
+		$boardName = $_GET['term'];
+		if (checkBoardExists('admin', $boardName) == 0) {
+			addBoard('admin', $_GET['term']);
+			$board_id = getBoardID('admin', $boardName);
 			$pinHits = searchForPin($searchTerm);
 			for ($i = 0; $i < count($pinHits); $i++) {
 				repin($pinHits[$i], $board_id);
 			}
 		}
-		$board_id = getBoardID($uName, $boardName);
-		header("location:boards?board=".$board_id.".php");
+		$board_id = getBoardID('admin', $boardName);
+		header("location:boards.php?board=".$board_id);
 	}		
 ?>
