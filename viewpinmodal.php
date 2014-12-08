@@ -6,54 +6,50 @@
 		$(".oldPinName").val(title);
 	});
 	
-    function likeButtonClick() {
-        //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLikeButtonClick();">Unlike</button>');
-		var pin_id = $(".repinID").val();
-		$.ajax({
-		      method: 'get',
-		      url: 'addRemoveLike.php',
-		      data: {
-				'add': true 
-		        'pin_id': pin_id,
-		        'ajax': true
-		      },
-		      success: function(data) {
-		        alert("It worked");
-				var currentLikes = parseInt($(".likesBadge").html(), 10);
-				$(".likesBadge").html(++currentLikes);
-		      }
-		    });
-		$('.likeButton').off('click').on('click', 'unLikeButtonClick()');
-		//var pin_id = $(".pinID").val();
-		//alert(pin_id);
-		//var jqxhr = $.post("addlike.php", {pin_id: 10 } );
-		//alert( "success" );
-		//addLike($user_id, $pin_id)
-		//})
-		// TODO: Disable like button
-        // TODO: Run query to like from JS function
-    }
-	
-	function unLikeButtonClick() {
-		//$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick="likeButtonClick();">Like</button>');
-		var pin_id = $(".repinID").val();
-		$.ajax({
-		      method: 'get',
-		      url: 'addRemoveLike.php',
-		      data: {
-				'remove': true 
-		        'pin_id': pin_id,
-		        'ajax': true
-		      },
-		      success: function(data) {
-		        alert("It worked");
-				var currentLikes = parseInt($(".likesBadge").html(), 10);
-				$(".likesBadge").html(--currentLikes);
-		      }
-		    });
-		$('.likeButton').off('click').on('click', 'likeButtonClick()');
-	}
-</script>
+	function likeButtonClick() {
+	        //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm unlikeButton" onClick="unLi$
+	                var pin_id = $(".repinID").val();
+	                alert('like pressed');
+	                $.ajax({
+	                      method: 'get',
+	                      url: 'addRemoveLike.php',
+	                      data: {
+	                        'add': 1,
+	                        'pin_id': pin_id,
+	                        'ajax': true
+	                      },
+	                      success: function(data) {
+	                      		alert("It worked");
+	                            var currentLikes = parseInt($(".likesBadge").html(), 10);
+	                            $(".likesBadge").html(currentLikes+1);
+	                      }
+	                    });
+	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
+	        $('.likeButton').html("Unlike");
+	    }
+        
+	        function unLikeButtonClick() {
+	                //$(".likeButtonDiv").html('<button type="button" class="btn btn-secondary btn-sm likeButton" onClick$
+	                var pin_id = $(".repinID").val();
+	                $.ajax({
+   method: 'get',
+                        url: 'addRemoveLike.php',
+                        data: {
+                                  'remove': 1,
+                          'pin_id': pin_id,
+                          'ajax': true
+                        },
+                        success: function(data) {
+                          alert("It worked");
+                                  var currentLikes = parseInt($(".likesBadge").html(), 10);
+                                  $(".likesBadge").html(currentLikes-1);
+                        }
+                      });
+                   $('.likeButton').attr('onclick', "likeButtonClick()");
+                   $('.likeButton').html("Like");
+          }
+
+  </script>
 
 <div class="modal fade" id="viewPin" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

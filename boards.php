@@ -78,12 +78,14 @@
 			 var pinLikes = $(this).attr('data-pinLikes');
 			 var pinIsLiked = $(this).attr('data-pinLiked');
 			 
-			 /*
+			 
 			 if (pinIsLiked == 1) {
-			 	$('.likeButton').on('click', 'unLikeButtonClick()');
+	 	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
+	 	        $('.likeButton').html("Unlike");
 			 } else {
-			 	$('.likeButton').on('click', 'likeButtonClick()');
-			 }*/
+                 $('.likeButton').attr('onclick', "likeButtonClick()");
+                 $('.likeButton').html("Like");
+			 }
 			 			 
 			 $('.likesBadge').html(pinLikes); // TODO: Make this line up properly
 			 $(".oldPinName").val(title);
