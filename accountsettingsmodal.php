@@ -6,7 +6,7 @@
                 <div class="panel panel-info" >
                     <div class="panel-heading">
                         <button class="btn btn-link pull-right" data-dismiss="modal" onclick=" $('#accountSettings').hide()">X</button>
-                        <div class="panel-title">Account Settings</div>
+                        <div class="panel-title">Change Password</div>
                      
                     </div>
                     <div class="panel-body" >
