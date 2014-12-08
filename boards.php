@@ -206,7 +206,7 @@
 					}
 					echo '" ';
 					
-					if ($pinsLiked[$j] == $pinIDs[$i] && $j != -1) {
+					if ($k != -1 && $pinsLiked[$k] == $pinIDs[$i]) {
 						echo 'data-j='.$k.' data-pinLiked=1 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].'';
 						$k++
 						if ($k == count($pinsLiked)) {
