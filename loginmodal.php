@@ -42,7 +42,7 @@
 
                                     <!-- Maybe I'll need to change to input type -->
                                     <button type="submit" id="signin" name="submitLogin" class="btn btn-success">Login</button>
-                                    <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+                                    <!--<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>-->
                                 </div>
                             </div>
 
@@ -151,12 +151,12 @@
                             </div>
                         </div>
 
-                        <!-- Facebook button -->
+                        <!-- Facebook button
                         <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
                             <div class="col-md-offset-3 col-md-9">
                                 <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
                             </div>                                           
-                        </div>
+                        </div> -->
 
                     </form>
                 </div> <!-- Close panel body -->
