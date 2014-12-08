@@ -678,25 +678,26 @@ function getCommentAuthors($pin_id) {
 		}
 		return $resultArray;
 }
+
 function addLike($user_id, $pin_id)
 {
 	global $con;
 	$result = mysqli_query($con, "INSERT INTO likes
-									VALUES($user_id, $pin_id);");
+									VALUES('$user_id', $pin_id);");
 	return $result;
 }
 function removeLike($user_id, $pin_id)
 {
 	global $con;
 	$result = mysqli_query($con, "delete from likes
-									WHERE user_id=$user_id AND pin_id=$pin_id;");
+									WHERE username=$user_id AND pin_id=$pin_id;");
 	return $result;
 }
 
 function getNumberOfLikes($pin_id) {
 	global $con;
 	$query = "
-		SELECT user_id
+		SELECT username
 		FROM likes
 		WHERE pin_id = '$pin_id';";
 		$result = $con->query($query);
