@@ -98,20 +98,9 @@
 		 var comments = $(this).data('comments').split("~");
 		 var commentAuthors = $(this).attr('data-commentAuthors').split("~");
 		 var desription = $(this).attr('data-pinDescription');
-		 var pinLikes = $(this).attr('data-pinLikes');
-		 var pinIsLiked = parseInt($(this).attr('data-pinLiked'));
-		 var pinOwner = $(this).attr('data-pinOwner');
 		 
-		 //alert(pinIsLiked);
-		 if (pinIsLiked == 1) {
- 	        $('.likeButton').attr('onclick', "unLikeButtonClick()");
- 	        $('.likeButton').html("Unlike");
-		 } else {
-                $('.likeButton').attr('onclick', "likeButtonClick()");
-                $('.likeButton').html("Like");
-		 }
 		 			 
-		 $('.likesBadge').html(pinLikes); // TODO: Make this line up properly
+
 		 $(".oldPinName").val(title);
 		 $(".newPinName").val(title);
 		 $(".pinDescription").val(desription);
@@ -128,19 +117,10 @@
 		 }
 		     //We add vPool HTML content to #myDIV
 		     $('.commentField').html(commentHtml);
-		 
-		 if ("<?php echo $_SESSION['username']; ?>" == pinOwner) {
-			 $(".addmaplink").show();
-			 $(".pinID").val(pinID);					 
-			 $(".open-editPin").show();
-			 $(".likeButton").hide();
-			 
-		 } else {
-		 	
+	
 			$(".open-editPin").hide();
 			$(".addmaplink").hide();
-			$(".likeButton").show();
-		 }
+			$(".likeButton").hide();
 		 if (isRestaurant == 1) {		 	
 				$(".viewmapBtn").show();			 			
 			var address = $(this).attr('data-address');
@@ -206,23 +186,30 @@
 	    
 	<?php 
 	//initialize feed board
-	if (isset($_SESSION['username'])) {
+	$board_id;
+	if (!isset($_SESSION['username'])) {
+		$board_id = getBoardID('admin', 'guest');
 		if (checkBoardExists('admin', 'guest') == 0) {
 			addBoard('admin', 'guest');
-		} 
-		$board_id = getBoardID('admin', 'guest');
+		} else {
+			removeBoard($board_id);
+			addBoard('admin', 'guest');
+			$board_id = getBoardID('admin', 'guest');
+		}		
 		$pins = getNewPins();
-		for ($i = 0; $i < $max; $i++) {
+		for ($i = 0; $i < 20; $i++) {
 			repin($pinHits[$i], $board_id);
 		}
 	} else {
 		$boardName = $_SESSION['username']."followBoard";
 		$board_id = getBoardID('admin', $boardName);
 		if (checkBoardExists('admin', $boardName) == 0) {
-			addBoard('admin', $_GET['term']);
+			addBoard('admin', $boardName);
 		} else {
 			removeBoard($board_id);
+			addBoard('admin', $boardName);
 		}
+			$board_id = getBoardID('admin', $boardName);
 			$pinHits = getFollowPins($_SESSION['username']);
 			$pins = getNewPins();
 			$max = 20;
@@ -232,19 +219,20 @@
 			for ($i = 0; $i < $max; $i++) {
 				repin($pinHits[$i], $board_id);
 			}
-			for ($i = $max, $j = 0; $i < 20; $i++) {
+			for ($i = $max, $j = 0; $i < 20; $i++, $j++) {
 				repin($pins[$j], $board_id);
 			}
 	}
 	?>
-    <section id="board" class="home-section text-center">
+	
+	<section id="board" class="home-section text-center">
         <div class="heading-contact">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="wow bounceInDown" data-wow-delay="0.4s">
                             <div class="section-heading">
-                                <h2><?php echo getBoardName($board_id); ?></h2>
+                                <h2>Your Feed</h2>
                                 <i class="fa fa-2x fa-angle-down"></i>
                             </div>
                         </div>
@@ -257,26 +245,24 @@
         <div id="pin-container" class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 310, "itemSelector": ".item", "isFitWidth": true }'>
 			<div>
             <?php
-                
+			$board_id = getBoardID('admin', 'guest');
+			if (isset($_SESSION['username'])) {
+				$board_id = getBoardID('admin', $_SESSION['username']."followBoard");
+			}
                 // Where to get board ID from? 
                 $pins = getPinLinks($board_id);
 				$pinNames = getNamesOfPinsOnBoard($board_id);
 				$pinIDs = getPinId($board_id);
 				$isRestaurantArray = isRestuarant($board_id);
 				$descriptions = getDescriptionsOfPinsOnBoard($board_id);			
-				$pinsLiked = getPinLikes($board_id, $_SESSION['username']);
-				//echo '<p>'.$pinsLiked[0].'</p>';
-				$k = 0;
-				if (count($pinsLiked) == 0) {
-					$k = -1;
-				} 
+
 				
                 for($i = 0; $i < count($pins); $i++) {
 					$comments = getComments($pinIDs[$i]);
 					$authors = getCommentAuthors($pinIDs[$i]);
 					$numLikes = getNumberOfLikes($pinIDs[$i]);
                     echo '
-                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-count='.count($pinsLiked).' data-pinLikes="'.$numLikes.'" data-pinDescription="'.$descriptions[$i].'" data-pinOwner="'.getPinOwner($pinIDs[$i]).'" data-comments="';
+                        <a href="#viewPin" data-target="#viewPin" data-toggle="modal" class="open-viewPin" data-pinDescription="'.$descriptions[$i].'" data-pinOwner="'.getPinOwner($pinIDs[$i]).'" data-comments="';
 					
 					for ($j = 0; $j < count($comments); $j++) {
 						if ($j != 0) {
@@ -293,16 +279,6 @@
 						echo $authors[$j];
 					}
 					echo '" ';
-					
-					if ($k != -1 && $pinsLiked[$k] == $pinIDs[$i]) {
-						echo 'data-j='.$k.' data-pinLiked=1 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].' ';
-						$k++;
-						if ($k == count($pinsLiked)) {
-							$k = -1;
-						}
-					} else {
-						echo 'data-j='.$k.' data-pinLiked=0 data-pinsLiked[k]='.$pinsLiked[$k].' data-pinIDs[i]='.$pinIDs[$i].' ';
-					}
 					if ($isRestaurantArray[$i] == 1) {
 						echo 'data-address="'.getRestaurantAddress($pinIDs[$i]).'" ';
 					}
