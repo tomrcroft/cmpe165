@@ -1,4 +1,3 @@
-<<<<<<< Local Changes
 <?php 
 	session_start(); 
 	include 'actions.php';
@@ -352,5 +351,3 @@
 </body>
 
 </html>
-=======
->>>>>>> External Changes
