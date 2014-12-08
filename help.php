@@ -179,7 +179,7 @@
                             </div>
                             <div class="service-desc">
                                 <h5>What are pins?</h5>
-                                <p>Pins are posts. Each Pin contains an image, a title, a description, and a list of comments. If the pin contains details of a restaurant, add its location with the map button.</p>
+                                <p>Pins are posts. Each Pin contains an image, a title, a description, and a list of comments. If you want to add a location to the pin (such as if you pin a picture of a restaurant), add its location with the add map button.</p>
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                             </div>
                             <div class="service-desc">
                                 <h5>Alright, but what can I pin?</h5>
-                                <p>Pin images, text, or images with text. No need to limit yourself to one choice. Insert an image URL or just type into the description to post a text post.</p>
+                                <p>Pin images or images with text. No need to limit yourself to one choice. Insert an image URL or choose your own file to upload. You can name it and describe if you want, but it is not required.</p>
                             </div>
                         </div>
                     </div>
@@ -221,33 +221,30 @@
                             </div>
                             <div class="service-desc">
                                 <h5>Neat. Where can I find more pins?</h5>
-                                <p>Use the search function at the top of the page to find users, pins, and boards. Type in what you're looking for and it'll give you a list of related results.</p>
+                                <p>Use the search function at the top of the page to find users, pins, and boards. Type in what you're looking for and it'll give you a list of related results. If you didn't originally post the pin, you can press like to let the owner know you like their picture</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>        
-        </div>
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-4">
-                    <div class="service-icon">
-                        <img src="img/icons/service-icon-4.png" alt="" />
-                        <h4> Pin Tutorial Video"</h4>
-                    </div>
-                    <div class="col-md-3 col-md-offset-4">
-                        <iframe width="300" height="300" src="//www.youtube.com/embed/83gmiey7S7w" 
-                        frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-                
-       
-        
-        
+            </div>       
+        	<div class="row">
+            	<div class="col-sm-3 col-md-3">
+                	<div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    	<div class="service-box">
+                        	<div class="service-icon">
+                        		<img src="img/icons/service-icon-4.png" alt="" />
+							</div>
+							<div class="service-desc">
+                        		<h4>Pin Tutorial Video</h4>
+								<div class="embed-responsive embed-responsive-16by9">
+						  	  	<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/ICemupWG56U"></iframe>
+								</div>
+							</div>
+                		</div>
+            		</div>      
+        		</div>
+			</div>
+    	</div>
     </section>
     <!-- /section: pins-->
  
@@ -319,23 +316,23 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+		                        <img src="img/icons/service-icon-4.png" alt="" />
+		                        <h4>Board Tutorial Video</h4>
+		                    </div>
+								<div class="embed-responsive embed-responsive-4by3">
+								  <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/ICemupWG56U"></iframe>
+								</div>
+		                </div>
+		            </div>
+		        </div>
+			</div>        
         </div>
         
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <div class="service-icon">
-                        <img src="img/icons/service-icon-4.png" alt="" />
-                        <h4> Board Tutorial Video"</h4>
-                    </div>
-                    <div class="col-md-3 col-md-offset-4">
-                       <iframe width="300" height="300" 
-                       src="//www.youtube.com/embed/ICemupWG56U" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <!-- /section: boards-->
  
