@@ -99,10 +99,8 @@
             <div class="row">      
                 <?php
                     // Fetches boards based on user
-					echo "<script> alert('search term =".$_GET['term']." '); </script>";
                     $boardNames = searchForBoardName($_GET['term']);
                     for($i = 0; $i < count($boardIDs); $i++) {
-						echo "<script> alert('board name = ".$boardNames[$i]." '); </script>";
 						$privacyCheck = checkPrivacy($boardIDs[$i]);
                         $boardPreview = getBoardPreview($boardIDs[$i]);
                         if (!(isset($boardPreview))) {
