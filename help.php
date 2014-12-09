@@ -31,7 +31,7 @@
     } 
 	
 	if (isset($_GET['download_file'])) {
-		$path = $_SERVER['DOCUMENT_ROOT']."pdf/"; // change the path to fit your websites document structure
+		$path = "/var/www/corq.org/public_html/pdf/"; // change the path to fit your websites document structure
 		$fullPath = $path.$_GET['download_file'];
 
 		if ($fd = fopen ($fullPath, "r")) {
@@ -161,7 +161,7 @@
                                 <img src="img/icons/service-icon-4.png" alt="" />
                             </div>
                             <div class="service-desc">
-                                <a href="help.php?download_file=end_users_guide.pdf"><h5>User Guide</h5></a>
+                                <a href="help.php?download_file=end_user_guide.pdf"><h5>User Guide</h5></a>
                                 <p>   </p>
                             </div>
                         </div>
