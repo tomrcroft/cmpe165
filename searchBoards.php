@@ -52,7 +52,7 @@
     </section>
 
 	<?php
-		$searchTerm = $_GET['term'];
+		//$searchTerm = $_GET['term'];
 		$isOwner = false;
 		$boardOwner = 'admin';
 	?>
@@ -65,7 +65,7 @@
                         <div class="wow bounceInDown" data-wow-delay="0.4s">
                             <div class="section-heading">
                                 <!-- TODO: insert board owner's name -->
-                                <h2><?php echo $searchTerm; ?></h2>
+                                <h2><?php echo $_GET['term']; ?></h2>
                                 <!-- Info Badges -->
 							
                                 <div class="heading-about">
@@ -73,7 +73,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-lg-offset-2">
                                                 <?php
-                                                    $boardIDs = searchForBoard($searchTerm); //TODO: insert board owner's name
+                                                    $boardIDs = searchForBoard($_GET['term']); //TODO: insert board owner's name
                                                     $numberOfBoards = count($boardIDs);
 
                                                 ?>
@@ -99,8 +99,10 @@
             <div class="row">      
                 <?php
                     // Fetches boards based on user
-                    $boardNames = searchForBoardName($searchTerm);
+					echo "<script> alert('search term =".$_GET['term']." '); </script>";
+                    $boardNames = searchForBoardName($_GET['term']);
                     for($i = 0; $i < count($boardIDs); $i++) {
+						echo "<script> alert('board name = ".$boardNames[$i]." '); </script>";
 						$privacyCheck = checkPrivacy($boardIDs[$i]);
                         $boardPreview = getBoardPreview($boardIDs[$i]);
                         if (!(isset($boardPreview))) {

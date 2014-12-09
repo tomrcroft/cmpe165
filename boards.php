@@ -22,6 +22,7 @@
 		editPinName($userName, $oldPinName, $newPinName, $desc);
 	}
 	if (isset($_POST['submitAddAddress'])) {
+		$username = $_SESSION['username'];
 	    $address = $_POST['address'];
 	    $city = $_POST['city'];
 	    $state = $_POST['state'];
@@ -30,6 +31,7 @@
 	    $combine = $address . ' ' . $city . ' ' . $state . ' ' . $zip;
 	    addRestaurant($pinid, $username, $combine);	   
 	}
+	
     if (isset($_GET['board'])) {
         $board_id = $_GET['board'];
 		$boardOwner = getBoardOwner($board_id);

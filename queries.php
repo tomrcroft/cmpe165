@@ -956,7 +956,8 @@ function searchForBoard($boardName)
     $query = "
     	     SELECT board_id
 	     FROM board
-	     WHERE board_name LIKE '%$boardName%'";
+	     WHERE board_name LIKE '%$boardName%'
+		 ORDER BY board_id";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
@@ -969,9 +970,10 @@ function searchForBoardName($boardName)
 {
     global $con;
     $query = "
-    	     SELECT board_name
+    	     SELECT board_name, board_id
 	     FROM board
-	     WHERE board_name LIKE '%a%'";
+	     WHERE board_name LIKE '%$boardName%'
+		 ORDER BY board_id;";
     $result = $con->query($query);
     $resultArray = array();
     while ($row = $result->fetch_assoc()) {
