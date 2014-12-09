@@ -57,7 +57,7 @@
 				                <li>
 					                <form class="form-inline pull-center" role="search" style="margin-top:8px; text-align:center;">
 						                <div class="form-group">
-						                	<input type="text" name="search" class="form-control input-medium" placeholder="boards, stickers, or people" >
+						                	<input type="text" name="search" class="form-control input-medium" placeholder="boards, pins, or people" >
 						                	<button type="submit" class="btn btn-primary btn-medium">Go</button>
 						                </div>
 					                </form>
